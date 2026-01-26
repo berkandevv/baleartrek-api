@@ -1,19 +1,7 @@
-# 📌 BalearTrek API – Parte A  
-**Migraciones · Seeders · Factories · Modelos · Triggers · Carga de datos**
+# 📌 BalearTrek API
+**Base de datos · API REST · Seeders · Triggers · Autenticación**
 
-Este proyecto corresponde a la **primera parte** del desarrollo de la API para *BalearTrek*, una plataforma dedicada a la gestión de **excursiones, encuentros, participantes, lugares remarcables y comentarios**.
-
-En esta fase se construye toda la **capa de datos**, incluyendo:
-
-- Modelo relacional  
-- Migraciones  
-- Seeders  
-- Factories  
-- Modelos Eloquent  
-- Automatización mediante triggers  
-- Carga masiva desde JSON  
-
-> Esta parte NO incluye aún rutas, controladores, requests, resources ni middlewares. Esto se desarrollará en la Parte B.
+BalearTrek es una plataforma dedicada a la gestión de **excursiones (treks), encuentros (meetings), participantes, lugares remarcables y comentarios**. Este repositorio agrupa tanto la **capa de datos** como la **API REST** del proyecto.
 
 ---
 
@@ -38,7 +26,18 @@ $data = json_decode($jsonData, true);
 
 ---
 
-## 📌 3. Contenido implementado en la Parte A
+## 📌 3. Instalación y ejecución del proyecto
+
+```bash
+composer install
+cp .env.example .env
+php artisan migrate:fresh --seed
+php artisan serve
+```
+
+---
+
+## 📌 4. Capa de datos (modelo, migraciones, seeders y triggers)
 
 ### 🧱 Migraciones
 - users, roles  
@@ -49,8 +48,6 @@ $data = json_decode($jsonData, true);
 - place_types, places, place_trek  
 - municipalities, islands, zones  
 - meeting_user (pivot)
-
----
 
 ### 🌱 Seeders
 Orden ejecutado por `DatabaseSeeder`:
@@ -66,20 +63,12 @@ Orden ejecutado por `DatabaseSeeder`:
 9. MeetingUserSeeder  
 10. ImageFactory (1000 imágenes)
 
----
-
 ### 🧩 Factories
 - UserFactory  
 - ImageFactory  
 
----
-
 ### 🗂️ Modelos y relaciones
 Relaciones 1:N y N:N definidas según el modelo ER del proyecto.
-
----
-
-## 📌 4. Triggers de la base de datos
 
 ### 🔹 Triggers sobre `comments`
 Actualizan:
@@ -117,17 +106,73 @@ Incluye place_types, interesting_places y place_trek.
 
 ---
 
-## 📌 6. Instalación y ejecución del proyecto
+## 📌 6. API REST (lo implementado)
 
-```bash
-composer install
-cp .env.example .env
-php artisan migrate:fresh --seed
-```
+### ✅ Autenticación
+- **Por credenciales**: register, login, logout (Sanctum).
+- **Por API-KEY**: header `API-KEY` con el valor de `APP_KEY`.
+
+### ✅ Middlewares
+- `auth.or.api.key` (Sanctum o API-KEY).
+- `check.role.admin` (solo administradores).
+
+### ✅ Route model binding personalizado
+- **Users**: `{user}` acepta **ID** o **email**.
+- **Treks**: `{trek}` acepta **ID** o **regNumber**.
+
+### ✅ Requests y Resources
+- Requests: `UserUpdateRequest`, `UserDestroyRequest`, `TrekStoreRequest`, `LoginRequest`.
+- Resources: `UserResource`, `UserSummaryResource`, `TrekResource`, `MeetingResource`, `CommentResource`,
+  `MunicipalityResource`, `PlaceTypeResource`, `InterestingPlaceResource`.
 
 ---
 
-## 📂 7. Estructura del proyecto
+## 📌 7. Endpoints principales
+
+Base URL típica: `http://127.0.0.1:8000/api`
+
+### Autenticación
+- `POST /register`
+- `POST /login`
+- `POST /logout` (protegido)
+
+### Usuarios
+- `GET /users` (admin)
+- `GET /users/{user}` (admin)
+- `PUT /users/{user}` (admin)
+- `DELETE /users/{user}` (admin o propio)
+- `GET /user` (usuario autenticado)
+- `PUT /user` (usuario autenticado)
+- `DELETE /user` (usuario autenticado)
+
+### Treks
+- `GET /treks`
+- `GET /treks/{trek}`
+- `POST /treks` (admin)
+
+---
+
+## 📌 8. Mini documentación de uso
+
+### 🔹 Autenticación con token Sanctum
+1. `POST /login`
+2. Usar `Authorization: Bearer <token>` en las rutas protegidas.
+
+### 🔹 Autenticación con API-KEY
+En cualquier ruta protegida, enviar:
+```
+API-KEY: <APP_KEY>
+```
+
+### 🔹 Filtros
+- `GET /treks?illa=Mallorca` o `GET /treks?island_id=1`
+
+### 🔹 Updates parciales de usuario
+`PUT /user` acepta solo los campos que quieras modificar.
+
+---
+
+## 📂 9. Estructura del proyecto
 
 ```
 database/
@@ -136,27 +181,37 @@ database/
 │── factories/
 app/
 │── Models/
+│── Http/Controllers/
+│── Http/Requests/
+│── Http/Resources/
+│── Http/Middleware/
+routes/
+│── api.php
 ```
 
 ---
 
-## 📌 8. Estado actual del proyecto
+## 📌 10. Estado actual del proyecto
 
-| Fase | Estado |
+| Área | Estado |
 |------|--------|
-| Parte A – Base de datos | ✔️ Completada |
-| Parte B – API | ⏳ Pendiente |
-| Parte C – Integración con frontend | ⏳ Pendiente |
+| Base de datos | ✔️ Completada |
+| API REST | ✔️ Completada |
+| Dashboard de la API | ⏳ Pendiente |
+| Frontend (React + Vite) | ⏳ Pendiente |
 
 ---
 
-## 📖 9. Resumen técnico final
+## 📖 11. Resumen técnico final
 
 ✔ Migraciones completas  
 ✔ Seeders basados en JSON  
 ✔ Factories masivas  
 ✔ Triggers automáticos  
 ✔ Carga reproducible  
-✔ Configuración flexible  
+✔ API REST con Sanctum + API-KEY  
+✔ Requests + Resources  
+✔ Route model binding personalizado  
+✔ Filtros y permisos por rol  
 
 ---
