@@ -57,8 +57,8 @@ class PlaceSeeder extends Seeder
 
                 // 2) INTERESTING PLACE
                 $place = InterestingPlace::firstOrCreate(
+                    ['gps' => $placeData['gpsPos']],
                     [
-                        'gps'           => $placeData['gpsPos'],
                         'name'          => $placeData['name'],
                         'place_type_id' => $placeTypeId
                     ]

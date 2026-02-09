@@ -18,6 +18,9 @@ class MeetingResource extends JsonResource
             'hour' => $this->hour,
             'appDateIni' => $this->appDateIni,
             'appDateEnd' => $this->appDateEnd,
+            'trek_name' => $this->whenLoaded('trek', function () {
+                return $this->trek?->name;
+            }),
             'score' => [
                 'total' => $this->totalScore,
                 'count' => $this->countScore,
@@ -31,4 +34,3 @@ class MeetingResource extends JsonResource
         ];
     }
 }
-

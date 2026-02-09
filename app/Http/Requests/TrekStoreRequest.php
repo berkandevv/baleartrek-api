@@ -25,6 +25,8 @@ class TrekStoreRequest extends FormRequest
             // Datos principales del "trek"
             'regNumber' => ['required', 'string', 'max:255', 'unique:treks,regnumber'],
             'name' => ['required', 'string', 'max:255'],
+            'description' => ['sometimes', 'nullable', 'string'],
+            'imageUrl' => ['sometimes', 'nullable', 'url', 'max:2048'],
             'status' => ['sometimes', 'in:y,n'],
 
             // Municipio por nombre o por id (uno de los dos obligatorio)

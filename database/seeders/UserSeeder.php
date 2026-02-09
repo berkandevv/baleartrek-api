@@ -22,7 +22,7 @@ class UserSeeder extends Seeder
             'dni'       => '00000000A',
             'email'     => 'admin@baleartrek.com',
             'phone'     => '000000000',
-            'passwd'  => Hash::make('12345678'),
+            'password'  => Hash::make('12345678'),
             'role_id'   => Role::where('name', 'admin')->value('id'),
         ]);
 
@@ -52,7 +52,7 @@ class UserSeeder extends Seeder
                 // Email como clave única. Se pasa a minúsculas con mb_strtolower
                 'email'     => mb_strtolower($user['email']),
                 'phone'     => $user['telefon'],
-                'passwd'    => Hash::make($user['password']),
+                'password'    => Hash::make($user['password']),
                 // Asignamos el rol guía
                 'role_id'   => $roleId,
             ]);

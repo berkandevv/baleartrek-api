@@ -33,7 +33,7 @@ class UserFactory extends Factory
             'email' => mb_strtolower(fake()->unique()->safeEmail()),
             'phone' => fake()->phoneNumber(),
             'email_verified_at' => now(),
-            'passwd' => static::$password ??= Hash::make('password'),
+            'password' => static::$password ??= Hash::make('password'),
             'role_id' => Role::where('name', 'visitant')->value('id'), // "visitant por defecto"
         ];
     }

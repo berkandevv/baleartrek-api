@@ -34,7 +34,16 @@ class UserController extends Controller
         // Cargamos relaciones necesarias
         $user->load([
             'meeting.comments.images',
-            'meetings.comments.images',
+            'meetings' => function ($query) use ($user) {
+                $query->with([
+                    'trek',
+                    'comments' => function ($commentQuery) use ($user) {
+                        $commentQuery
+                            ->where('user_id', $user->id)
+                            ->with(['user', 'images']);
+                    }
+                ]);
+            },
             'comments.images' // Comentarios hechos por el usuario
         ]);
 

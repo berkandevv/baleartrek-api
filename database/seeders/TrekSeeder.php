@@ -37,6 +37,8 @@ class TrekSeeder extends Seeder
                 ['regnumber' => $trekData['regNumber']],
                 [
                     'name'            => $trekData['name'],
+                    'description'     => $trekData['description'] ?? null,
+                    'imageUrl'        => $trekData['imageUrl'] ?? null,
                     'municipality_id' => $municipioId,
                 ]
             );

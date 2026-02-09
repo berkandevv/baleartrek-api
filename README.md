@@ -213,3 +213,5 @@ routes/
 ✔ Requests + Resources  
 ✔ Route model binding personalizado  
 ✔ Filtros y permisos por rol  
+
+---

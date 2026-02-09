@@ -6,10 +6,12 @@ use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\TrekController;
+use App\Http\Controllers\Api\MeetingSubscriptionController;
 use App\Http\Resources\UserResource;
 use App\Http\Requests\UserUpdateRequest;
 use App\Http\Requests\UserDestroyRequest;
 use App\Models\User;
+use App\Models\Meeting;
 use App\Models\Trek;
 
 // ROUTE MODEL BINDING PERSONALIZADO "USERS"
@@ -60,7 +62,28 @@ Route::middleware('auth.or.api.key')->group(function () {
     // Devuelvemos el usuario autenticado transformado mediante UserResource, 
     // que se encarga de definir la estructura y los datos expuestos en la API
     Route::get('/user', function (Request $request) {
-        return new UserResource($request->user());
+        $user = $request->user();
+
+        $meetings = Meeting::query()
+            ->whereHas('users', function ($q) use ($user) {
+                $q->where('users.id', $user->id);
+            })
+            ->orWhereHas('comments', function ($q) use ($user) {
+                $q->where('user_id', $user->id);
+            })
+            ->with([
+                'trek',
+                'comments' => function ($commentQuery) use ($user) {
+                    $commentQuery
+                        ->where('user_id', $user->id)
+                        ->with(['images']);
+                }
+            ])
+            ->get();
+
+        $user->setRelation('meetings', $meetings);
+
+        return new UserResource($user);
     });
 
     // Actualizamos el perfil propio del usuario
@@ -98,4 +121,8 @@ Route::middleware('auth.or.api.key')->group(function () {
     // - Admin puede eliminar a cualquiera
     // - Usuario normal solo puede eliminarse a sí mismo (controlado por UserDestroyRequest::authorize())
     Route::delete('/users/{user}', [UserController::class, 'destroy']);
+
+    // Suscripción a meetings para el usuario autenticado
+    Route::post('/meetings/{meeting}/subscribe', [MeetingSubscriptionController::class, 'store']);
+    Route::delete('/meetings/{meeting}/subscribe', [MeetingSubscriptionController::class, 'destroy']);
 });

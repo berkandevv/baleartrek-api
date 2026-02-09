@@ -15,6 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('regnumber')->unique();
             $table->string('name');
+            $table->text('description')->nullable();
+            $table->string('imageUrl')->nullable();
             $table->enum('status', ['y', 'n'])->default('n');
             $table->foreignId('municipality_id')->constrained()->onUpdate('restrict')->onDelete('restrict');
             $table->integer('totalScore')->default(0);
@@ -29,5 +31,8 @@ return new class extends Migration
     public function down(): void
     {
         Schema::dropIfExists('treks');
+        Schema::table('treks', function (Blueprint $table) {
+            $table->dropColumn(['description', 'imageUrl']);
+        });
     }
 };

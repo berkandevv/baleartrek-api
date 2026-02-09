@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('phone');
-            $table->string('passwd');
+            $table->string('password');
             $table->foreignId('role_id')->constrained()->onUpdate('restrict')->onDelete('restrict');
             $table->timestamps();
         });

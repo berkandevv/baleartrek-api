@@ -18,15 +18,18 @@ class CommentResource extends JsonResource
             'score' => $this->score,
             'status' => $this->status,
             'user' => new UserSummaryResource($this->whenLoaded('user')),
-            'images' => $this->whenLoaded('images', function () {
-                return $this->images->map(function ($image) {
-                    return [
-                        'id' => $image->id,
-                        'url' => $image->url,
-                    ];
-                });
+            'image' => $this->whenLoaded('images', function () {
+                $image = $this->images->first();
+
+                if (! $image) {
+                    return null;
+                }
+
+                return [
+                    'id' => $image->id,
+                    'url' => $image->url,
+                ];
             }),
         ];
     }
 }
-

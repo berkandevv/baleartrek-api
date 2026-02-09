@@ -9,6 +9,8 @@ class Trek extends Model
     protected $fillable = [
         'regnumber',
         'name',
+        'description',
+        'imageUrl',
         'status',
         'municipality_id',
         'totalScore',

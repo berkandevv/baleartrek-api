@@ -16,6 +16,8 @@ class TrekResource extends JsonResource
             'id' => $this->id,
             'regNumber' => $this->regnumber,
             'name' => $this->name,
+            'description' => $this->description,
+            'imageUrl' => $this->imageUrl,
             'status' => $this->status,
             'score' => [
                 'total' => $this->totalScore,
@@ -30,4 +32,3 @@ class TrekResource extends JsonResource
         ];
     }
 }
-

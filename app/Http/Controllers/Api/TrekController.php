@@ -108,6 +108,8 @@ class TrekController extends Controller
             $trek = Trek::create([
                 'regnumber' => mb_strtoupper($data['regNumber']),
                 'name' => $data['name'],
+                'description' => $data['description'] ?? null,
+                'imageUrl' => $data['imageUrl'] ?? null,
                 'status' => $data['status'] ?? 'n',
                 'municipality_id' => $municipalityId,
             ]);
