@@ -16,11 +16,20 @@ class MeetingController extends Controller
     public function index(Request $request)
     {
         $trekId = $request->query('trek_id', 'all');
+        $inscripcion = $request->query('inscripcion', 'all');
+        $today = Carbon::today()->toDateString();
 
         $meetings = Meeting::query()
             ->with(['trek', 'user'])
             ->when($trekId !== 'all', function ($query) use ($trekId) {
                 $query->where('trek_id', $trekId);
+            })
+            ->when($inscripcion !== 'all', function ($query) use ($inscripcion, $today) {
+                if ($inscripcion === 'active') {
+                    $query->whereDate('appDateEnd', '>=', $today);
+                } elseif ($inscripcion === 'inactive') {
+                    $query->whereDate('appDateEnd', '<', $today);
+                }
             })
             ->orderByDesc('day')
             ->orderByDesc('hour')
@@ -35,6 +44,7 @@ class MeetingController extends Controller
             'meetings' => $meetings,
             'treks' => $treks,
             'trekId' => $trekId,
+            'inscripcion' => $inscripcion,
         ]);
     }
 

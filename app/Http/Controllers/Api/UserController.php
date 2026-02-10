@@ -102,37 +102,9 @@ class UserController extends Controller
         DB::transaction(function () use ($user) {
 
             $user->tokens()->delete();
-            $user->meetings()->detach();
-
-            // Eliminamos comentarios del usuario y sus imágenes asociadas
-            $userComments = $user->comments()->with('images')->get();
-            foreach ($userComments as $comment) {
-                $comment->images()->delete();
-                $comment->delete();
-            }
-
-            // Meetings organizadas por el usuario
-            $organizedMeetings = Meeting::query()
-                ->where('user_id', $user->id)
-                ->with(['comments.images', 'users'])
-                ->get();
-
-            foreach ($organizedMeetings as $meeting) {
-                // Eliminamos imágenes de los comentarios de la meeting
-                foreach ($meeting->comments as $comment) {
-                    $comment->images()->delete();
-                }
-
-                // Eliminamos comentarios, asistentes y la meeting
-                $meeting->comments()->delete();
-                $meeting->users()->detach();
-                $meeting->delete();
-            }
-
-            // Finalmente eliminamos el usuario
-            $user->delete();
+            $user->update(['status' => 'n']);
         });
 
-        return response()->json(['message' => 'Usuario eliminado!']);
+        return response()->json(['message' => 'Usuario desactivado!']);
     }
 }
