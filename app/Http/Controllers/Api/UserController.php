@@ -37,6 +37,7 @@ class UserController extends Controller
             'meetings' => function ($query) use ($user) {
                 $query->with([
                     'trek',
+                    'user',
                     'comments' => function ($commentQuery) use ($user) {
                         $commentQuery
                             ->where('user_id', $user->id)

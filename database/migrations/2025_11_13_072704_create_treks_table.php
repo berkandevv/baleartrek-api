@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('name');
             $table->text('description')->nullable();
             $table->string('imageUrl')->nullable();
-            $table->enum('status', ['y', 'n'])->default('n');
+            $table->enum('status', ['y', 'n'])->default('y');
             $table->foreignId('municipality_id')->constrained()->onUpdate('restrict')->onDelete('restrict');
             $table->integer('totalScore')->default(0);
             $table->integer('countScore')->default(0);

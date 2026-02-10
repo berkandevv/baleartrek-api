@@ -8,6 +8,7 @@ use App\Models\Role;
 use App\Models\User;
 use App\Models\Comment;
 use App\Models\Image;
+use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
 {
@@ -38,6 +39,7 @@ class DatabaseSeeder extends Seeder
 
         User::factory(100)->create([
             'role_id' => $visitantRoleId,
+            'password' => Hash::make('Password123!'),
         ]);
 
         $this->command?->info("3) Rellenando tabla MEETING_USER (20 visitants por meeting)...\n");

@@ -85,6 +85,7 @@ Route::middleware('auth.or.api.key')->group(function () {
             })
             ->with([
                 'trek',
+                'user',
                 'comments' => function ($commentQuery) use ($user) {
                     $commentQuery
                         ->where('user_id', $user->id)
