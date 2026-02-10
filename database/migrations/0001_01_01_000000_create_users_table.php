@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('phone');
             $table->string('password');
             $table->foreignId('role_id')->constrained()->onUpdate('restrict')->onDelete('restrict');
+            $table->enum('status', ['y', 'n'])->default('y');
             $table->timestamps();
         });
 

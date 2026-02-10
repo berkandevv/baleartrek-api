@@ -1,0 +1,87 @@
+<?php
+
+namespace App\Http\Controllers\Admin;
+
+use App\Http\Controllers\Controller;
+use App\Models\Comment;
+use App\Models\Image;
+use App\Models\Trek;
+use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
+
+class CommentController extends Controller
+{
+    // Listado de comentarios con filtros por estado
+    public function index(Request $request)
+    {
+        $status = $request->query('status', 'pending');
+        $trekId = $request->query('trek_id', 'all');
+
+        $comments = Comment::query()
+            ->with(['user', 'meeting.trek', 'images'])
+            ->when($trekId !== 'all', function ($query) use ($trekId) {
+                $query->whereHas('meeting', function ($meetingQuery) use ($trekId) {
+                    $meetingQuery->where('trek_id', $trekId);
+                });
+            })
+            ->when($status === 'approved', function ($query) {
+                $query->where('status', 'y');
+            })
+            ->when($status === 'pending', function ($query) {
+                $query->where('status', '!=', 'y');
+            })
+            ->when($status === 'all', function ($query) {
+                $query->orderByRaw("CASE WHEN status = 'y' THEN 1 ELSE 0 END ASC");
+            })
+            ->orderByDesc('id')
+            ->paginate(20)
+            ->withQueryString();
+
+        $treks = Trek::query()
+            ->orderBy('regnumber')
+            ->get();
+
+        return view('admin.comments.index', [
+            'comments' => $comments,
+            'status' => $status,
+            'trekId' => $trekId,
+            'treks' => $treks,
+        ]);
+    }
+
+    // Vista de detalle para moderación del comentario
+    public function edit(Comment $adminComment)
+    {
+        $adminComment->load(['user', 'meeting.trek', 'images']);
+
+        return view('admin.comments.edit', [
+            'comment' => $adminComment,
+        ]);
+    }
+
+    // Actualiza el estado del comentario (aprobado/pendiente)
+    public function update(Request $request, Comment $adminComment)
+    {
+        $data = $request->validate([
+            'status' => ['required', Rule::in(['y', 'n'])],
+        ]);
+
+        $adminComment->update($data);
+
+        return redirect()
+            ->route('admin.comments.edit', $adminComment)
+            ->with('status', 'Comentario actualizado.');
+    }
+
+    // Elimina una imagen asociada a un comentario
+    public function destroyImage(Comment $adminComment, Image $image)
+    {
+        abort_if($image->comment_id !== $adminComment->id, 404);
+
+        $image->delete();
+
+        return redirect()
+            ->route('admin.comments.edit', $adminComment)
+            ->with('status', 'Imagen eliminada.');
+    }
+}

@@ -3,63 +3,48 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Models\Role;
 use App\Models\User;
 use Illuminate\Auth\Events\Registered;
-use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
-use Symfony\Component\HttpFoundation\Response;
+use Illuminate\View\View;
 
 class RegisteredUserController extends Controller
 {
     /**
-     * Handle an incoming registration request.
+     * Display the registration view.
      */
-    public function store(Request $request): JsonResponse
+    public function create(): View
     {
-        // Validación de los datos recibidos en el registro
-        $validated = $request->validate([
+        return view('auth.register');
+    }
+
+    /**
+     * Handle an incoming registration request.
+     *
+     * @throws \Illuminate\Validation\ValidationException
+     */
+    public function store(Request $request): RedirectResponse
+    {
+        $request->validate([
             'name' => ['required', 'string', 'max:255'],
-            'lastname' => ['required', 'string', 'max:255'],
-            'dni' => ['required', 'string', 'max:50', 'unique:' . User::class],
-            'phone' => ['required', 'string', 'max:50'],
-            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:' . User::class],
+            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
-        // Obtenemos el ID del rol por defecto (visitant)
-        $roleId = Role::where('name', 'visitant')->value('id');
-        // Si no existe el rol, abortamos (error de configuración del sistema)
-        abort_unless($roleId, 500, 'No hay ningún rol predeterminado configurado (visitant)');
-
-        // Creamos el usuario normalizando algunos campos
         $user = User::create([
-            'name' => mb_strtoupper($validated['name']),
-            'lastname' => mb_strtoupper($validated['lastname']),
-            'dni' => mb_strtoupper($validated['dni']),
-            'email' => mb_strtolower($validated['email']),
-            'phone' => $validated['phone'],
-            'password' => $validated['password'],
-            'role_id' => $roleId,
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
         ]);
 
-        // Lanzamos el evento de registro
         event(new Registered($user));
 
-        // Creamos un token de acceso para la API (Laravel Sanctum)
-        $token = $user->createToken('api-token')->plainTextToken;
+        Auth::login($user);
 
-        // Respuesta JSON con el token y los datos básicos del usuario
-        return response()->json([
-            'token' => $token,
-            'user' => [
-                'name' => $user->name,
-                'lastname' => $user->lastname,
-                'email' => $user->email,
-                'dni' => $user->dni,
-                'phone' => $user->phone,
-            ],
-        ], Response::HTTP_CREATED);
+        return redirect(route('dashboard', absolute: false));
     }
 }

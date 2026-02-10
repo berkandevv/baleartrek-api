@@ -22,6 +22,7 @@ class UserResource extends JsonResource
             'dni' => $this->dni,
             'email' => $this->email,
             'phone' => $this->phone,
+            'status' => $this->status,
             'role' => $this->whenLoaded('role'),
             'meetings' => MeetingResource::collection($this->whenLoaded('meetings')),
             'meeting' => new MeetingResource($this->whenLoaded('meeting')),

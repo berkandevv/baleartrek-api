@@ -47,6 +47,7 @@ class UserUpdateRequest extends FormRequest
                 Rule::unique('users', 'email')->ignore($user->id),
             ],
             'phone' => ['sometimes', 'string', 'max:255'],
+            'status' => ['sometimes', 'in:y,n'],
 
             // Campos sensibles que no deben modificarse desde este endpoint genérico
             'role_id' => ['prohibited'],

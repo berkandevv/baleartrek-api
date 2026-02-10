@@ -10,9 +10,11 @@ use App\Http\Controllers\Api\MeetingSubscriptionController;
 use App\Http\Resources\UserResource;
 use App\Http\Requests\UserUpdateRequest;
 use App\Http\Requests\UserDestroyRequest;
+use App\Http\Requests\Auth\LoginRequest;
 use App\Models\User;
 use App\Models\Meeting;
 use App\Models\Trek;
+use Illuminate\Support\Facades\Auth;
 
 // ROUTE MODEL BINDING PERSONALIZADO "USERS"
 
@@ -49,8 +51,18 @@ Route::bind('trek', function ($value) {
 
 // Registro de nuevos usuarios
 Route::post('/register', [RegisteredUserController::class, 'store']);
-// Login de usuario (devuelve token Sanctum)
-Route::post('/login', [AuthenticatedSessionController::class, 'store']);
+// Login de usuario (devuelve token Sanctum, sin sesión)
+Route::post('/login', function (LoginRequest $request) {
+    $request->authenticate();
+
+    $user = Auth::user();
+    $token = $user->createToken('api')->plainTextToken;
+
+    return response()->json([
+        'token' => $token,
+        'user' => new UserResource($user->load('role')),
+    ]);
+});
 // Exploración de rutas
 Route::get('/treks', [TrekController::class, 'index']);
 Route::get('/treks/{trek}', [TrekController::class, 'show']);
@@ -104,7 +116,14 @@ Route::middleware('auth.or.api.key')->group(function () {
     // AUTENTICACIÓN
 
     // Logout del usuario (revoca el token actual)
-    Route::post('/logout', [AuthenticatedSessionController::class, 'destroy']);
+    Route::post('/logout', function (Request $request) {
+        $user = $request->user();
+        if ($user && $user->currentAccessToken()) {
+            $user->currentAccessToken()->delete();
+        }
+
+        return response()->json(['message' => 'Logout OK']);
+    });
 
 
     // RUTAS DE ADMIN
