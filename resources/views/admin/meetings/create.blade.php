@@ -12,7 +12,7 @@
 
                         <div class="flex items-center gap-3">
                             <x-primary-button type="submit">
-                                {{ __('Crear encuentro') }}
+                                Crear encuentro
                             </x-primary-button>
                             <a href="{{ route('admin.meetings.index') }}" class="inline-flex items-center px-3 py-1.5 text-xs font-semibold uppercase tracking-widest text-gray-700 bg-gray-100 border border-gray-300 rounded-md hover:bg-gray-200">
                                 Volver a la lista

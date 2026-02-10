@@ -12,16 +12,16 @@
                     <div class="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
                         <form method="GET" action="{{ route('admin.municipalities.index') }}" class="flex flex-col gap-3 sm:flex-row sm:items-end sm:flex-1">
                             <div class="w-full">
-                                <x-input-label for="q" :value="__('Buscar')" />
+                                <x-input-label for="q" value="Buscar" />
                                 <x-text-input id="q" name="q" type="text" class="mt-1 block w-full" value="{{ $search }}" placeholder="Nombre del municipio" />
                             </div>
                             <div class="flex gap-2">
                                 <x-primary-button type="submit">
-                                    {{ __('Buscar') }}
+                                    Buscar
                                 </x-primary-button>
                                 @if($search !== '')
                                     <a href="{{ route('admin.municipalities.index') }}" class="inline-flex items-center px-4 py-2 bg-gray-100 border border-gray-300 rounded-md font-semibold text-xs text-gray-700 uppercase tracking-widest hover:bg-gray-200">
-                                        {{ __('Limpiar') }}
+                                        Limpiar
                                     </a>
                                 @endif
                             </div>
@@ -29,7 +29,7 @@
 
                         <div>
                             <a href="{{ route('admin.municipalities.create') }}" class="inline-flex items-center px-4 py-2 bg-slate-900 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-slate-800">
-                                {{ __('Nuevo municipio') }}
+                                Nuevo municipio
                             </a>
                         </div>
                     </div>

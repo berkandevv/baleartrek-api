@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Comentario') }} #{{ $comment->id }}
+            Comentario #{{ $comment->id }}
         </h2>
     </x-slot>
 
@@ -46,7 +46,7 @@
                         @csrf
                         @method('PATCH')
 
-                        <x-input-label for="status" :value="__('Estado')" />
+                        <x-input-label for="status" value="Estado" />
                         <select id="status" name="status" class="mt-1 block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm">
                             <option value="y" @selected(old('status', $comment->status) === 'y')>Aprobar</option>
                             <option value="n" @selected(old('status', $comment->status) === 'n')>Pendiente</option>
@@ -55,7 +55,7 @@
 
                         <div class="mt-4 flex items-center gap-3">
                             <x-primary-button type="submit">
-                                {{ __('Guardar') }}
+                                Guardar
                             </x-primary-button>
                             <a href="{{ route('admin.comments.index') }}" class="inline-flex items-center px-3 py-1.5 text-xs font-semibold uppercase tracking-widest text-gray-700 bg-gray-100 border border-gray-300 rounded-md hover:bg-gray-200">
                                 Volver a la lista
@@ -76,7 +76,7 @@
                                             @csrf
                                             @method('DELETE')
                                             <x-danger-button type="submit">
-                                                {{ __('Eliminar imagen') }}
+                                                Eliminar imagen
                                             </x-danger-button>
                                         </form>
                                     </div>

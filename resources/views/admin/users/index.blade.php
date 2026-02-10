@@ -5,11 +5,11 @@
                 <div class="p-6 text-slate-900">
                     <form method="GET" action="{{ route('admin.users.index') }}" class="flex flex-col gap-3 sm:flex-row sm:items-end">
                         <div class="w-full sm:flex-1">
-                            <x-input-label for="q" :value="__('Buscar')" />
+                            <x-input-label for="q" value="Buscar" />
                             <x-text-input id="q" name="q" type="text" class="mt-1 block w-full" value="{{ $search }}" placeholder="Nombre, email o DNI" />
                         </div>
                         <div class="w-full sm:w-48">
-                            <x-input-label for="role" :value="__('Rol')" />
+                            <x-input-label for="role" value="Rol" />
                             <select id="role" name="role" class="mt-1 block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm">
                                 <option value="all" @selected($role === 'all')>Todos</option>
                                 <option value="admin" @selected($role === 'admin')>admin</option>
@@ -18,7 +18,7 @@
                             </select>
                         </div>
                         <div class="w-full sm:w-48">
-                            <x-input-label for="status" :value="__('Estado')" />
+                            <x-input-label for="status" value="Estado" />
                             <select id="status" name="status" class="mt-1 block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm">
                                 <option value="all" @selected($status === 'all')>Todos</option>
                                 <option value="alta" @selected($status === 'alta')>Alta</option>
@@ -27,11 +27,11 @@
                         </div>
                         <div class="flex gap-2">
                             <x-primary-button type="submit">
-                                {{ __('Buscar') }}
+                                Buscar
                             </x-primary-button>
                             @if($search !== '' || $role !== 'all' || $status !== 'all')
                                 <a href="{{ route('admin.users.index') }}" class="inline-flex items-center px-4 py-2 bg-gray-100 border border-gray-300 rounded-md font-semibold text-xs text-gray-700 uppercase tracking-widest hover:bg-gray-200">
-                                    {{ __('Limpiar') }}
+                                    Limpiar
                                 </a>
                             @endif
                         </div>

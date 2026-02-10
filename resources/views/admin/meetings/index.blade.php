@@ -6,7 +6,7 @@
                     <div class="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
                         <form method="GET" action="{{ route('admin.meetings.index') }}" class="flex flex-col gap-3 sm:flex-row sm:items-end sm:flex-1">
                         <div class="w-full sm:w-72">
-                            <x-input-label for="trek_id" :value="__('Excursión (código o nombre)')" />
+                            <x-input-label for="trek_id" value="Excursión (código o nombre)" />
                             <select id="trek_id" name="trek_id" class="mt-1 block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm">
                                 <option value="all" @selected($trekId === 'all')>Todas</option>
                                 @foreach ($treks as $trek)
@@ -17,7 +17,7 @@
                             </select>
                         </div>
                         <div class="w-full sm:w-56">
-                            <x-input-label for="inscripcion" :value="__('Inscripción')" />
+                            <x-input-label for="inscripcion" value="Inscripción" />
                             <select id="inscripcion" name="inscripcion" class="mt-1 block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm">
                                 <option value="all" @selected($inscripcion === 'all')>Todas</option>
                                 <option value="active" @selected($inscripcion === 'active')>Activas</option>
@@ -26,11 +26,11 @@
                         </div>
                         <div class="flex gap-2">
                             <x-primary-button type="submit">
-                                {{ __('Filtrar') }}
+                                Filtrar
                             </x-primary-button>
                             @if($trekId !== 'all' || $inscripcion !== 'all')
                                 <a href="{{ route('admin.meetings.index') }}" class="inline-flex items-center px-4 py-2 bg-gray-100 border border-gray-300 rounded-md font-semibold text-xs text-gray-700 uppercase tracking-widest hover:bg-gray-200">
-                                    {{ __('Limpiar') }}
+                                    Limpiar
                                 </a>
                             @endif
                         </div>
@@ -38,7 +38,7 @@
 
                         <div>
                             <a href="{{ route('admin.meetings.create') }}" class="inline-flex items-center px-4 py-2 bg-slate-900 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-slate-800">
-                                {{ __('Nuevo encuentro') }}
+                                Nuevo encuentro
                             </a>
                         </div>
                     </div>

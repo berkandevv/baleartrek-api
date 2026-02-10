@@ -13,7 +13,7 @@
 
                         <div class="flex items-center gap-3">
                             <x-primary-button type="submit">
-                                {{ __('Guardar cambios') }}
+                                Guardar cambios
                             </x-primary-button>
                             <a href="{{ route('admin.meetings.index') }}" class="inline-flex items-center px-3 py-1.5 text-xs font-semibold uppercase tracking-widest text-gray-700 bg-gray-100 border border-gray-300 rounded-md hover:bg-gray-200">
                                 Volver a la lista
@@ -26,7 +26,7 @@
                         <form method="POST" action="{{ route('admin.meetings.guides.add', $meeting->id) }}" class="mt-4 flex flex-col gap-3 sm:flex-row sm:items-end">
                             @csrf
                             <div class="w-full sm:flex-1">
-                                <x-input-label for="guide_user_id" :value="__('Añadir guía')" />
+                                <x-input-label for="guide_user_id" value="Añadir guía" />
                                 <select id="guide_user_id" name="user_id" class="mt-1 block w-full border-gray-300 focus:border-blue-600 focus:ring-blue-500 rounded-md shadow-sm">
                                     <option value="">Selecciona un guía</option>
                                     @foreach ($guides as $guide)
@@ -105,7 +105,7 @@
                         @csrf
                         @method('DELETE')
                         <x-danger-button type="submit">
-                            {{ __('Eliminar encuentro') }}
+                            Eliminar encuentro
                         </x-danger-button>
                     </form>
                 </div>

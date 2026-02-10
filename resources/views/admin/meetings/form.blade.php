@@ -6,7 +6,7 @@
 
 <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
     <div>
-        <x-input-label for="trek_id" :value="__('Excursión')" />
+        <x-input-label for="trek_id" value="Excursión" />
         <select id="trek_id" name="trek_id" class="mt-1 block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm">
             <option value="">Selecciona una excursión</option>
             @foreach ($treks as $trek)
@@ -18,7 +18,7 @@
         <x-input-error :messages="$errors->get('trek_id')" class="mt-2" />
     </div>
     <div>
-        <x-input-label for="user_id" :value="__('Guía principal')" />
+        <x-input-label for="user_id" value="Guía principal" />
         <select id="user_id" name="user_id" class="mt-1 block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm">
             <option value="">Selecciona un guía</option>
             @foreach ($guides as $guide)
@@ -33,12 +33,12 @@
 
 <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
     <div>
-        <x-input-label for="day" :value="__('Día del encuentro')" />
+        <x-input-label for="day" value="Día del encuentro" />
         <x-text-input id="day" name="day" type="date" class="mt-1 block w-full" value="{{ old('day', $meeting->day ?? '') }}" required />
         <x-input-error :messages="$errors->get('day')" class="mt-2" />
     </div>
     <div>
-        <x-input-label for="hour" :value="__('Hora')" />
+        <x-input-label for="hour" value="Hora" />
         @php
             $hourValue = old('hour', $meeting->hour ?? '');
             if ($hourValue) {

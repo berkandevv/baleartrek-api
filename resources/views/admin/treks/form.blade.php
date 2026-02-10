@@ -6,19 +6,19 @@
 
 <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
     <div>
-        <x-input-label for="regnumber" :value="__('Código')" />
+        <x-input-label for="regnumber" value="Código" />
         <x-text-input id="regnumber" name="regnumber" type="text" class="mt-1 block w-full" value="{{ old('regnumber', $trek->regnumber ?? '') }}" required />
         <x-input-error :messages="$errors->get('regnumber')" class="mt-2" />
     </div>
     <div>
-        <x-input-label for="name" :value="__('Nombre')" />
+        <x-input-label for="name" value="Nombre" />
         <x-text-input id="name" name="name" type="text" class="mt-1 block w-full" value="{{ old('name', $trek->name ?? '') }}" required />
         <x-input-error :messages="$errors->get('name')" class="mt-2" />
     </div>
 </div>
 
 <div>
-    <x-input-label for="municipality_id" :value="__('Municipio')" />
+    <x-input-label for="municipality_id" value="Municipio" />
     <select id="municipality_id" name="municipality_id" class="mt-1 block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm">
         <option value="">Selecciona un municipio</option>
         @foreach ($municipalities as $municipality)
@@ -32,7 +32,7 @@
 
 <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
     <div>
-        <x-input-label for="status" :value="__('Estado')" />
+        <x-input-label for="status" value="Estado" />
         <select id="status" name="status" class="mt-1 block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm">
             <option value="y" @selected(old('status', $trek->status ?? 'y') === 'y')>Activa</option>
             <option value="n" @selected(old('status', $trek->status ?? 'y') === 'n')>Inactiva</option>
@@ -40,11 +40,17 @@
         <x-input-error :messages="$errors->get('status')" class="mt-2" />
     </div>
     <div>
-        <x-input-label for="image" :value="__('Imagen')" />
+        <x-input-label for="image" value="Imagen" />
         <input id="image" name="image" type="file" accept="image/*" class="mt-1 block w-full text-sm text-gray-700 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-xs file:font-semibold file:bg-gray-100 file:text-gray-700 hover:file:bg-gray-200" />
         @if (!empty($trek->imageUrl))
+            @php
+                $imageUrl = $trek->imageUrl;
+                if (!\Illuminate\Support\Str::startsWith($imageUrl, ['http://', 'https://'])) {
+                    $imageUrl = asset(ltrim($imageUrl, '/'));
+                }
+            @endphp
             <div class="mt-3 flex items-center gap-4">
-                <img src="{{ $trek->imageUrl }}" alt="Imagen actual" class="h-16 w-24 object-cover rounded-md border border-slate-200" />
+                <img src="{{ $imageUrl }}" alt="Imagen actual" class="h-16 w-24 object-cover rounded-md border border-slate-200" />
                 <div class="text-sm text-gray-600 break-all">
                     Actual: {{ $trek->imageUrl }}
                 </div>
@@ -55,7 +61,7 @@
 </div>
 
 <div>
-    <x-input-label for="description" :value="__('Descripción')" />
+    <x-input-label for="description" value="Descripción" />
     <textarea id="description" name="description" rows="4" class="mt-1 block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm">{{ old('description', $trek->description ?? '') }}</textarea>
     <x-input-error :messages="$errors->get('description')" class="mt-2" />
 </div>
@@ -77,7 +83,7 @@
                     <div class="text-xs text-gray-500">{{ $place->placeType?->name }}</div>
                 </div>
                 <div class="w-24">
-                    <x-input-label for="place-order-{{ $place->id }}" :value="__('Orden')" />
+                    <x-input-label for="place-order-{{ $place->id }}" value="Orden" />
                     <x-text-input id="place-order-{{ $place->id }}" name="places[{{ $place->id }}][order]" type="number" min="0" class="mt-1 block w-full" value="{{ $placeOrder }}" />
                 </div>
             </label>

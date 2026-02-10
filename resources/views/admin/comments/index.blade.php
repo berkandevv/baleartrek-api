@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Comentarios') }}
+            Comentarios
         </h2>
     </x-slot>
 
@@ -12,24 +12,26 @@
                     <div class="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
                         <div class="flex flex-wrap gap-2">
                             <a href="{{ route('admin.comments.index', ['status' => 'all', 'trek_id' => $trekId]) }}"
-                               class="px-3 py-2 rounded-md text-sm font-medium {{ $status === 'all' ? 'bg-gray-800 text-white' : 'bg-gray-100 text-gray-700' }}">
+                                class="px-3 py-2 rounded-md text-sm font-medium {{ $status === 'all' ? 'bg-gray-800 text-white' : 'bg-gray-100 text-gray-700' }}">
                                 Todos
                             </a>
                             <a href="{{ route('admin.comments.index', ['status' => 'approved', 'trek_id' => $trekId]) }}"
-                               class="px-3 py-2 rounded-md text-sm font-medium {{ $status === 'approved' ? 'bg-gray-800 text-white' : 'bg-gray-100 text-gray-700' }}">
+                                class="px-3 py-2 rounded-md text-sm font-medium {{ $status === 'approved' ? 'bg-gray-800 text-white' : 'bg-gray-100 text-gray-700' }}">
                                 Aprobados
                             </a>
                             <a href="{{ route('admin.comments.index', ['status' => 'pending', 'trek_id' => $trekId]) }}"
-                               class="px-3 py-2 rounded-md text-sm font-medium {{ $status === 'pending' ? 'bg-gray-800 text-white' : 'bg-gray-100 text-gray-700' }}">
+                                class="px-3 py-2 rounded-md text-sm font-medium {{ $status === 'pending' ? 'bg-gray-800 text-white' : 'bg-gray-100 text-gray-700' }}">
                                 Pendientes
                             </a>
                         </div>
 
-                        <form method="GET" action="{{ route('admin.comments.index') }}" class="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-end">
+                        <form method="GET" action="{{ route('admin.comments.index') }}"
+                            class="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-end">
                             <input type="hidden" name="status" value="{{ $status }}">
                             <div class="w-full sm:w-72">
-                                <x-input-label for="trek_id" :value="__('Ruta')" />
-                                <select id="trek_id" name="trek_id" class="mt-1 block w-full border-gray-300 focus:border-blue-600 focus:ring-blue-500 rounded-md shadow-sm">
+                                <x-input-label for="trek_id" value="Ruta" />
+                                <select id="trek_id" name="trek_id"
+                                    class="mt-1 block w-full border-gray-300 focus:border-blue-600 focus:ring-blue-500 rounded-md shadow-sm">
                                     <option value="all" @selected($trekId === 'all')>Todas</option>
                                     @foreach ($treks as $trek)
                                         <option value="{{ $trek->id }}" @selected((string) $trekId === (string) $trek->id)>
@@ -41,7 +43,8 @@
                             <div class="flex gap-2 sm:pb-0.5">
                                 <x-primary-button type="submit">Filtrar</x-primary-button>
                                 @if ($trekId !== 'all')
-                                    <a href="{{ route('admin.comments.index', ['status' => $status]) }}" class="inline-flex items-center px-4 py-2 bg-gray-100 border border-gray-300 rounded-md font-semibold text-xs text-gray-700 uppercase tracking-widest hover:bg-gray-200">
+                                    <a href="{{ route('admin.comments.index', ['status' => $status]) }}"
+                                        class="inline-flex items-center px-4 py-2 bg-gray-100 border border-gray-300 rounded-md font-semibold text-xs text-gray-700 uppercase tracking-widest hover:bg-gray-200">
                                         Limpiar
                                     </a>
                                 @endif
@@ -75,11 +78,13 @@
                                         <td class="py-2 pr-4">{{ $comment->score }}</td>
                                         <td class="py-2 pr-4">
                                             @if ($comment->status === 'y')
-                                                <span class="inline-flex items-center px-2.5 py-0.5 text-xs font-semibold uppercase tracking-widest text-green-700 bg-green-100 rounded-full">
+                                                <span
+                                                    class="inline-flex items-center px-2.5 py-0.5 text-xs font-semibold uppercase tracking-widest text-green-700 bg-green-100 rounded-full">
                                                     Aprobado
                                                 </span>
                                             @else
-                                                <span class="inline-flex items-center px-2.5 py-0.5 text-xs font-semibold uppercase tracking-widest text-red-700 bg-red-100 rounded-full">
+                                                <span
+                                                    class="inline-flex items-center px-2.5 py-0.5 text-xs font-semibold uppercase tracking-widest text-red-700 bg-red-100 rounded-full">
                                                     Pendiente
                                                 </span>
                                             @endif
