@@ -115,10 +115,16 @@ class MeetingController extends Controller
             ->orderBy('name')
             ->get();
 
+        $meeting = $adminMeeting->load(['trek', 'user', 'users.role']);
+        $extraGuides = $meeting->users->where('role.name', 'guia')->values();
+        $attendees = $meeting->users->where('role.name', '!=', 'guia')->values();
+
         return view('admin.meetings.edit', [
-            'meeting' => $adminMeeting->load(['trek', 'user', 'users.role']),
+            'meeting' => $meeting,
             'treks' => $treks,
             'guides' => $guides,
+            'extraGuides' => $extraGuides,
+            'attendees' => $attendees,
         ]);
     }
 

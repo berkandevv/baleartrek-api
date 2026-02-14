@@ -64,6 +64,20 @@ class Meeting extends Model
         return $this->formatDateAttribute('appDateEnd');
     }
 
+    public function getHourInputAttribute(): string
+    {
+        $hour = $this->getAttribute('hour');
+        if (! is_string($hour) || $hour === '') {
+            return '';
+        }
+
+        try {
+            return Carbon::parse($hour)->format('H:i');
+        } catch (\Throwable) {
+            return '';
+        }
+    }
+
     public function getEnrollmentIsOpenAttribute(): bool
     {
         $appDateEnd = $this->getAttribute('appDateEnd');

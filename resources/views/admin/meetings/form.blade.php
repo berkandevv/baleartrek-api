@@ -34,13 +34,7 @@
     </div>
     <div>
         <x-input-label for="hour" value="Hora" />
-        @php
-            $hourValue = old('hour', $meeting->hour ?? '');
-            if ($hourValue) {
-                $hourValue = \Carbon\Carbon::parse($hourValue)->format('H:i');
-            }
-        @endphp
-        <x-text-input id="hour" name="hour" type="time" class="mt-1 block w-full" value="{{ $hourValue }}" required />
+        <x-text-input id="hour" name="hour" type="time" class="mt-1 block w-full" value="{{ old('hour', $meeting->hour_input ?? '') }}" required />
         <x-input-error :messages="$errors->get('hour')" class="mt-2" />
     </div>
 </div>

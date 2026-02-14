@@ -39,14 +39,8 @@
         <x-input-label for="image" value="Imagen" />
         <input id="image" name="image" type="file" accept="image/*" class="mt-1 block w-full text-sm text-gray-700 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-xs file:font-semibold file:bg-gray-100 file:text-gray-700 hover:file:bg-gray-200" />
         @if (!empty($trek->imageUrl))
-            @php
-                $imageUrl = $trek->imageUrl;
-                if (!\Illuminate\Support\Str::startsWith($imageUrl, ['http://', 'https://'])) {
-                    $imageUrl = asset(ltrim($imageUrl, '/'));
-                }
-            @endphp
             <div class="mt-3 flex items-center gap-4">
-                <img src="{{ $imageUrl }}" alt="Imagen actual" class="h-16 w-24 object-cover rounded-md border border-slate-200" />
+                <img src="{{ $trek->image_display_url }}" alt="Imagen actual" class="h-16 w-24 object-cover rounded-md border border-slate-200" />
                 <div class="text-sm text-gray-600 break-all">
                     Actual: {{ $trek->imageUrl }}
                 </div>
@@ -108,19 +102,15 @@
 
     <div class="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-2">
         @foreach ($interestingPlaces as $place)
-            @php
-                $placeOrder = old('places.' . $place->id . '.order', $selectedPlaces[$place->id] ?? 0);
-                $placeSelected = old('places.' . $place->id . '.selected', array_key_exists($place->id, $selectedPlaces ?? []));
-            @endphp
             <label class="flex items-center gap-3 border rounded-md p-3">
-                <input type="checkbox" name="places[{{ $place->id }}][selected]" value="1" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" @checked($placeSelected) />
+                <input type="checkbox" name="places[{{ $place->id }}][selected]" value="1" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" @checked(old('places.' . $place->id . '.selected', array_key_exists($place->id, $selectedPlaces ?? []) ? '1' : '0') === '1') />
                 <div class="flex-1">
                     <div class="font-medium">{{ $place->name }}</div>
                     <div class="text-xs text-gray-500">{{ $place->placeType?->name }}</div>
                 </div>
                 <div class="w-24">
                     <x-input-label for="place-order-{{ $place->id }}" value="Orden" />
-                    <x-text-input id="place-order-{{ $place->id }}" name="places[{{ $place->id }}][order]" type="number" min="0" class="mt-1 block w-full" value="{{ $placeOrder }}" />
+                    <x-text-input id="place-order-{{ $place->id }}" name="places[{{ $place->id }}][order]" type="number" min="0" class="mt-1 block w-full" value="{{ old('places.' . $place->id . '.order', $selectedPlaces[$place->id] ?? 0) }}" />
                 </div>
             </label>
         @endforeach

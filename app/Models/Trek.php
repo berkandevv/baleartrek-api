@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 
 class Trek extends Model
 {
@@ -30,5 +31,19 @@ class Trek extends Model
     public function interestingPlaces()
     {
         return $this->belongsToMany(InterestingPlace::class, 'interesting_place_trek')->withPivot('order')->withTimestamps();
+    }
+
+    public function getImageDisplayUrlAttribute(): ?string
+    {
+        $imageUrl = $this->imageUrl;
+        if (! is_string($imageUrl) || $imageUrl === '') {
+            return null;
+        }
+
+        if (Str::startsWith($imageUrl, ['http://', 'https://'])) {
+            return $imageUrl;
+        }
+
+        return asset(ltrim($imageUrl, '/'));
     }
 }

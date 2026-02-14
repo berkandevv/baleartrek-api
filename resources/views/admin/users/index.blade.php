@@ -60,22 +60,21 @@
                                         <td class="py-2 pr-4">{{ $user->email }}</td>
                                         <td class="py-2 pr-4">{{ $user->dni }}</td>
                                         <td class="py-2 pr-4">
-                                            @php $roleName = $user->role?->name; @endphp
-                                            @if ($roleName === 'admin')
+                                            @if ($user->role?->name === 'admin')
                                                 <span class="inline-flex items-center px-2.5 py-0.5 text-xs font-semibold uppercase tracking-widest text-purple-800 bg-purple-100 rounded-full">
                                                     admin
                                                 </span>
-                                            @elseif ($roleName === 'guia')
+                                            @elseif ($user->role?->name === 'guia')
                                                 <span class="inline-flex items-center px-2.5 py-0.5 text-xs font-semibold uppercase tracking-widest text-amber-800 bg-amber-100 rounded-full">
                                                     guia
                                                 </span>
-                                            @elseif ($roleName === 'visitant')
+                                            @elseif ($user->role?->name === 'visitant')
                                                 <span class="inline-flex items-center px-2.5 py-0.5 text-xs font-semibold uppercase tracking-widest text-orange-800 bg-orange-100 rounded-full">
                                                     visitant
                                                 </span>
                                             @else
                                                 <span class="inline-flex items-center px-2.5 py-0.5 text-xs font-semibold uppercase tracking-widest text-slate-700 bg-slate-100 rounded-full">
-                                                    {{ $roleName ?? '-' }}
+                                                    {{ $user->role?->name ?? '-' }}
                                                 </span>
                                             @endif
                                         </td>

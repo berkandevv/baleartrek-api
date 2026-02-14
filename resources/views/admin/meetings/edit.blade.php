@@ -42,10 +42,6 @@
                             </x-primary-button>
                         </form>
 
-                        @php
-                            $extraGuides = $meeting->users->filter(fn ($u) => $u->role?->name === 'guia');
-                        @endphp
-
                         <div class="mt-6">
                             @if ($extraGuides->isEmpty())
                                 <div class="text-sm text-slate-500">No hay guías adicionales asignados.</div>
@@ -70,9 +66,6 @@
 
                     <div class="mt-10 border-t pt-6">
                         <div class="text-sm font-semibold text-slate-700 uppercase tracking-widest">Inscripciones</div>
-                        @php
-                            $attendees = $meeting->users->filter(fn ($u) => $u->role?->name !== 'guia');
-                        @endphp
                         <div class="mt-4">
                             @if ($attendees->isEmpty())
                                 <div class="text-sm text-slate-500">No hay inscripciones.</div>
