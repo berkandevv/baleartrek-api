@@ -13,7 +13,7 @@ class IslandSeeder extends Seeder
      */
     public function run(): void
     {
-        $jsonData = File::get(env('JSON_PATH') . 'islands.json');
+        $jsonData = File::get(database_path('seeders/data/islands.json'));
         $data = json_decode($jsonData, true);
 
         foreach ($data['illes']['illa'] as $island) {

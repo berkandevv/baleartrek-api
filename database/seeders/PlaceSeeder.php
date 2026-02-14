@@ -16,7 +16,7 @@ class PlaceSeeder extends Seeder
     public function run(): void
     {
         // Cargar JSON
-        $jsonData = File::get(env('JSON_PATH') . 'places.json');
+        $jsonData = File::get(database_path('seeders/data/places.json'));
         $data = json_decode($jsonData, true);
 
         // Obtener treks por regNumber

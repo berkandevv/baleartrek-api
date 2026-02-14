@@ -16,7 +16,7 @@ class MunicipalitySeeder extends Seeder
     public function run(): void
     {
         // Cargar JSON
-        $jsonData = File::get(env('JSON_PATH') . 'municipalities.json');
+        $jsonData = File::get(database_path('seeders/data/municipalities.json'));
         $data = json_decode($jsonData, true);
 
         // Obtener todas las islas y zonas

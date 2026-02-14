@@ -19,7 +19,7 @@ class TrekSeeder extends Seeder
     {
 
         // Cargar el JSON
-        $jsonData = File::get(env('JSON_PATH') . 'treks.json');
+        $jsonData = File::get(database_path('seeders/data/treks.json'));
         $data = json_decode($jsonData, true);
 
         // Obtener municipios por nombre

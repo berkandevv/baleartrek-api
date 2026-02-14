@@ -36,7 +36,7 @@ class UserSeeder extends Seeder
         $user->save(); */
 
         // Cargar el JSON usando File
-        $jsonData = File::get(env('JSON_PATH') . 'users.json');
+        $jsonData = File::get(database_path('seeders/data/users.json'));
         $data = json_decode($jsonData, true);
 
         // El select se hace solo una vez

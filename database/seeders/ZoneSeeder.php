@@ -13,7 +13,7 @@ class ZoneSeeder extends Seeder
      */
     public function run(): void
     {
-        $jsonData = File::get(env('JSON_PATH') . 'zones.json');
+        $jsonData = File::get(database_path('seeders/data/zones.json'));
         $data = json_decode($jsonData, true);
 
         foreach ($data['zones']['zona'] as $zone) {

@@ -5,22 +5,20 @@ BalearTrek es una plataforma dedicada a la gestión de **excursiones (treks), en
 
 ---
 
-## 📌 1. Configuración necesaria (JSON externos)
+## 📌 1. Configuración necesaria (JSON de seeders)
 
-La ruta donde se encuentran los archivos JSON se define en `.env`:
+Los seeders leen los JSON desde una ruta interna del proyecto:
 
 ```
-JSON_PATH=/ruta/a/baleartrek/
+database/seeders/data/
 ```
-
-**Debe terminar en `/` o `\`**, según el sistema operativo.
 
 ---
 
-## 📌 2. Cómo usan los seeders la variable JSON_PATH
+## 📌 2. Cómo cargan los seeders los JSON
 
 ```php
-$jsonData = File::get(env('JSON_PATH') . 'treks.json');
+$jsonData = File::get(database_path('seeders/data/treks.json'));
 $data = json_decode($jsonData, true);
 ```
 
@@ -178,6 +176,7 @@ API-KEY: <APP_KEY>
 database/
 │── migrations/
 │── seeders/
+│   │── data/
 │── factories/
 app/
 │── Models/
