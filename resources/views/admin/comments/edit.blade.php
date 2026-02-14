@@ -33,19 +33,19 @@
                                     <div class="flex items-center justify-between gap-3 py-1 border-t border-slate-200">
                                         <span class="text-sm text-gray-600">Día del encuentro</span>
                                         <span class="font-medium text-gray-900">
-                                            {{ $comment->meeting->day ? \Carbon\Carbon::parse($comment->meeting->day)->format('d-m-Y') : '-' }}
+                                            {{ $comment->meeting->day_formatted ?: '-' }}
                                         </span>
                                     </div>
                                     <div class="flex items-center justify-between gap-3 py-1 border-t border-slate-200">
                                         <span class="text-sm text-gray-600">Inicio inscripción</span>
                                         <span class="font-medium text-gray-900">
-                                            {{ $comment->meeting->appDateIni ? \Carbon\Carbon::parse($comment->meeting->appDateIni)->format('d-m-Y') : '-' }}
+                                            {{ $comment->meeting->app_date_ini_formatted ?: '-' }}
                                         </span>
                                     </div>
                                     <div class="flex items-center justify-between gap-3 py-1 border-t border-slate-200">
                                         <span class="text-sm text-gray-600">Fin inscripción</span>
                                         <span class="font-medium text-gray-900">
-                                            {{ $comment->meeting->appDateEnd ? \Carbon\Carbon::parse($comment->meeting->appDateEnd)->format('d-m-Y') : '-' }}
+                                            {{ $comment->meeting->app_date_end_formatted ?: '-' }}
                                         </span>
                                     </div>
                                 </div>
