@@ -80,7 +80,7 @@
                                             @if ($comment->meeting)
                                                 <div>#{{ $comment->meeting->id }}</div>
                                                 <div class="text-xs text-gray-500">
-                                                    {{ $comment->meeting->day ? \Carbon\Carbon::parse($comment->meeting->day)->format('d-m-Y') : '-' }}
+                                                    {{ $comment->meeting->day_formatted ?: '-' }}
                                                 </div>
                                             @else
                                                 -
@@ -100,7 +100,7 @@
                                                 </span>
                                             @endif
                                         </td>
-                                        <td class="py-2 pr-4">{{ $comment->images->count() }}</td>
+                                        <td class="py-2 pr-4">{{ $comment->images_count }}</td>
                                         <td class="py-2 pr-4 text-right">
                                             <a href="{{ route('admin.comments.edit', $comment->id) }}"
                                                 class="inline-flex items-center px-3 py-1.5 text-xs font-semibold uppercase tracking-widest text-white bg-blue-900 rounded-md hover:bg-blue-800">

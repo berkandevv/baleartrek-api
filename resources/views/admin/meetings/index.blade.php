@@ -59,30 +59,16 @@
                             <tbody>
                                 @forelse($meetings as $meeting)
                                 <tr class="border-b">
-                                    @php
-                                        $dayFormatted = $meeting->day
-                                            ? \Carbon\Carbon::parse($meeting->day)->format('d-m-Y')
-                                            : '';
-                                        $appDateIniFormatted = $meeting->appDateIni
-                                            ? \Carbon\Carbon::parse($meeting->appDateIni)->format('d-m-Y')
-                                            : '';
-                                        $appDateEndFormatted = $meeting->appDateEnd
-                                            ? \Carbon\Carbon::parse($meeting->appDateEnd)->format('d-m-Y')
-                                            : '';
-                                        $isOpen = $meeting->appDateEnd
-                                            ? \Carbon\Carbon::today()->lte(\Carbon\Carbon::parse($meeting->appDateEnd))
-                                            : false;
-                                    @endphp
                                     <td class="py-2 pr-4">{{ $meeting->id }}</td>
                                     <td class="py-2 pr-4">{{ $meeting->trek?->name }}</td>
                                         <td class="py-2 pr-4">
                                             {{ $meeting->user?->name }} {{ $meeting->user?->lastname }}
                                         </td>
-                                        <td class="py-2 pr-4">{{ $dayFormatted }}</td>
+                                        <td class="py-2 pr-4">{{ $meeting->day_formatted }}</td>
                                         <td class="py-2 pr-4">{{ $meeting->hour }}</td>
                                     <td class="py-2 pr-4">
-                                        <span class="{{ $isOpen ? 'text-green-600' : 'text-red-600' }}">
-                                        {{ $appDateIniFormatted }} - {{ $appDateEndFormatted }}
+                                        <span class="{{ $meeting->enrollment_is_open ? 'text-green-600' : 'text-red-600' }}">
+                                        {{ $meeting->app_date_ini_formatted }} - {{ $meeting->app_date_end_formatted }}
                                         </span>
                                     </td>
                                     <td class="py-2 pr-4 text-right">

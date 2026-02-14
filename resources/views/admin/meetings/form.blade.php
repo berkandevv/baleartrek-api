@@ -34,7 +34,7 @@
 <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
     <div>
         <x-input-label for="day" value="Día del encuentro" />
-        <x-text-input id="day" name="day" type="date" class="mt-1 block w-full" value="{{ old('day', $meeting->day ?? '') }}" required />
+        <x-text-input id="day" name="day" type="date" class="mt-1 block w-full" value="{{ old('day', isset($meeting->day) ? $meeting->day->format('Y-m-d') : '') }}" required />
         <x-input-error :messages="$errors->get('day')" class="mt-2" />
     </div>
     <div>

@@ -19,7 +19,8 @@ class TrekController extends Controller
         $search = trim((string) $request->query('q'));
 
         $treks = Trek::query()
-            ->with(['municipality.island', 'interestingPlaces'])
+            ->with('municipality.island')
+            ->withCount('interestingPlaces')
             ->when($search !== '', function ($query) use ($search) {
                 $query->where(function ($subQuery) use ($search) {
                     $subQuery

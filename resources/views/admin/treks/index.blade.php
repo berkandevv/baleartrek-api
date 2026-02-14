@@ -65,7 +65,7 @@
                                                 </span>
                                             @endif
                                         </td>
-                                        <td class="py-2 pr-4">{{ $trek->interestingPlaces->count() }}</td>
+                                        <td class="py-2 pr-4">{{ $trek->interesting_places_count }}</td>
                                         <td class="py-2 pr-4 text-right">
                                             <a href="{{ route('admin.treks.edit', $trek->id) }}" class="inline-flex items-center px-3 py-1.5 text-xs font-semibold uppercase tracking-widest text-white bg-blue-900 rounded-md hover:bg-blue-800">
                                                 Editar

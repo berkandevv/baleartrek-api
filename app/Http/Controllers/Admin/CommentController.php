@@ -18,7 +18,8 @@ class CommentController extends Controller
         $trekId = $request->query('trek_id', 'all');
 
         $comments = Comment::query()
-            ->with(['user', 'meeting.trek', 'images'])
+            ->with(['user', 'meeting.trek'])
+            ->withCount('images')
             ->when($trekId !== 'all', function ($query) use ($trekId) {
                 $query->whereHas('meeting', function ($meetingQuery) use ($trekId) {
                     $meetingQuery->where('trek_id', $trekId);

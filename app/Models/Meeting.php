@@ -2,8 +2,14 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * @property Carbon|null $day
+ * @property Carbon|null $appDateIni
+ * @property Carbon|null $appDateEnd
+ */
 class Meeting extends Model
 {
     protected $fillable = [
@@ -15,6 +21,12 @@ class Meeting extends Model
         'hour',
         'totalScore',
         'countScore'
+    ];
+
+    protected $casts = [
+        'day' => 'date',
+        'appDateIni' => 'date',
+        'appDateEnd' => 'date',
     ];
 
     public function trek()
@@ -35,5 +47,42 @@ class Meeting extends Model
     public function comments()
     {
         return $this->hasMany(Comment::class);
+    }
+
+    public function getDayFormattedAttribute(): string
+    {
+        return $this->formatDateAttribute('day');
+    }
+
+    public function getAppDateIniFormattedAttribute(): string
+    {
+        return $this->formatDateAttribute('appDateIni');
+    }
+
+    public function getAppDateEndFormattedAttribute(): string
+    {
+        return $this->formatDateAttribute('appDateEnd');
+    }
+
+    public function getEnrollmentIsOpenAttribute(): bool
+    {
+        $appDateEnd = $this->getAttribute('appDateEnd');
+
+        if (! $appDateEnd instanceof Carbon) {
+            return false;
+        }
+
+        return Carbon::today()->lte($appDateEnd);
+    }
+
+    private function formatDateAttribute(string $attribute): string
+    {
+        $value = $this->getAttribute($attribute);
+
+        if (! $value instanceof Carbon) {
+            return '';
+        }
+
+        return $value->format('d-m-Y');
     }
 }
