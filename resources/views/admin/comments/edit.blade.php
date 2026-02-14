@@ -98,13 +98,6 @@
                                 @foreach ($comment->images as $image)
                                     <div class="border rounded-md p-3">
                                         <div class="text-sm text-gray-600 break-all">{{ $image->url }}</div>
-                                        <form method="POST" action="{{ route('admin.comments.images.destroy', [$comment->id, $image->id]) }}" class="mt-3" onsubmit="return confirm('¿Seguro que quieres eliminar esta imagen?');">
-                                            @csrf
-                                            @method('DELETE')
-                                            <x-danger-button type="submit">
-                                                Eliminar imagen
-                                            </x-danger-button>
-                                        </form>
                                     </div>
                                 @endforeach
                             </div>

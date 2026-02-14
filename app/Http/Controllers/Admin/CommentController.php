@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Comment;
-use App\Models\Image;
 use App\Models\Trek;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
@@ -72,17 +71,5 @@ class CommentController extends Controller
         return redirect()
             ->route('admin.comments.edit', $adminComment)
             ->with('status', 'Comentario actualizado.');
-    }
-
-    // Elimina una imagen asociada a un comentario
-    public function destroyImage(Comment $adminComment, Image $image)
-    {
-        abort_if($image->comment_id !== $adminComment->id, 404);
-
-        $image->delete();
-
-        return redirect()
-            ->route('admin.comments.edit', $adminComment)
-            ->with('status', 'Imagen eliminada.');
     }
 }

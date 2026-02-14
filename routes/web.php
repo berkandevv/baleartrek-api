@@ -40,7 +40,7 @@ Route::middleware(['auth', 'check.role.admin'])
             ->whereNumber('admin_user')
             ->name('users.update');
 
-        // Comentarios (validación + imágenes)
+        // Comentarios (validación)
         Route::get('/comments', [AdminCommentController::class, 'index'])->name('comments.index');
         Route::get('/comments/{admin_comment}/edit', [AdminCommentController::class, 'edit'])
             ->whereNumber('admin_comment')
@@ -48,10 +48,6 @@ Route::middleware(['auth', 'check.role.admin'])
         Route::patch('/comments/{admin_comment}', [AdminCommentController::class, 'update'])
             ->whereNumber('admin_comment')
             ->name('comments.update');
-        Route::delete('/comments/{admin_comment}/images/{image}', [AdminCommentController::class, 'destroyImage'])
-            ->whereNumber('admin_comment')
-            ->whereNumber('image')
-            ->name('comments.images.destroy');
 
         // Excursiones (CRUD)
         Route::get('/treks', [AdminTrekController::class, 'index'])->name('treks.index');
