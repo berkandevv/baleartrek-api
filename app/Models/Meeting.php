@@ -75,6 +75,16 @@ class Meeting extends Model
         return Carbon::today()->lte($appDateEnd);
     }
 
+    public static function enrollmentDatesForDay(Carbon|string $day): array
+    {
+        $baseDay = $day instanceof Carbon ? $day->copy() : Carbon::parse($day);
+
+        return [
+            'appDateIni' => $baseDay->copy()->subMonthNoOverflow()->toDateString(),
+            'appDateEnd' => $baseDay->copy()->subWeek()->toDateString(),
+        ];
+    }
+
     private function formatDateAttribute(string $attribute): string
     {
         $value = $this->getAttribute($attribute);

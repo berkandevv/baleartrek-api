@@ -21,4 +21,25 @@ class InterestingPlace extends Model
     {
         return $this->belongsToMany(Trek::class, 'interesting_place_trek')->withPivot('order')->withTimestamps();
     }
+
+    public function getLatitudeAttribute(): ?string
+    {
+        return $this->gpsPart(0);
+    }
+
+    public function getLongitudeAttribute(): ?string
+    {
+        return $this->gpsPart(1);
+    }
+
+    private function gpsPart(int $index): ?string
+    {
+        if (! is_string($this->gps) || $this->gps === '') {
+            return null;
+        }
+
+        $parts = explode(',', $this->gps, 2);
+
+        return isset($parts[$index]) ? trim($parts[$index]) : null;
+    }
 }

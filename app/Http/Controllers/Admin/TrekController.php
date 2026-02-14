@@ -6,13 +6,16 @@ use App\Http\Controllers\Controller;
 use App\Models\InterestingPlace;
 use App\Models\Municipality;
 use App\Models\Trek;
+use App\Services\TrekImageService;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
-use Illuminate\Support\Facades\File;
-use Illuminate\Support\Str;
 
 class TrekController extends Controller
 {
+    public function __construct(private TrekImageService $trekImageService)
+    {
+    }
+
     // Listado de excursiones con búsqueda básica
     public function index(Request $request)
     {
@@ -74,7 +77,7 @@ class TrekController extends Controller
 
         $imageUrl = null;
         if ($request->hasFile('image')) {
-            $imageUrl = $this->storeTrekImage($request->file('image'));
+            $imageUrl = $this->trekImageService->storeUploadedImage($request->file('image'));
         }
 
         $trek = Trek::create([
@@ -146,7 +149,7 @@ class TrekController extends Controller
 
         $imageUrl = $adminTrek->imageUrl;
         if ($request->hasFile('image')) {
-            $imageUrl = $this->storeTrekImage($request->file('image'), $adminTrek->imageUrl);
+            $imageUrl = $this->trekImageService->storeUploadedImage($request->file('image'), $adminTrek->imageUrl);
         }
 
         $adminTrek->update([
@@ -185,24 +188,4 @@ class TrekController extends Controller
         return $syncData;
     }
 
-    // Guarda la imagen físicamente en public/images/treks y devuelve la URL pública
-    private function storeTrekImage($file, ?string $previousUrl = null): string
-    {
-        $directory = public_path('images/treks');
-        File::ensureDirectoryExists($directory);
-
-        $extension = $file->getClientOriginalExtension() ?: 'jpg';
-        $filename = Str::uuid()->toString() . '.' . $extension;
-
-        if ($previousUrl && str_starts_with($previousUrl, '/images/treks/')) {
-            $previousPath = public_path(ltrim($previousUrl, '/'));
-            if (File::exists($previousPath)) {
-                File::delete($previousPath);
-            }
-        }
-
-        $file->move($directory, $filename);
-
-        return '/images/treks/' . $filename;
-    }
 }

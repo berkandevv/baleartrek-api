@@ -45,70 +45,15 @@
     </div>
 </div>
 
-@php
-    $dayValue = old('day', $meeting->day ?? null);
-    $appDateIniValue = $dayValue ? \Carbon\Carbon::parse($dayValue)->subMonthNoOverflow()->format('d/m/Y') : null;
-    $appDateEndValue = $dayValue ? \Carbon\Carbon::parse($dayValue)->subWeek()->format('d/m/Y') : null;
-@endphp
-
 <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
     <div>
         <div class="text-xs uppercase text-gray-500">Inicio inscripción</div>
-        <div id="appDateIniPreview" class="mt-1 font-medium text-gray-900">{{ $appDateIniValue ?? '-' }}</div>
-        <div class="text-sm text-gray-500">Se calcula como 1 mes antes del encuentro.</div>
+        <div class="mt-1 font-medium text-gray-900">{{ $meeting->app_date_ini_formatted ?: '-' }}</div>
+        <div class="text-sm text-gray-500">Se calcula automáticamente al guardar (1 mes antes del encuentro).</div>
     </div>
     <div>
         <div class="text-xs uppercase text-gray-500">Fin inscripción</div>
-        <div id="appDateEndPreview" class="mt-1 font-medium text-gray-900">{{ $appDateEndValue ?? '-' }}</div>
-        <div class="text-sm text-gray-500">Se calcula como 1 semana antes del encuentro.</div>
+        <div class="mt-1 font-medium text-gray-900">{{ $meeting->app_date_end_formatted ?: '-' }}</div>
+        <div class="text-sm text-gray-500">Se calcula automáticamente al guardar (1 semana antes del encuentro).</div>
     </div>
 </div>
-
-<script>
-    (function () {
-        const dayInput = document.getElementById('day');
-        const iniEl = document.getElementById('appDateIniPreview');
-        const endEl = document.getElementById('appDateEndPreview');
-
-        if (!dayInput || !iniEl || !endEl) return;
-
-        const formatDate = (date) => {
-            const day = String(date.getDate()).padStart(2, '0');
-            const month = String(date.getMonth() + 1).padStart(2, '0');
-            const year = date.getFullYear();
-            return `${day}/${month}/${year}`;
-        };
-
-        const updatePreview = () => {
-            if (!dayInput.value) {
-                iniEl.textContent = '-';
-                endEl.textContent = '-';
-                return;
-            }
-
-            const base = new Date(dayInput.value + 'T00:00:00');
-            if (isNaN(base.getTime())) {
-                iniEl.textContent = '-';
-                endEl.textContent = '-';
-                return;
-            }
-
-            const ini = new Date(base);
-            ini.setMonth(ini.getMonth() - 1);
-
-            // Ajuste para evitar desbordes de fin de mes
-            if (ini.getDate() !== base.getDate()) {
-                ini.setDate(0);
-            }
-
-            const end = new Date(base);
-            end.setDate(end.getDate() - 7);
-
-            iniEl.textContent = formatDate(ini);
-            endEl.textContent = formatDate(end);
-        };
-
-        dayInput.addEventListener('input', updatePreview);
-        updatePreview();
-    })();
-</script>

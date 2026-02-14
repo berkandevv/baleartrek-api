@@ -84,17 +84,15 @@ class MeetingController extends Controller
             return back()->withErrors(['user_id' => 'El guía principal debe tener rol guía.'])->withInput();
         }
 
-        $day = Carbon::parse($data['day']);
-        $appDateIni = $day->copy()->subMonthNoOverflow()->toDateString();
-        $appDateEnd = $day->copy()->subWeek()->toDateString();
+        $enrollmentDates = Meeting::enrollmentDatesForDay($data['day']);
 
         $meeting = Meeting::create([
             'trek_id' => (int) $data['trek_id'],
             'user_id' => (int) $data['user_id'],
             'day' => $data['day'],
             'hour' => $data['hour'],
-            'appDateIni' => $appDateIni,
-            'appDateEnd' => $appDateEnd,
+            'appDateIni' => $enrollmentDates['appDateIni'],
+            'appDateEnd' => $enrollmentDates['appDateEnd'],
         ]);
 
         return redirect()
@@ -139,17 +137,15 @@ class MeetingController extends Controller
             return back()->withErrors(['user_id' => 'El guía principal debe tener rol guía.'])->withInput();
         }
 
-        $day = Carbon::parse($data['day']);
-        $appDateIni = $day->copy()->subMonthNoOverflow()->toDateString();
-        $appDateEnd = $day->copy()->subWeek()->toDateString();
+        $enrollmentDates = Meeting::enrollmentDatesForDay($data['day']);
 
         $adminMeeting->update([
             'trek_id' => (int) $data['trek_id'],
             'user_id' => (int) $data['user_id'],
             'day' => $data['day'],
             'hour' => $data['hour'],
-            'appDateIni' => $appDateIni,
-            'appDateEnd' => $appDateEnd,
+            'appDateIni' => $enrollmentDates['appDateIni'],
+            'appDateEnd' => $enrollmentDates['appDateEnd'],
         ]);
 
         return redirect()
