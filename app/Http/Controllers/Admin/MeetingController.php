@@ -79,6 +79,11 @@ class MeetingController extends Controller
             'hour' => ['required', 'date_format:H:i'],
         ]);
 
+        $guide = User::query()->with('role')->findOrFail($data['user_id']);
+        if ($guide->role?->name !== 'guia') {
+            return back()->withErrors(['user_id' => 'El guía principal debe tener rol guía.'])->withInput();
+        }
+
         $day = Carbon::parse($data['day']);
         $appDateIni = $day->copy()->subMonthNoOverflow()->toDateString();
         $appDateEnd = $day->copy()->subWeek()->toDateString();
@@ -128,6 +133,11 @@ class MeetingController extends Controller
             'day' => ['required', 'date'],
             'hour' => ['required', 'date_format:H:i'],
         ]);
+
+        $guide = User::query()->with('role')->findOrFail($data['user_id']);
+        if ($guide->role?->name !== 'guia') {
+            return back()->withErrors(['user_id' => 'El guía principal debe tener rol guía.'])->withInput();
+        }
 
         $day = Carbon::parse($data['day']);
         $appDateIni = $day->copy()->subMonthNoOverflow()->toDateString();
