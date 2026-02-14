@@ -16,24 +16,7 @@
                         {{ __('Dashboard') }}
                     </x-nav-link>
                     @if (Auth::user()?->isAdmin())
-                        <x-nav-link :href="route('admin.users.index')" :active="request()->routeIs('admin.users.*')">
-                            {{ __('Usuarios') }}
-                        </x-nav-link>
-                        <x-nav-link :href="route('admin.comments.index')" :active="request()->routeIs('admin.comments.*')">
-                            {{ __('Comentarios') }}
-                        </x-nav-link>
-                        <x-nav-link :href="route('admin.treks.index')" :active="request()->routeIs('admin.treks.*')">
-                            {{ __('Excursiones') }}
-                        </x-nav-link>
-                        <x-nav-link :href="route('admin.meetings.index')" :active="request()->routeIs('admin.meetings.*')">
-                            {{ __('Encuentros') }}
-                        </x-nav-link>
-                        <x-nav-link :href="route('admin.municipalities.index')" :active="request()->routeIs('admin.municipalities.*')">
-                            {{ __('Municipios') }}
-                        </x-nav-link>
-                        <x-nav-link :href="route('admin.places.index')" :active="request()->routeIs('admin.places.*')">
-                            {{ __('Lugares') }}
-                        </x-nav-link>
+                        @include('layouts.partials.admin-navigation-links', ['component' => 'nav-link'])
                     @endif
                 </div>
             </div>
@@ -91,24 +74,7 @@
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
             @if (Auth::user()?->isAdmin())
-                <x-responsive-nav-link :href="route('admin.users.index')" :active="request()->routeIs('admin.users.*')">
-                    {{ __('Usuarios') }}
-                </x-responsive-nav-link>
-                <x-responsive-nav-link :href="route('admin.comments.index')" :active="request()->routeIs('admin.comments.*')">
-                    {{ __('Comentarios') }}
-                </x-responsive-nav-link>
-                <x-responsive-nav-link :href="route('admin.treks.index')" :active="request()->routeIs('admin.treks.*')">
-                    {{ __('Excursiones') }}
-                </x-responsive-nav-link>
-                <x-responsive-nav-link :href="route('admin.meetings.index')" :active="request()->routeIs('admin.meetings.*')">
-                    {{ __('Encuentros') }}
-                </x-responsive-nav-link>
-                <x-responsive-nav-link :href="route('admin.municipalities.index')" :active="request()->routeIs('admin.municipalities.*')">
-                    {{ __('Municipios') }}
-                </x-responsive-nav-link>
-                <x-responsive-nav-link :href="route('admin.places.index')" :active="request()->routeIs('admin.places.*')">
-                    {{ __('Lugares') }}
-                </x-responsive-nav-link>
+                @include('layouts.partials.admin-navigation-links', ['component' => 'responsive-nav-link'])
             @endif
         </div>
 
