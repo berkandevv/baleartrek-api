@@ -42,6 +42,12 @@ Route::middleware(['auth', 'check.role.admin'])
         Route::patch('/users/{admin_user}', [AdminUserController::class, 'update'])
             ->whereNumber('admin_user')
             ->name('users.update');
+        Route::patch('/users/{admin_user}/deactivate', [AdminUserController::class, 'deactivate'])
+            ->whereNumber('admin_user')
+            ->name('users.deactivate');
+        Route::patch('/users/{admin_user}/activate', [AdminUserController::class, 'activate'])
+            ->whereNumber('admin_user')
+            ->name('users.activate');
 
         // Comentarios (validación)
         Route::get('/comments', [AdminCommentController::class, 'index'])->name('comments.index');

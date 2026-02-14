@@ -53,6 +53,13 @@
                                                 <a href="{{ route('admin.places.edit', $place->id) }}" class="inline-flex items-center px-3 py-1.5 text-xs font-semibold uppercase tracking-widest text-white bg-blue-900 rounded-md hover:bg-blue-800">
                                                     Editar
                                                 </a>
+                                                <form method="POST" action="{{ route('admin.places.destroy', $place->id) }}" onsubmit="return confirm('¿Seguro que quieres eliminar este lugar?');">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="inline-flex items-center px-3 py-1.5 text-xs font-semibold uppercase tracking-widest text-white bg-red-700 rounded-md hover:bg-red-600">
+                                                        Eliminar
+                                                    </button>
+                                                </form>
                                             </div>
                                         </td>
                                     </tr>

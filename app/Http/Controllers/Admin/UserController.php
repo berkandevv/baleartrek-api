@@ -120,4 +120,28 @@ class UserController extends Controller
             ->route('admin.users.edit', $adminUser->id)
             ->with('status', 'Usuario actualizado.');
     }
+
+    // Da de baja rápida desde el listado
+    public function deactivate(User $adminUser)
+    {
+        $adminUser->update([
+            'status' => 'n',
+        ]);
+
+        return redirect()
+            ->route('admin.users.index')
+            ->with('status', 'Usuario dado de baja.');
+    }
+
+    // Da de alta rápida desde el listado
+    public function activate(User $adminUser)
+    {
+        $adminUser->update([
+            'status' => 'y',
+        ]);
+
+        return redirect()
+            ->route('admin.users.index')
+            ->with('status', 'Usuario dado de alta.');
+    }
 }
