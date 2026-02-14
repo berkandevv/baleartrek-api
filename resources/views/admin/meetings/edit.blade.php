@@ -27,15 +27,15 @@
                             @csrf
                             <div class="w-full sm:flex-1">
                                 <x-input-label for="guide_user_id" value="Añadir guía" />
-                                <select id="guide_user_id" name="user_id" class="mt-1 block w-full border-gray-300 focus:border-blue-600 focus:ring-blue-500 rounded-md shadow-sm">
+                                <select id="guide_user_id" name="guide_user_id" class="mt-1 block w-full border-gray-300 focus:border-blue-600 focus:ring-blue-500 rounded-md shadow-sm">
                                     <option value="">Selecciona un guía</option>
                                     @foreach ($guides as $guide)
-                                        <option value="{{ $guide->id }}">
+                                        <option value="{{ $guide->id }}" @selected((string) old('guide_user_id') === (string) $guide->id)>
                                             {{ $guide->lastname }} {{ $guide->name }} ({{ $guide->email }})
                                         </option>
                                     @endforeach
                                 </select>
-                                <x-input-error :messages="$errors->get('user_id')" class="mt-2" />
+                                <x-input-error :messages="$errors->addGuide->get('guide_user_id')" class="mt-2" />
                             </div>
                             <x-primary-button type="submit">
                                 Añadir

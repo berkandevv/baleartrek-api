@@ -166,16 +166,11 @@ class MeetingController extends Controller
     // Añade un guía adicional
     public function addGuide(Request $request, Meeting $adminMeeting)
     {
-        $data = $request->validate([
-            'user_id' => ['required', 'exists:users,id'],
+        $data = $request->validateWithBag('addGuide', [
+            'guide_user_id' => ['required', 'exists:users,id'],
         ]);
 
-        $user = User::query()->with('role')->findOrFail($data['user_id']);
-        if ($user->role?->name !== 'guia') {
-            return back()->withErrors(['user_id' => 'Solo se pueden añadir usuarios con rol guía.']);
-        }
-
-        $adminMeeting->users()->syncWithoutDetaching([$user->id]);
+        $adminMeeting->users()->syncWithoutDetaching([(int) $data['guide_user_id']]);
 
         return redirect()
             ->route('admin.meetings.edit', $adminMeeting)
