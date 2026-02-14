@@ -97,7 +97,12 @@
                             <div class="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2">
                                 @foreach ($comment->images as $image)
                                     <div class="border rounded-md p-3">
-                                        <div class="text-sm text-gray-600 break-all">{{ $image->url }}</div>
+                                        @if ($image->display_url)
+                                            <a href="{{ $image->display_url }}" target="_blank" rel="noopener noreferrer">
+                                                <img src="{{ $image->display_url }}" alt="Imagen comentario {{ $image->id }}" class="h-28 w-full object-cover rounded-md border border-slate-200" loading="lazy" />
+                                            </a>
+                                        @endif
+                                        <div class="mt-2 text-xs text-gray-500 break-all">{{ $image->url }}</div>
                                     </div>
                                 @endforeach
                             </div>
