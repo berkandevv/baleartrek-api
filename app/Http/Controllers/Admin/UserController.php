@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Meeting;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -47,6 +48,28 @@ class UserController extends Controller
             'search' => $search,
             'role' => $role,
             'status' => $status,
+        ]);
+    }
+
+    // Vista de detalle de usuario
+    public function show(User $adminUser)
+    {
+        $user = $adminUser->load([
+            'role',
+            'comments.meeting.trek',
+            'meetings.trek',
+        ]);
+
+        $createdMeetings = Meeting::query()
+            ->with('trek')
+            ->where('user_id', $user->id)
+            ->orderByDesc('day')
+            ->orderByDesc('hour')
+            ->get();
+
+        return view('admin.users.show', [
+            'user' => $user,
+            'createdMeetings' => $createdMeetings,
         ]);
     }
 

@@ -75,6 +75,21 @@ class InterestingPlaceController extends Controller
             ->with('status', 'Lugar creado.');
     }
 
+    // Vista de detalle de lugar
+    public function show(InterestingPlace $adminPlace)
+    {
+        $place = $adminPlace->load([
+            'placeType',
+            'treks' => fn ($query) => $query
+                ->with('municipality')
+                ->orderBy('regnumber'),
+        ]);
+
+        return view('admin.places.show', [
+            'place' => $place,
+        ]);
+    }
+
     // Formulario de edición
     public function edit(InterestingPlace $adminPlace)
     {

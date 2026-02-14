@@ -92,9 +92,14 @@
                                             @endif
                                         </td>
                                         <td class="py-2 pr-4 text-right">
+                                            <div class="inline-flex items-center gap-2">
+                                                <a href="{{ route('admin.users.show', $user->id) }}" class="inline-flex items-center px-3 py-1.5 text-xs font-semibold uppercase tracking-widest text-white bg-green-700 rounded-md hover:bg-green-600">
+                                                    Ver
+                                                </a>
                                             <a href="{{ route('admin.users.edit', $user->id) }}" class="inline-flex items-center px-3 py-1.5 text-xs font-semibold uppercase tracking-widest text-white bg-blue-900 rounded-md hover:bg-blue-800">
                                                 Editar
                                             </a>
+                                            </div>
                                         </td>
                                     </tr>
                                 @empty

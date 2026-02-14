@@ -102,10 +102,16 @@
                                         </td>
                                         <td class="py-2 pr-4">{{ $comment->images_count }}</td>
                                         <td class="py-2 pr-4 text-right">
-                                            <a href="{{ route('admin.comments.edit', $comment->id) }}"
-                                                class="inline-flex items-center px-3 py-1.5 text-xs font-semibold uppercase tracking-widest text-white bg-blue-900 rounded-md hover:bg-blue-800">
-                                                Ver
-                                            </a>
+                                            <div class="inline-flex items-center gap-2">
+                                                <a href="{{ route('admin.comments.show', $comment->id) }}"
+                                                    class="inline-flex items-center px-3 py-1.5 text-xs font-semibold uppercase tracking-widest text-white bg-green-700 rounded-md hover:bg-green-600">
+                                                    Ver
+                                                </a>
+                                                <a href="{{ route('admin.comments.edit', $comment->id) }}"
+                                                    class="inline-flex items-center px-3 py-1.5 text-xs font-semibold uppercase tracking-widest text-white bg-blue-900 rounded-md hover:bg-blue-800">
+                                                    Editar
+                                                </a>
+                                            </div>
                                         </td>
                                     </tr>
                                 @empty

@@ -64,6 +64,22 @@ class MunicipalityController extends Controller
             ->with('status', 'Municipio creado.');
     }
 
+    // Vista de detalle de municipio
+    public function show(Municipality $adminMunicipality)
+    {
+        $municipality = $adminMunicipality->load([
+            'zone',
+            'island',
+            'treks' => fn ($query) => $query
+                ->withCount('meetings')
+                ->orderBy('regnumber'),
+        ]);
+
+        return view('admin.municipalities.show', [
+            'municipality' => $municipality,
+        ]);
+    }
+
     // Formulario de edición de municipio
     public function edit(Municipality $adminMunicipality)
     {

@@ -49,6 +49,16 @@ class CommentController extends Controller
         ]);
     }
 
+    // Vista de detalle del comentario
+    public function show(Comment $adminComment)
+    {
+        $comment = $adminComment->load(['user.role', 'meeting.trek.user', 'images']);
+
+        return view('admin.comments.show', [
+            'comment' => $comment,
+        ]);
+    }
+
     // Vista de detalle para moderación del comentario
     public function edit(Comment $adminComment)
     {

@@ -101,6 +101,25 @@ class TrekController extends Controller
             ->with('status', 'Excursión creada.');
     }
 
+    // Vista de detalle de excursión
+    public function show(Trek $adminTrek)
+    {
+        $trek = $adminTrek->load([
+            'municipality.zone',
+            'municipality.island',
+            'interestingPlaces' => fn ($query) => $query->with('placeType')->orderBy('interesting_place_trek.order'),
+            'meetings' => fn ($query) => $query
+                ->with('user')
+                ->withCount('comments')
+                ->orderByDesc('day')
+                ->orderByDesc('hour'),
+        ]);
+
+        return view('admin.treks.show', [
+            'trek' => $trek,
+        ]);
+    }
+
     // Formulario de edición de excursión
     public function edit(Trek $adminTrek)
     {

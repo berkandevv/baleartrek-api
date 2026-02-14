@@ -33,6 +33,9 @@ Route::middleware(['auth', 'check.role.admin'])
     ->group(function () {
         // Usuarios
         Route::get('/users', [AdminUserController::class, 'index'])->name('users.index');
+        Route::get('/users/{admin_user}', [AdminUserController::class, 'show'])
+            ->whereNumber('admin_user')
+            ->name('users.show');
         Route::get('/users/{admin_user}/edit', [AdminUserController::class, 'edit'])
             ->whereNumber('admin_user')
             ->name('users.edit');
@@ -42,6 +45,9 @@ Route::middleware(['auth', 'check.role.admin'])
 
         // Comentarios (validación)
         Route::get('/comments', [AdminCommentController::class, 'index'])->name('comments.index');
+        Route::get('/comments/{admin_comment}', [AdminCommentController::class, 'show'])
+            ->whereNumber('admin_comment')
+            ->name('comments.show');
         Route::get('/comments/{admin_comment}/edit', [AdminCommentController::class, 'edit'])
             ->whereNumber('admin_comment')
             ->name('comments.edit');
@@ -53,6 +59,9 @@ Route::middleware(['auth', 'check.role.admin'])
         Route::get('/treks', [AdminTrekController::class, 'index'])->name('treks.index');
         Route::get('/treks/create', [AdminTrekController::class, 'create'])->name('treks.create');
         Route::post('/treks', [AdminTrekController::class, 'store'])->name('treks.store');
+        Route::get('/treks/{admin_trek}', [AdminTrekController::class, 'show'])
+            ->whereNumber('admin_trek')
+            ->name('treks.show');
         Route::get('/treks/{admin_trek}/edit', [AdminTrekController::class, 'edit'])
             ->whereNumber('admin_trek')
             ->name('treks.edit');
@@ -64,6 +73,9 @@ Route::middleware(['auth', 'check.role.admin'])
         Route::get('/meetings', [AdminMeetingController::class, 'index'])->name('meetings.index');
         Route::get('/meetings/create', [AdminMeetingController::class, 'create'])->name('meetings.create');
         Route::post('/meetings', [AdminMeetingController::class, 'store'])->name('meetings.store');
+        Route::get('/meetings/{admin_meeting}', [AdminMeetingController::class, 'show'])
+            ->whereNumber('admin_meeting')
+            ->name('meetings.show');
         Route::get('/meetings/{admin_meeting}/edit', [AdminMeetingController::class, 'edit'])
             ->whereNumber('admin_meeting')
             ->name('meetings.edit');
@@ -85,6 +97,9 @@ Route::middleware(['auth', 'check.role.admin'])
         Route::get('/municipalities', [AdminMunicipalityController::class, 'index'])->name('municipalities.index');
         Route::get('/municipalities/create', [AdminMunicipalityController::class, 'create'])->name('municipalities.create');
         Route::post('/municipalities', [AdminMunicipalityController::class, 'store'])->name('municipalities.store');
+        Route::get('/municipalities/{admin_municipality}', [AdminMunicipalityController::class, 'show'])
+            ->whereNumber('admin_municipality')
+            ->name('municipalities.show');
         Route::get('/municipalities/{admin_municipality}/edit', [AdminMunicipalityController::class, 'edit'])
             ->whereNumber('admin_municipality')
             ->name('municipalities.edit');
@@ -96,6 +111,9 @@ Route::middleware(['auth', 'check.role.admin'])
         Route::get('/places', [AdminInterestingPlaceController::class, 'index'])->name('places.index');
         Route::get('/places/create', [AdminInterestingPlaceController::class, 'create'])->name('places.create');
         Route::post('/places', [AdminInterestingPlaceController::class, 'store'])->name('places.store');
+        Route::get('/places/{admin_place}', [AdminInterestingPlaceController::class, 'show'])
+            ->whereNumber('admin_place')
+            ->name('places.show');
         Route::get('/places/{admin_place}/edit', [AdminInterestingPlaceController::class, 'edit'])
             ->whereNumber('admin_place')
             ->name('places.edit');

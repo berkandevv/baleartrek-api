@@ -101,6 +101,29 @@ class MeetingController extends Controller
             ->with('status', 'Encuentro creado.');
     }
 
+    // Vista de detalle de encuentro
+    public function show(Meeting $adminMeeting)
+    {
+        $meeting = $adminMeeting->load([
+            'trek.municipality.island',
+            'user.role',
+            'users.role',
+            'comments' => fn ($query) => $query
+                ->with(['user', 'images'])
+                ->withCount('images')
+                ->latest(),
+        ]);
+
+        $extraGuides = $meeting->users->where('role.name', 'guia')->values();
+        $attendees = $meeting->users->where('role.name', '!=', 'guia')->values();
+
+        return view('admin.meetings.show', [
+            'meeting' => $meeting,
+            'extraGuides' => $extraGuides,
+            'attendees' => $attendees,
+        ]);
+    }
+
     // Formulario de edición de encuentro
     public function edit(Meeting $adminMeeting)
     {
