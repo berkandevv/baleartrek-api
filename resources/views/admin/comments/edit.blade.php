@@ -27,6 +27,37 @@
                             <div class="text-xs uppercase text-gray-500">Ruta</div>
                             <div class="font-medium">{{ $comment->meeting?->trek?->name ?? '-' }}</div>
                         </div>
+                        <div class="sm:col-span-2">
+                            <div class="text-xs uppercase text-gray-500">Encuentro</div>
+                            @if ($comment->meeting)
+                                <div class="mt-1 rounded-lg border border-slate-200 bg-slate-50 p-3">
+                                    <div class="flex items-center justify-between gap-3 py-1">
+                                        <span class="text-sm text-gray-600">ID</span>
+                                        <span class="font-medium text-gray-900">#{{ $comment->meeting->id }}</span>
+                                    </div>
+                                    <div class="flex items-center justify-between gap-3 py-1 border-t border-slate-200">
+                                        <span class="text-sm text-gray-600">Día del encuentro</span>
+                                        <span class="font-medium text-gray-900">
+                                            {{ $comment->meeting->day ? \Carbon\Carbon::parse($comment->meeting->day)->format('d-m-Y') : '-' }}
+                                        </span>
+                                    </div>
+                                    <div class="flex items-center justify-between gap-3 py-1 border-t border-slate-200">
+                                        <span class="text-sm text-gray-600">Inicio inscripción</span>
+                                        <span class="font-medium text-gray-900">
+                                            {{ $comment->meeting->appDateIni ? \Carbon\Carbon::parse($comment->meeting->appDateIni)->format('d-m-Y') : '-' }}
+                                        </span>
+                                    </div>
+                                    <div class="flex items-center justify-between gap-3 py-1 border-t border-slate-200">
+                                        <span class="text-sm text-gray-600">Fin inscripción</span>
+                                        <span class="font-medium text-gray-900">
+                                            {{ $comment->meeting->appDateEnd ? \Carbon\Carbon::parse($comment->meeting->appDateEnd)->format('d-m-Y') : '-' }}
+                                        </span>
+                                    </div>
+                                </div>
+                            @else
+                                <div class="font-medium">-</div>
+                            @endif
+                        </div>
                         <div>
                             <div class="text-xs uppercase text-gray-500">Puntuación</div>
                             <div class="font-medium">{{ $comment->score }}</div>

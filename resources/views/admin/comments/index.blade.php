@@ -59,6 +59,7 @@
                                     <th class="py-2 pr-4">ID</th>
                                     <th class="py-2 pr-4">Usuario</th>
                                     <th class="py-2 pr-4">Ruta</th>
+                                    <th class="py-2 pr-4">Encuentro</th>
                                     <th class="py-2 pr-4">Puntuación</th>
                                     <th class="py-2 pr-4">Estado</th>
                                     <th class="py-2 pr-4">Imágenes</th>
@@ -74,6 +75,16 @@
                                         </td>
                                         <td class="py-2 pr-4">
                                             {{ $comment->meeting?->trek?->name ?? '-' }}
+                                        </td>
+                                        <td class="py-2 pr-4">
+                                            @if ($comment->meeting)
+                                                <div>#{{ $comment->meeting->id }}</div>
+                                                <div class="text-xs text-gray-500">
+                                                    {{ $comment->meeting->day ? \Carbon\Carbon::parse($comment->meeting->day)->format('d-m-Y') : '-' }}
+                                                </div>
+                                            @else
+                                                -
+                                            @endif
                                         </td>
                                         <td class="py-2 pr-4">{{ $comment->score }}</td>
                                         <td class="py-2 pr-4">
@@ -99,7 +110,7 @@
                                     </tr>
                                 @empty
                                     <tr>
-                                        <td colspan="7" class="py-6 text-center text-gray-500">
+                                        <td colspan="8" class="py-6 text-center text-gray-500">
                                             No hay comentarios para mostrar.
                                         </td>
                                     </tr>
