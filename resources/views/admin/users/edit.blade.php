@@ -50,13 +50,18 @@
 
                         <div>
                             <x-input-label for="role_id" value="Rol" />
-                            <select id="role_id" name="role_id" class="mt-1 block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm">
-                                @foreach ($roles as $role)
-                                    <option value="{{ $role->id }}" @selected(old('role_id', $user->role_id) == $role->id)>
-                                        {{ $role->name }}
-                                    </option>
-                                @endforeach
-                            </select>
+                            @if ($isAdminUser ?? false)
+                                <x-text-input type="text" class="mt-1 block w-full bg-gray-100 text-gray-700" value="admin" disabled />
+                                <input type="hidden" name="role_id" value="{{ $user->role_id }}">
+                            @else
+                                <select id="role_id" name="role_id" class="mt-1 block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm">
+                                    @foreach ($roles as $role)
+                                        <option value="{{ $role->id }}" @selected(old('role_id', $user->role_id) == $role->id)>
+                                            {{ $role->name }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            @endif
                             <x-input-error :messages="$errors->get('role_id')" class="mt-2" />
                         </div>
 

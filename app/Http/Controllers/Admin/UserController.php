@@ -76,18 +76,37 @@ class UserController extends Controller
     // Formulario de edición de usuario
     public function edit(User $adminUser)
     {
-        $roles = Role::query()->orderBy('name')->get();
+        $roles = Role::query()
+            ->whereIn('name', ['guia', 'visitant'])
+            ->orderBy('name')
+            ->get();
+
+        $adminRoleId = Role::query()
+            ->where('name', 'admin')
+            ->value('id');
 
         return view('admin.users.edit', [
             'user' => $adminUser->load('role'),
             'roles' => $roles,
+            'isAdminUser' => $adminRoleId !== null && (int) $adminUser->role_id === (int) $adminRoleId,
         ]);
     }
 
     // Actualización de datos básicos, rol y estado
     public function update(Request $request, User $adminUser)
     {
-        $roles = Role::query()->orderBy('name')->pluck('id')->all();
+        $editableRoleIds = Role::query()
+            ->whereIn('name', ['guia', 'visitant'])
+            ->pluck('id')
+            ->all();
+
+        $adminRoleId = Role::query()
+            ->where('name', 'admin')
+            ->value('id');
+
+        $allowedRoleIds = $adminRoleId !== null && (int) $adminUser->role_id === (int) $adminRoleId
+            ? [$adminRoleId]
+            : $editableRoleIds;
 
         $data = $request->validate([
             'name' => ['required', 'string', 'max:255'],
@@ -105,7 +124,7 @@ class UserController extends Controller
                 Rule::unique('users', 'email')->ignore($adminUser->id),
             ],
             'phone' => ['required', 'string', 'max:255'],
-            'role_id' => ['required', Rule::in($roles)],
+            'role_id' => ['required', Rule::in($allowedRoleIds)],
             'status' => ['required', Rule::in(['y', 'n'])],
         ]);
 
