@@ -52,7 +52,7 @@ class CommentController extends Controller
     // Vista de detalle del comentario
     public function show(Comment $adminComment)
     {
-        $comment = $adminComment->load(['user.role', 'meeting.trek.user', 'images']);
+        $comment = $adminComment->load(['user.role', 'meeting.trek', 'meeting.user', 'images']);
 
         return view('admin.comments.show', [
             'comment' => $comment,

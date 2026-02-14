@@ -1,13 +1,17 @@
 <x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            Editar usuario
-        </h2>
-    </x-slot>
-
-    <div class="py-6">
+    <div class="py-6 bg-gradient-to-br from-emerald-50 via-sky-50 to-white">
         <div class="max-w-3xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white/90 border border-slate-200 shadow-sm sm:rounded-2xl">
+            <div class="mb-4 flex justify-between items-center bg-white/90 border border-emerald-100 shadow-sm sm:rounded-2xl px-5 py-4">
+                <div>
+                    <span class="inline-flex items-center px-2.5 py-0.5 text-xs font-semibold uppercase tracking-widest text-emerald-700 bg-emerald-100 rounded-full">Usuario</span>
+                    <h2 class="mt-2 font-semibold text-xl text-gray-800 leading-tight">Editar usuario</h2>
+                </div>
+                <a href="{{ route('admin.users.index') }}" class="inline-flex items-center px-4 py-2 bg-gray-100 border border-gray-300 rounded-md font-semibold text-xs text-gray-700 uppercase tracking-widest hover:bg-gray-200">
+                    Volver
+                </a>
+            </div>
+
+            <div class="bg-white/90 border border-emerald-100 shadow-sm sm:rounded-2xl">
                 <div class="p-6 text-slate-900">
                     <x-flash-status class="mb-4" />
                     <form method="POST" action="{{ route('admin.users.update', $user->id) }}" class="space-y-4">

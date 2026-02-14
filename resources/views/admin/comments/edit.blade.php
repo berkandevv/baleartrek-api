@@ -1,13 +1,17 @@
 <x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            Comentario #{{ $comment->id }}
-        </h2>
-    </x-slot>
-
-    <div class="py-6">
+    <div class="py-6 bg-gradient-to-br from-sky-50 via-cyan-50 to-white">
         <div class="max-w-4xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white/90 border border-slate-200 shadow-sm sm:rounded-2xl">
+            <div class="mb-4 flex justify-between items-center bg-white/90 border border-sky-100 shadow-sm sm:rounded-2xl px-5 py-4">
+                <div>
+                    <span class="inline-flex items-center px-2.5 py-0.5 text-xs font-semibold uppercase tracking-widest text-sky-700 bg-sky-100 rounded-full">Comentario</span>
+                    <h2 class="mt-2 font-semibold text-xl text-gray-800 leading-tight">Editar comentario</h2>
+                </div>
+                <a href="{{ route('admin.comments.index') }}" class="inline-flex items-center px-4 py-2 bg-gray-100 border border-gray-300 rounded-md font-semibold text-xs text-gray-700 uppercase tracking-widest hover:bg-gray-200">
+                    Volver
+                </a>
+            </div>
+
+            <div class="bg-white/90 border border-sky-100 shadow-sm sm:rounded-2xl">
                 <div class="p-6 text-slate-900 space-y-6">
                     <x-flash-status />
                     <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
@@ -25,24 +29,24 @@
                         <div class="sm:col-span-2">
                             <div class="text-xs uppercase text-gray-500">Encuentro</div>
                             @if ($comment->meeting)
-                                <div class="mt-1 rounded-lg border border-slate-200 bg-slate-50 p-3">
+                                <div class="mt-1 rounded-lg border border-cyan-100 bg-cyan-50/50 p-3">
                                     <div class="flex items-center justify-between gap-3 py-1">
                                         <span class="text-sm text-gray-600">ID</span>
                                         <span class="font-medium text-gray-900">#{{ $comment->meeting->id }}</span>
                                     </div>
-                                    <div class="flex items-center justify-between gap-3 py-1 border-t border-slate-200">
+                                    <div class="flex items-center justify-between gap-3 py-1 border-t border-cyan-100">
                                         <span class="text-sm text-gray-600">Día del encuentro</span>
                                         <span class="font-medium text-gray-900">
                                             {{ $comment->meeting->day_formatted ?: '-' }}
                                         </span>
                                     </div>
-                                    <div class="flex items-center justify-between gap-3 py-1 border-t border-slate-200">
+                                    <div class="flex items-center justify-between gap-3 py-1 border-t border-cyan-100">
                                         <span class="text-sm text-gray-600">Inicio inscripción</span>
                                         <span class="font-medium text-gray-900">
                                             {{ $comment->meeting->app_date_ini_formatted ?: '-' }}
                                         </span>
                                     </div>
-                                    <div class="flex items-center justify-between gap-3 py-1 border-t border-slate-200">
+                                    <div class="flex items-center justify-between gap-3 py-1 border-t border-cyan-100">
                                         <span class="text-sm text-gray-600">Fin inscripción</span>
                                         <span class="font-medium text-gray-900">
                                             {{ $comment->meeting->app_date_end_formatted ?: '-' }}
@@ -63,12 +67,12 @@
                         </div>
                     </div>
 
-                    <div class="border-t pt-6">
+                    <div class="border-t border-sky-100 pt-6">
                         <div class="text-xs uppercase text-gray-500">Comentario</div>
                         <p class="mt-2 text-gray-900">{{ $comment->comment }}</p>
                     </div>
 
-                    <form method="POST" action="{{ route('admin.comments.update', $comment->id) }}" class="border-t pt-6">
+                    <form method="POST" action="{{ route('admin.comments.update', $comment->id) }}" class="border-t border-sky-100 pt-6">
                         @csrf
                         @method('PATCH')
 
@@ -89,14 +93,14 @@
                         </div>
                     </form>
 
-                    <div class="border-t pt-6">
+                    <div class="border-t border-sky-100 pt-6">
                         <div class="text-xs uppercase text-gray-500">Imágenes</div>
                         @if ($comment->images->isEmpty())
                             <p class="mt-2 text-sm text-gray-600">Sin imágenes.</p>
                         @else
                             <div class="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2">
                                 @foreach ($comment->images as $image)
-                                    <div class="border rounded-md p-3">
+                                    <div class="border border-cyan-100 bg-cyan-50/30 rounded-md p-3">
                                         @if ($image->display_url)
                                             <a href="{{ $image->display_url }}" target="_blank" rel="noopener noreferrer">
                                                 <img src="{{ $image->display_url }}" alt="Imagen comentario {{ $image->id }}" class="h-28 w-full object-cover rounded-md border border-slate-200" loading="lazy" />

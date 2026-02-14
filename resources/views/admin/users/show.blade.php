@@ -1,8 +1,10 @@
 <x-app-layout>
-    <div class="py-6">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-4">
-            <div class="flex justify-between items-center">
-                <h2 class="text-xl font-semibold text-slate-900">Detalle de usuario #{{ $user->id }}</h2>
+    <div class="py-6 bg-gradient-to-br from-emerald-50 via-sky-50 to-white">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-5">
+            <div class="flex justify-between items-center bg-white/90 border border-emerald-100 shadow-sm sm:rounded-2xl px-5 py-4">
+                <div>
+                    <span class="inline-flex items-center px-2.5 py-0.5 text-xs font-semibold uppercase tracking-widest text-emerald-700 bg-emerald-100 rounded-full">Usuario</span>
+                </div>
                 <div class="flex gap-2">
                     <a href="{{ route('admin.users.index') }}" class="inline-flex items-center px-4 py-2 bg-gray-100 border border-gray-300 rounded-md font-semibold text-xs text-gray-700 uppercase tracking-widest hover:bg-gray-200">
                         Volver
@@ -13,26 +15,26 @@
                 </div>
             </div>
 
-            <div class="bg-white/90 border border-slate-200 shadow-sm sm:rounded-2xl p-6">
+            <div class="bg-white/90 border border-emerald-100 shadow-sm sm:rounded-2xl p-6">
                 <dl class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-slate-800">
-                    <div><dt class="text-gray-500">Nombre</dt><dd class="font-medium">{{ $user->name }}</dd></div>
-                    <div><dt class="text-gray-500">Apellidos</dt><dd class="font-medium">{{ $user->lastname }}</dd></div>
-                    <div><dt class="text-gray-500">DNI</dt><dd class="font-medium">{{ $user->dni }}</dd></div>
-                    <div><dt class="text-gray-500">Email</dt><dd class="font-medium">{{ $user->email }}</dd></div>
-                    <div><dt class="text-gray-500">Teléfono</dt><dd class="font-medium">{{ $user->phone }}</dd></div>
-                    <div><dt class="text-gray-500">Rol</dt><dd class="font-medium">{{ $user->role?->name ?? '-' }}</dd></div>
-                    <div><dt class="text-gray-500">Estado</dt><dd class="font-medium">{{ $user->status === 'y' ? 'Alta' : 'Baja' }}</dd></div>
-                    <div><dt class="text-gray-500">Email verificado</dt><dd class="font-medium">{{ $user->email_verified_at ? $user->email_verified_at->format('d-m-Y H:i') : 'No' }}</dd></div>
-                    <div><dt class="text-gray-500">Creado</dt><dd class="font-medium">{{ $user->created_at?->format('d-m-Y H:i') }}</dd></div>
-                    <div><dt class="text-gray-500">Actualizado</dt><dd class="font-medium">{{ $user->updated_at?->format('d-m-Y H:i') }}</dd></div>
+                    <div class="rounded-lg border border-emerald-100 bg-emerald-50/40 p-3"><dt class="text-gray-500">Nombre</dt><dd class="font-medium">{{ $user->name }}</dd></div>
+                    <div class="rounded-lg border border-emerald-100 bg-emerald-50/40 p-3"><dt class="text-gray-500">Apellidos</dt><dd class="font-medium">{{ $user->lastname }}</dd></div>
+                    <div class="rounded-lg border border-sky-100 bg-sky-50/40 p-3"><dt class="text-gray-500">DNI</dt><dd class="font-medium">{{ $user->dni }}</dd></div>
+                    <div class="rounded-lg border border-sky-100 bg-sky-50/40 p-3"><dt class="text-gray-500">Email</dt><dd class="font-medium">{{ $user->email }}</dd></div>
+                    <div class="rounded-lg border border-sky-100 bg-sky-50/40 p-3"><dt class="text-gray-500">Teléfono</dt><dd class="font-medium">{{ $user->phone }}</dd></div>
+                    <div class="rounded-lg border border-amber-100 bg-amber-50/40 p-3"><dt class="text-gray-500">Rol</dt><dd class="font-medium">{{ $user->role?->name ?? '-' }}</dd></div>
+                    <div class="rounded-lg border border-amber-100 bg-amber-50/40 p-3"><dt class="text-gray-500">Estado</dt><dd class="font-medium">{{ $user->status === 'y' ? 'Alta' : 'Baja' }}</dd></div>
+                    <div class="rounded-lg border border-violet-100 bg-violet-50/40 p-3"><dt class="text-gray-500">Email verificado</dt><dd class="font-medium">{{ $user->email_verified_at ? $user->email_verified_at->format('d-m-Y H:i') : 'No' }}</dd></div>
+                    <div class="rounded-lg border border-violet-100 bg-violet-50/40 p-3"><dt class="text-gray-500">Creado</dt><dd class="font-medium">{{ $user->created_at?->format('d-m-Y H:i') }}</dd></div>
+                    <div class="rounded-lg border border-violet-100 bg-violet-50/40 p-3"><dt class="text-gray-500">Actualizado</dt><dd class="font-medium">{{ $user->updated_at?->format('d-m-Y H:i') }}</dd></div>
                 </dl>
             </div>
 
-            <div class="bg-white/90 border border-slate-200 shadow-sm sm:rounded-2xl p-6">
-                <h3 class="text-lg font-semibold text-slate-900 mb-3">Encuentros como guía principal</h3>
+            <div class="bg-white/90 border border-sky-100 shadow-sm sm:rounded-2xl p-6">
+                <h3 class="text-lg font-semibold text-sky-900 mb-3">Encuentros como guía principal</h3>
                 <div class="overflow-x-auto">
                     <table class="min-w-full text-sm">
-                        <thead class="text-left text-gray-600 border-b">
+                        <thead class="text-left text-sky-900 bg-sky-50 border-b border-sky-100">
                             <tr>
                                 <th class="py-2 pr-4">ID</th>
                                 <th class="py-2 pr-4">Excursión</th>
@@ -40,9 +42,9 @@
                                 <th class="py-2 pr-4">Hora</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody class="divide-y divide-sky-50">
                             @forelse ($createdMeetings as $meeting)
-                                <tr class="border-b">
+                                <tr class="hover:bg-sky-50/40">
                                     <td class="py-2 pr-4">#{{ $meeting->id }}</td>
                                     <td class="py-2 pr-4">{{ $meeting->trek?->name ?? '-' }}</td>
                                     <td class="py-2 pr-4">{{ $meeting->day_formatted }}</td>
@@ -56,11 +58,11 @@
                 </div>
             </div>
 
-            <div class="bg-white/90 border border-slate-200 shadow-sm sm:rounded-2xl p-6">
-                <h3 class="text-lg font-semibold text-slate-900 mb-3">Encuentros asociados</h3>
+            <div class="bg-white/90 border border-emerald-100 shadow-sm sm:rounded-2xl p-6">
+                <h3 class="text-lg font-semibold text-emerald-900 mb-3">Encuentros asociados</h3>
                 <div class="overflow-x-auto">
                     <table class="min-w-full text-sm">
-                        <thead class="text-left text-gray-600 border-b">
+                        <thead class="text-left text-emerald-900 bg-emerald-50 border-b border-emerald-100">
                             <tr>
                                 <th class="py-2 pr-4">ID</th>
                                 <th class="py-2 pr-4">Excursión</th>
@@ -68,9 +70,9 @@
                                 <th class="py-2 pr-4">Hora</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody class="divide-y divide-emerald-50">
                             @forelse ($user->meetings as $meeting)
-                                <tr class="border-b">
+                                <tr class="hover:bg-emerald-50/40">
                                     <td class="py-2 pr-4">#{{ $meeting->id }}</td>
                                     <td class="py-2 pr-4">{{ $meeting->trek?->name ?? '-' }}</td>
                                     <td class="py-2 pr-4">{{ $meeting->day_formatted }}</td>
@@ -84,11 +86,11 @@
                 </div>
             </div>
 
-            <div class="bg-white/90 border border-slate-200 shadow-sm sm:rounded-2xl p-6">
-                <h3 class="text-lg font-semibold text-slate-900 mb-3">Comentarios</h3>
+            <div class="bg-white/90 border border-amber-100 shadow-sm sm:rounded-2xl p-6">
+                <h3 class="text-lg font-semibold text-amber-900 mb-3">Comentarios</h3>
                 <div class="overflow-x-auto">
                     <table class="min-w-full text-sm">
-                        <thead class="text-left text-gray-600 border-b">
+                        <thead class="text-left text-amber-900 bg-amber-50 border-b border-amber-100">
                             <tr>
                                 <th class="py-2 pr-4">ID</th>
                                 <th class="py-2 pr-4">Encuentro</th>
@@ -97,9 +99,9 @@
                                 <th class="py-2 pr-4">Texto</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody class="divide-y divide-amber-50">
                             @forelse ($user->comments as $comment)
-                                <tr class="border-b">
+                                <tr class="hover:bg-amber-50/40">
                                     <td class="py-2 pr-4">#{{ $comment->id }}</td>
                                     <td class="py-2 pr-4">
                                         {{ $comment->meeting?->trek?->name ?? '-' }} (#{{ $comment->meeting_id }})

@@ -1,7 +1,7 @@
 <x-app-layout>
-    <div class="py-6">
+    <div class="py-6 bg-gradient-to-br from-sky-50 via-cyan-50 to-white">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white/90 border border-slate-200 shadow-sm sm:rounded-2xl">
+            <div class="bg-white/90 border border-sky-100 shadow-sm sm:rounded-2xl">
                 <div class="p-6 text-slate-900">
                     <form method="GET" action="{{ route('admin.users.index') }}" class="flex flex-col gap-3 sm:flex-row sm:items-end">
                         <div class="w-full sm:flex-1">
@@ -41,7 +41,7 @@
 
                     <div class="mt-6 overflow-x-auto">
                         <table class="min-w-full text-sm">
-                            <thead class="text-left text-gray-600 border-b">
+                            <thead class="text-left text-sky-900 bg-sky-50 border-b border-sky-100">
                                 <tr>
                                     <th class="py-2 pr-4">ID</th>
                                     <th class="py-2 pr-4">Nombre</th>

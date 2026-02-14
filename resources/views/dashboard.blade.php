@@ -9,7 +9,7 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
-                    {{ __("You're logged in!") }}
+                    Ahora tienes todo el poder... y recuerda: un gran poder conlleva una gran responsabilidad. Úsalo sabiamente (o al menos sin romper producción).
                 </div>
             </div>
         </div>
