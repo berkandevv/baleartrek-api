@@ -9,12 +9,7 @@
         <div class="max-w-3xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white/90 border border-slate-200 shadow-sm sm:rounded-2xl">
                 <div class="p-6 text-slate-900">
-                    @if (session('status'))
-                        <div class="mb-4 text-sm text-green-700 bg-green-50 border border-green-200 rounded p-3">
-                            {{ session('status') }}
-                        </div>
-                    @endif
-
+                    <x-flash-status class="mb-4" />
                     <form method="POST" action="{{ route('admin.users.update', $user->id) }}" class="space-y-4">
                         @csrf
                         @method('PATCH')

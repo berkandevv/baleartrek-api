@@ -9,12 +9,7 @@
         <div class="max-w-4xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white/90 border border-slate-200 shadow-sm sm:rounded-2xl">
                 <div class="p-6 text-slate-900 space-y-6">
-                    @if (session('status'))
-                        <div class="text-sm text-green-700 bg-green-50 border border-green-200 rounded p-3">
-                            {{ session('status') }}
-                        </div>
-                    @endif
-
+                    <x-flash-status />
                     <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
                         <div>
                             <div class="text-xs uppercase text-gray-500">Usuario</div>

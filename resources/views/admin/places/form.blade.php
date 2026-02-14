@@ -1,9 +1,4 @@
-@if (session('status'))
-    <div class="mb-4 text-sm text-green-700 bg-green-50 border border-green-200 rounded p-3">
-        {{ session('status') }}
-    </div>
-@endif
-
+<x-flash-status class="mb-4" />
 <div>
     <x-input-label for="name" value="Nombre" />
     <x-text-input id="name" name="name" type="text" class="mt-1 block w-full" value="{{ old('name', $place->name ?? '') }}" required />
