@@ -12,24 +12,20 @@ class CommentResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
+        $imageUrl = null;
+
+        if ($this->relationLoaded('images')) {
+            $imageUrl = $this->images->first()?->url;
+        }
+
         return [
             'id' => $this->id,
             'comment' => $this->comment,
             'score' => $this->score,
             'status' => $this->status,
+            'commentDate' => $this->created_at,
+            'imageUrl' => is_string($imageUrl) ? ltrim($imageUrl, '/') : null,
             'user' => new UserSummaryResource($this->whenLoaded('user')),
-            'image' => $this->whenLoaded('images', function () {
-                $image = $this->images->first();
-
-                if (! $image) {
-                    return null;
-                }
-
-                return [
-                    'id' => $image->id,
-                    'url' => $image->url,
-                ];
-            }),
         ];
     }
 }

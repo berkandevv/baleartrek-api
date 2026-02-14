@@ -70,6 +70,7 @@ class TrekController extends Controller
             'meetings.user',
             'meetings.users',
             'meetings.comments.user',
+            'meetings.comments.images',
         ];
 
         // Cargamos relaciones en el "trek"
