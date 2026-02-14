@@ -35,4 +35,8 @@ return [
         ],
     ],
 
+    'ckeditor' => [
+        'license_key' => env('CKEDITOR_LICENSE_KEY'),
+    ],
+
 ];

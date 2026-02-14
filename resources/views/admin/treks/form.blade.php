@@ -66,6 +66,46 @@
     <x-input-error :messages="$errors->get('description')" class="mt-2" />
 </div>
 
+@once
+    @push('styles')
+        <link rel="stylesheet" href="https://cdn.ckeditor.com/ckeditor5/47.3.0/ckeditor5.css" />
+    @endpush
+
+    @push('scripts')
+        <script src="https://cdn.ckeditor.com/ckeditor5/47.3.0/ckeditor5.umd.js"></script>
+        <script>
+            (function initTrekDescriptionEditor() {
+                const editorElement = document.querySelector('#description');
+                if (!editorElement || typeof CKEDITOR === 'undefined') {
+                    return;
+                }
+
+                if (editorElement.dataset.ckeditorInitialized === '1') {
+                    return;
+                }
+
+                const { ClassicEditor, Essentials, Bold, Italic, Font, Paragraph, Undo } = CKEDITOR;
+
+                ClassicEditor
+                    .create(editorElement, {
+                        licenseKey: @json(config('services.ckeditor.license_key') ?: 'GPL'),
+                        plugins: [Essentials, Bold, Italic, Font, Paragraph, Undo],
+                        toolbar: [
+                            'undo', 'redo', '|', 'bold', 'italic', '|',
+                            'fontSize', 'fontFamily', 'fontColor', 'fontBackgroundColor', '|'
+                        ]
+                    })
+                    .then(() => {
+                        editorElement.dataset.ckeditorInitialized = '1';
+                    })
+                    .catch((error) => {
+                        console.error(error);
+                    });
+            })();
+        </script>
+    @endpush
+@endonce
+
 <div class="border-t pt-6">
     <div class="text-xs uppercase text-gray-500">Lugares remarcables</div>
     <p class="mt-1 text-sm text-gray-600">Marca los lugares y define el orden dentro de la excursión.</p>
