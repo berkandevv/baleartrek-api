@@ -6,9 +6,7 @@
                     <form method="POST" action="{{ route('admin.places.store') }}" class="space-y-6">
                         @csrf
 
-                        @include('admin.places.form', [
-                            'place' => new \App\Models\InterestingPlace(),
-                        ])
+                        @include('admin.places.form')
 
                         <div class="flex items-center gap-3">
                             <x-primary-button type="submit">

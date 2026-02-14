@@ -64,6 +64,7 @@ class MeetingController extends Controller
             ->get();
 
         return view('admin.meetings.create', [
+            'meeting' => new Meeting(),
             'treks' => $treks,
             'guides' => $guides,
         ]);

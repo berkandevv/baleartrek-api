@@ -6,9 +6,7 @@
                     <form method="POST" action="{{ route('admin.meetings.store') }}" class="space-y-6">
                         @csrf
 
-                        @include('admin.meetings.form', [
-                            'meeting' => new \App\Models\Meeting(),
-                        ])
+                        @include('admin.meetings.form')
 
                         <div class="flex items-center gap-3">
                             <x-primary-button type="submit">

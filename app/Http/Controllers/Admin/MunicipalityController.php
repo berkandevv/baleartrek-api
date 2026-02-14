@@ -38,6 +38,7 @@ class MunicipalityController extends Controller
         $islands = Island::query()->orderBy('name')->get();
 
         return view('admin.municipalities.create', [
+            'municipality' => new Municipality(),
             'zones' => $zones,
             'islands' => $islands,
         ]);

@@ -40,6 +40,7 @@ class InterestingPlaceController extends Controller
         $types = PlaceType::query()->orderBy('name')->get();
 
         return view('admin.places.create', [
+            'place' => new InterestingPlace(),
             'types' => $types,
         ]);
     }

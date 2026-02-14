@@ -55,8 +55,10 @@ class TrekController extends Controller
             ->get();
 
         return view('admin.treks.create', [
+            'trek' => new Trek(),
             'municipalities' => $municipalities,
             'interestingPlaces' => $interestingPlaces,
+            'selectedPlaces' => [],
         ]);
     }
 

@@ -6,10 +6,7 @@
                     <form method="POST" action="{{ route('admin.treks.store') }}" class="space-y-6" enctype="multipart/form-data">
                         @csrf
 
-                        @include('admin.treks.form', [
-                            'trek' => new \App\Models\Trek(),
-                            'selectedPlaces' => [],
-                        ])
+                        @include('admin.treks.form')
 
                         <div class="flex items-center gap-3">
                             <x-primary-button type="submit">

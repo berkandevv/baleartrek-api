@@ -6,9 +6,7 @@
                     <form method="POST" action="{{ route('admin.municipalities.store') }}" class="space-y-6">
                         @csrf
 
-                        @include('admin.municipalities.form', [
-                            'municipality' => new \App\Models\Municipality(),
-                        ])
+                        @include('admin.municipalities.form')
 
                         <div class="flex items-center gap-3">
                             <x-primary-button type="submit">
