@@ -7,7 +7,7 @@
                         @csrf
 
                         @include('admin.municipalities.form', [
-                            'municipality' => (object) [],
+                            'municipality' => new \App\Models\Municipality(),
                         ])
 
                         <div class="flex items-center gap-3">

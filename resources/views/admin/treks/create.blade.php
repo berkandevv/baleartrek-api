@@ -7,7 +7,7 @@
                         @csrf
 
                         @include('admin.treks.form', [
-                            'trek' => null,
+                            'trek' => new \App\Models\Trek(),
                             'selectedPlaces' => [],
                         ])
 

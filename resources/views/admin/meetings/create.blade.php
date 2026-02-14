@@ -7,7 +7,7 @@
                         @csrf
 
                         @include('admin.meetings.form', [
-                            'meeting' => (object) [],
+                            'meeting' => new \App\Models\Meeting(),
                         ])
 
                         <div class="flex items-center gap-3">
