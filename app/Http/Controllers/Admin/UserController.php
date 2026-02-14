@@ -16,6 +16,7 @@ class UserController extends Controller
         $search = trim((string) $request->query('q'));
         $role = $request->query('role', 'all');
         $status = $request->query('status', 'all');
+        $roles = Role::query()->orderBy('name')->get();
 
         $users = User::query()
             ->with('role')
@@ -42,6 +43,7 @@ class UserController extends Controller
 
         return view('admin.users.index', [
             'users' => $users,
+            'roles' => $roles,
             'search' => $search,
             'role' => $role,
             'status' => $status,

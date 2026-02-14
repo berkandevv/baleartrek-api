@@ -12,9 +12,11 @@
                             <x-input-label for="role" value="Rol" />
                             <select id="role" name="role" class="mt-1 block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm">
                                 <option value="all" @selected($role === 'all')>Todos</option>
-                                <option value="admin" @selected($role === 'admin')>admin</option>
-                                <option value="guia" @selected($role === 'guia')>guia</option>
-                                <option value="visitant" @selected($role === 'visitant')>visitant</option>
+                                @foreach ($roles as $roleOption)
+                                    <option value="{{ $roleOption->name }}" @selected($role === $roleOption->name)>
+                                        {{ $roleOption->name }}
+                                    </option>
+                                @endforeach
                             </select>
                         </div>
                         <div class="w-full sm:w-48">
