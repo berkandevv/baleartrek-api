@@ -4,12 +4,14 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UserDestroyRequest;
+use App\Http\Requests\UserPasswordUpdateRequest;
 use App\Http\Requests\UserUpdateRequest;
 use App\Http\Resources\UserResource;
 use App\Models\Meeting;
 use App\Models\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -107,5 +109,19 @@ class UserController extends Controller
         });
 
         return response()->json(['message' => 'Usuario desactivado!']);
+    }
+
+    /**
+     * Actualizar la contraseña del usuario autenticado.
+     */
+    public function updatePassword(UserPasswordUpdateRequest $request): JsonResponse
+    {
+        $request->user()->update([
+            'password' => Hash::make($request->validated('password')),
+        ]);
+
+        return response()->json([
+            'message' => 'Contraseña actualizada correctamente.',
+        ]);
     }
 }

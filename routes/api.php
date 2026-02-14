@@ -10,6 +10,7 @@ use App\Http\Controllers\Api\MeetingSubscriptionController;
 use App\Http\Resources\UserResource;
 use App\Http\Requests\UserUpdateRequest;
 use App\Http\Requests\UserDestroyRequest;
+use App\Http\Requests\UserPasswordUpdateRequest;
 use App\Http\Requests\Auth\LoginRequest;
 use App\Models\User;
 use App\Models\Meeting;
@@ -111,6 +112,11 @@ Route::middleware('auth.or.api.key')->group(function () {
         // Reutilizamos el método destroy() del UserController
         return app(UserController::class)
             ->destroy($request, $request->user());
+    });
+
+    // Actualizamos la contraseña del usuario autenticado
+    Route::put('/user/password', function (UserPasswordUpdateRequest $request) {
+        return app(UserController::class)->updatePassword($request);
     });
 
 
