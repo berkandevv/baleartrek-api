@@ -57,11 +57,6 @@ class User extends Authenticatable
         return $this->password;
     }
 
-    public function getRouteKeyName(): string
-    {
-        return 'email';
-    }
-
     public function isAdmin(): bool
 {
     return $this->role?->name === 'admin';

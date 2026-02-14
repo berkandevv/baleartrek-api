@@ -7,43 +7,7 @@ use App\Http\Controllers\Admin\MeetingController as AdminMeetingController;
 use App\Http\Controllers\Admin\MunicipalityController as AdminMunicipalityController;
 use App\Http\Controllers\Admin\InterestingPlaceController as AdminInterestingPlaceController;
 use App\Http\Controllers\Admin\TrekController as AdminTrekController;
-use App\Models\Comment;
-use App\Models\InterestingPlace;
-use App\Models\Meeting;
-use App\Models\Municipality;
-use App\Models\Trek;
-use App\Models\User;
 use Illuminate\Support\Facades\Route;
-
-// Bindings explícitos para evitar el Route Key por email en admin
-Route::bind('admin_user', function ($value) {
-    return User::query()->whereKey($value)->firstOrFail();
-});
-
-// Bindings explícitos para usar IDs en admin (comentarios/treks/encuentros)
-Route::bind('admin_comment', function ($value) {
-    return Comment::query()->whereKey($value)->firstOrFail();
-});
-
-// Trek por ID en rutas admin
-Route::bind('admin_trek', function ($value) {
-    return Trek::query()->whereKey($value)->firstOrFail();
-});
-
-// Meeting por ID en rutas admin
-Route::bind('admin_meeting', function ($value) {
-    return Meeting::query()->whereKey($value)->firstOrFail();
-});
-
-// Municipio por ID en rutas admin
-Route::bind('admin_municipality', function ($value) {
-    return Municipality::query()->whereKey($value)->firstOrFail();
-});
-
-// Lugar remarcable por ID en rutas admin
-Route::bind('admin_place', function ($value) {
-    return InterestingPlace::query()->whereKey($value)->firstOrFail();
-});
 
 // Página de bienvenida
 Route::get('/', function () {
