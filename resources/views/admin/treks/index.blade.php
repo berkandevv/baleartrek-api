@@ -10,11 +10,19 @@
                                 <x-input-label for="q" value="Buscar" />
                                 <x-text-input id="q" name="q" type="text" class="mt-1 block w-full" value="{{ $search }}" placeholder="Nombre o código" />
                             </div>
+                            <div class="w-full sm:max-w-xs">
+                                <x-input-label for="status" value="Estado" />
+                                <select id="status" name="status" class="mt-1 block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm">
+                                    <option value="all" @selected($status === 'all')>Todas</option>
+                                    <option value="y" @selected($status === 'y')>Activas</option>
+                                    <option value="n" @selected($status === 'n')>Inactivas</option>
+                                </select>
+                            </div>
                             <div class="flex gap-2">
                                 <x-primary-button type="submit">
                                     Buscar
                                 </x-primary-button>
-                                @if($search !== '')
+                                @if($search !== '' || $status !== 'all')
                                     <a href="{{ route('admin.treks.index') }}" class="inline-flex items-center px-4 py-2 bg-gray-100 border border-gray-300 rounded-md font-semibold text-xs text-gray-700 uppercase tracking-widest hover:bg-gray-200">
                                         Limpiar
                                     </a>

@@ -21,6 +21,11 @@ class TrekController extends Controller
     public function index(Request $request)
     {
         $search = trim((string) $request->query('q'));
+        $status = (string) $request->query('status', 'all');
+
+        if (! in_array($status, ['all', 'y', 'n'], true)) {
+            $status = 'all';
+        }
 
         $treks = Trek::query()
             ->with('municipality.island')
@@ -32,6 +37,9 @@ class TrekController extends Controller
                         ->orWhere('regnumber', 'like', "%{$search}%");
                 });
             })
+            ->when($status !== 'all', function ($query) use ($status) {
+                $query->where('status', $status);
+            })
             ->orderBy('regnumber')
             ->paginate(20)
             ->withQueryString();
@@ -39,6 +47,7 @@ class TrekController extends Controller
         return view('admin.treks.index', [
             'treks' => $treks,
             'search' => $search,
+            'status' => $status,
         ]);
     }
 
