@@ -190,6 +190,30 @@ class TrekController extends Controller
             ->with('status', 'Excursión actualizada.');
     }
 
+    // Dar de baja desde el listado
+    public function deactivate(Trek $adminTrek)
+    {
+        $adminTrek->update([
+            'status' => 'n',
+        ]);
+
+        return redirect()
+            ->route('admin.treks.index')
+            ->with('status', 'Excursión desactivada.');
+    }
+
+    // Dar de alta desde el listado
+    public function activate(Trek $adminTrek)
+    {
+        $adminTrek->update([
+            'status' => 'y',
+        ]);
+
+        return redirect()
+            ->route('admin.treks.index')
+            ->with('status', 'Excursión activada.');
+    }
+
     // Elimina una excursión
     // Construye el array de sync para lugares remarcables con orden
     private function buildPlaceSync(Request $request): array

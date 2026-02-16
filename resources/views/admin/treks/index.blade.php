@@ -69,6 +69,23 @@
                                                 <a href="{{ route('admin.treks.edit', $trek->id) }}" class="inline-flex items-center px-3 py-1.5 text-xs font-semibold uppercase tracking-widest text-white bg-blue-900 rounded-md hover:bg-blue-800">
                                                     Editar
                                                 </a>
+                                                @if ($trek->status === 'y')
+                                                    <form method="POST" action="{{ route('admin.treks.deactivate', $trek->id) }}" onsubmit="return confirm('¿Seguro que quieres desactivar esta excursión?');">
+                                                        @csrf
+                                                        @method('PATCH')
+                                                        <button type="submit" class="inline-flex items-center justify-center w-32 px-3 py-1.5 text-xs font-semibold uppercase tracking-widest text-white bg-red-700 rounded-md hover:bg-red-600">
+                                                            Desactivar
+                                                        </button>
+                                                    </form>
+                                                @else
+                                                    <form method="POST" action="{{ route('admin.treks.activate', $trek->id) }}" onsubmit="return confirm('¿Seguro que quieres activar esta excursión?');">
+                                                        @csrf
+                                                        @method('PATCH')
+                                                        <button type="submit" class="inline-flex items-center justify-center w-32 px-3 py-1.5 text-xs font-semibold uppercase tracking-widest text-white bg-green-500 rounded-md hover:bg-green-400">
+                                                            Activar
+                                                        </button>
+                                                    </form>
+                                                @endif
                                             </div>
                                         </td>
                                     </tr>
