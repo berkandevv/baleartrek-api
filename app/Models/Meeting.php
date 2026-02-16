@@ -56,12 +56,16 @@ class Meeting extends Model
 
     public function getAppDateIniFormattedAttribute(): string
     {
-        return $this->formatDateAttribute('appDateIni');
+        $appDateIni = $this->resolveEnrollmentDate('appDateIni');
+
+        return $appDateIni?->format('d-m-Y') ?? '';
     }
 
     public function getAppDateEndFormattedAttribute(): string
     {
-        return $this->formatDateAttribute('appDateEnd');
+        $appDateEnd = $this->resolveEnrollmentDate('appDateEnd');
+
+        return $appDateEnd?->format('d-m-Y') ?? '';
     }
 
     public function getHourInputAttribute(): string
@@ -80,13 +84,9 @@ class Meeting extends Model
 
     public function getEnrollmentIsOpenAttribute(): bool
     {
-        $appDateEnd = $this->getAttribute('appDateEnd');
+        $appDateEnd = $this->resolveEnrollmentDate('appDateEnd');
 
-        if (! $appDateEnd instanceof Carbon) {
-            return false;
-        }
-
-        return Carbon::today()->lte($appDateEnd);
+        return $appDateEnd instanceof Carbon && Carbon::today()->lte($appDateEnd);
     }
 
     public static function enrollmentDatesForDay(Carbon|string $day): array
@@ -108,5 +108,19 @@ class Meeting extends Model
         }
 
         return $value->format('d-m-Y');
+    }
+
+    private function resolveEnrollmentDate(string $attribute): ?Carbon
+    {
+        $day = $this->getAttribute('day');
+        if ($day instanceof Carbon) {
+            $enrollmentDates = self::enrollmentDatesForDay($day);
+
+            return Carbon::parse($enrollmentDates[$attribute]);
+        }
+
+        $storedValue = $this->getAttribute($attribute);
+
+        return $storedValue instanceof Carbon ? $storedValue : null;
     }
 }

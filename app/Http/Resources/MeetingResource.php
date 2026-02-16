@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use App\Models\Meeting;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -12,12 +13,19 @@ class MeetingResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
+        $enrollmentDates = $this->day
+            ? Meeting::enrollmentDatesForDay($this->day)
+            : [
+                'appDateIni' => $this->appDateIni,
+                'appDateEnd' => $this->appDateEnd,
+            ];
+
         return [
             'id' => $this->id,
             'day' => $this->day,
             'hour' => $this->hour,
-            'appDateIni' => $this->appDateIni,
-            'appDateEnd' => $this->appDateEnd,
+            'appDateIni' => $enrollmentDates['appDateIni'],
+            'appDateEnd' => $enrollmentDates['appDateEnd'],
             'trek_name' => $this->whenLoaded('trek', function () {
                 return $this->trek?->name;
             }),

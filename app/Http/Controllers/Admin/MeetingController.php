@@ -17,18 +17,18 @@ class MeetingController extends Controller
     {
         $trekId = $request->query('trek_id', 'all');
         $inscripcion = $request->query('inscripcion', 'all');
-        $today = Carbon::today()->toDateString();
+        $enrollmentCloseBoundary = Carbon::today()->addWeek()->toDateString();
 
         $meetings = Meeting::query()
             ->with(['trek', 'user'])
             ->when($trekId !== 'all', function ($query) use ($trekId) {
                 $query->where('trek_id', $trekId);
             })
-            ->when($inscripcion !== 'all', function ($query) use ($inscripcion, $today) {
+            ->when($inscripcion !== 'all', function ($query) use ($inscripcion, $enrollmentCloseBoundary) {
                 if ($inscripcion === 'active') {
-                    $query->whereDate('appDateEnd', '>=', $today);
+                    $query->whereDate('day', '>=', $enrollmentCloseBoundary);
                 } elseif ($inscripcion === 'inactive') {
-                    $query->whereDate('appDateEnd', '<', $today);
+                    $query->whereDate('day', '<', $enrollmentCloseBoundary);
                 }
             })
             ->orderByDesc('day')
