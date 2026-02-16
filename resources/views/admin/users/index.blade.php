@@ -5,12 +5,12 @@
                 <div class="p-6 text-slate-900">
                     <x-flash-status class="mb-4" />
 
-                    <form method="GET" action="{{ route('admin.users.index') }}" class="flex flex-col gap-3 sm:flex-row sm:items-end">
+                    <form method="GET" action="{{ route('admin.users.index') }}" class="flex flex-col gap-3 sm:flex-row sm:items-end sm:flex-1">
                         <div class="w-full sm:flex-1">
                             <x-input-label for="q" value="Buscar" />
                             <x-text-input id="q" name="q" type="text" class="mt-1 block w-full" value="{{ $search }}" placeholder="Nombre, email o DNI" />
                         </div>
-                        <div class="w-full sm:w-48">
+                        <div class="w-full sm:max-w-xs">
                             <x-input-label for="role" value="Rol" />
                             <select id="role" name="role" class="mt-1 block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm">
                                 <option value="all" @selected($role === 'all')>Todos</option>
@@ -21,7 +21,7 @@
                                 @endforeach
                             </select>
                         </div>
-                        <div class="w-full sm:w-48">
+                        <div class="w-full sm:max-w-xs">
                             <x-input-label for="status" value="Estado" />
                             <select id="status" name="status" class="mt-1 block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm">
                                 <option value="all" @selected($status === 'all')>Todos</option>

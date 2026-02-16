@@ -1,37 +1,23 @@
 <x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            Comentarios
-        </h2>
-    </x-slot>
-
     <div class="py-6 bg-gradient-to-br from-sky-50 via-cyan-50 to-white">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white/90 border border-sky-100 shadow-sm sm:rounded-2xl">
                 <div class="p-6 text-slate-900">
-                    <div class="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
-                        <div class="flex flex-wrap gap-2">
-                            <a href="{{ route('admin.comments.index', ['status' => 'all', 'trek_id' => $trekId]) }}"
-                                class="px-3 py-2 rounded-md text-sm font-medium {{ $status === 'all' ? 'bg-gray-800 text-white' : 'bg-gray-100 text-gray-700' }}">
-                                Todos
-                            </a>
-                            <a href="{{ route('admin.comments.index', ['status' => 'approved', 'trek_id' => $trekId]) }}"
-                                class="px-3 py-2 rounded-md text-sm font-medium {{ $status === 'approved' ? 'bg-gray-800 text-white' : 'bg-gray-100 text-gray-700' }}">
-                                Aprobados
-                            </a>
-                            <a href="{{ route('admin.comments.index', ['status' => 'pending', 'trek_id' => $trekId]) }}"
-                                class="px-3 py-2 rounded-md text-sm font-medium {{ $status === 'pending' ? 'bg-gray-800 text-white' : 'bg-gray-100 text-gray-700' }}">
-                                Pendientes
-                            </a>
-                        </div>
+                    <x-flash-status class="mb-4" />
 
-                        <form method="GET" action="{{ route('admin.comments.index') }}"
-                            class="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-end">
-                            <input type="hidden" name="status" value="{{ $status }}">
-                            <div class="w-full sm:w-72">
+                    <div class="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+                        <form method="GET" action="{{ route('admin.comments.index') }}" class="flex flex-col gap-3 sm:flex-row sm:items-end sm:flex-1">
+                            <div class="w-full sm:max-w-xs">
+                                <x-input-label for="status" value="Estado" />
+                                <select id="status" name="status" class="mt-1 block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm">
+                                    <option value="all" @selected($status === 'all')>Todos</option>
+                                    <option value="approved" @selected($status === 'approved')>Aprobados</option>
+                                    <option value="pending" @selected($status === 'pending')>Pendientes</option>
+                                </select>
+                            </div>
+                            <div class="w-full sm:max-w-md">
                                 <x-input-label for="trek_id" value="Ruta" />
-                                <select id="trek_id" name="trek_id"
-                                    class="mt-1 block w-full border-gray-300 focus:border-blue-600 focus:ring-blue-500 rounded-md shadow-sm">
+                                <select id="trek_id" name="trek_id" class="mt-1 block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm">
                                     <option value="all" @selected($trekId === 'all')>Todas</option>
                                     @foreach ($treks as $trek)
                                         <option value="{{ $trek->id }}" @selected((string) $trekId === (string) $trek->id)>
@@ -40,11 +26,12 @@
                                     @endforeach
                                 </select>
                             </div>
-                            <div class="flex gap-2 sm:pb-0.5">
-                                <x-primary-button type="submit">Filtrar</x-primary-button>
-                                @if ($trekId !== 'all')
-                                    <a href="{{ route('admin.comments.index', ['status' => $status]) }}"
-                                        class="inline-flex items-center px-4 py-2 bg-gray-100 border border-gray-300 rounded-md font-semibold text-xs text-gray-700 uppercase tracking-widest hover:bg-gray-200">
+                            <div class="flex gap-2">
+                                <x-primary-button type="submit">
+                                    Buscar
+                                </x-primary-button>
+                                @if ($status !== 'pending' || $trekId !== 'all')
+                                    <a href="{{ route('admin.comments.index') }}" class="inline-flex items-center px-4 py-2 bg-gray-100 border border-gray-300 rounded-md font-semibold text-xs text-gray-700 uppercase tracking-widest hover:bg-gray-200">
                                         Limpiar
                                     </a>
                                 @endif

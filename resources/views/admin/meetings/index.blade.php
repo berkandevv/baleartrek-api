@@ -7,35 +7,35 @@
 
                     <div class="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
                         <form method="GET" action="{{ route('admin.meetings.index') }}" class="flex flex-col gap-3 sm:flex-row sm:items-end sm:flex-1">
-                        <div class="w-full sm:w-72">
-                            <x-input-label for="trek_id" value="Excursión (código o nombre)" />
-                            <select id="trek_id" name="trek_id" class="mt-1 block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm">
-                                <option value="all" @selected($trekId === 'all')>Todas</option>
-                                @foreach ($treks as $trek)
-                                    <option value="{{ $trek->id }}" @selected((string) $trekId === (string) $trek->id)>
-                                        {{ $trek->regnumber }} - {{ $trek->name }}
-                                    </option>
-                                @endforeach
-                            </select>
-                        </div>
-                        <div class="w-full sm:w-56">
-                            <x-input-label for="inscripcion" value="Inscripción" />
-                            <select id="inscripcion" name="inscripcion" class="mt-1 block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm">
-                                <option value="all" @selected($inscripcion === 'all')>Todas</option>
-                                <option value="active" @selected($inscripcion === 'active')>Activas</option>
-                                <option value="inactive" @selected($inscripcion === 'inactive')>Cerradas</option>
-                            </select>
-                        </div>
-                        <div class="flex gap-2">
-                            <x-primary-button type="submit">
-                                Filtrar
-                            </x-primary-button>
-                            @if($trekId !== 'all' || $inscripcion !== 'all')
-                                <a href="{{ route('admin.meetings.index') }}" class="inline-flex items-center px-4 py-2 bg-gray-100 border border-gray-300 rounded-md font-semibold text-xs text-gray-700 uppercase tracking-widest hover:bg-gray-200">
-                                    Limpiar
-                                </a>
-                            @endif
-                        </div>
+                            <div class="w-full sm:max-w-md">
+                                <x-input-label for="trek_id" value="Excursión (código o nombre)" />
+                                <select id="trek_id" name="trek_id" class="mt-1 block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm">
+                                    <option value="all" @selected($trekId === 'all')>Todas</option>
+                                    @foreach ($treks as $trek)
+                                        <option value="{{ $trek->id }}" @selected((string) $trekId === (string) $trek->id)>
+                                            {{ $trek->regnumber }} - {{ $trek->name }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="w-full sm:max-w-xs">
+                                <x-input-label for="inscripcion" value="Inscripción" />
+                                <select id="inscripcion" name="inscripcion" class="mt-1 block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm">
+                                    <option value="all" @selected($inscripcion === 'all')>Todas</option>
+                                    <option value="active" @selected($inscripcion === 'active')>Activas</option>
+                                    <option value="inactive" @selected($inscripcion === 'inactive')>Cerradas</option>
+                                </select>
+                            </div>
+                            <div class="flex gap-2">
+                                <x-primary-button type="submit">
+                                    Buscar
+                                </x-primary-button>
+                                @if ($trekId !== 'all' || $inscripcion !== 'all')
+                                    <a href="{{ route('admin.meetings.index') }}" class="inline-flex items-center px-4 py-2 bg-gray-100 border border-gray-300 rounded-md font-semibold text-xs text-gray-700 uppercase tracking-widest hover:bg-gray-200">
+                                        Limpiar
+                                    </a>
+                                @endif
+                            </div>
                         </form>
 
                         <div>
