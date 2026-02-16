@@ -3,6 +3,8 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white/90 border border-sky-100 shadow-sm sm:rounded-2xl">
                 <div class="p-6 text-slate-900">
+                    <x-flash-status class="mb-4" />
+
                     <div class="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
                         <form method="GET" action="{{ route('admin.meetings.index') }}" class="flex flex-col gap-3 sm:flex-row sm:items-end sm:flex-1">
                         <div class="w-full sm:w-72">
