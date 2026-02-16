@@ -99,7 +99,7 @@ class MeetingController extends Controller
 
         return redirect()
             ->route('admin.meetings.edit', $meeting)
-            ->with('status', 'Encuentro creado.');
+            ->with('status', 'Encuentro creado');
     }
 
     // Vista de detalle de encuentro
@@ -181,7 +181,7 @@ class MeetingController extends Controller
 
         return redirect()
             ->route('admin.meetings.edit', $adminMeeting)
-            ->with('status', 'Encuentro actualizado.');
+            ->with('status', 'Encuentro actualizado');
     }
 
     // Elimina un encuentro
@@ -197,7 +197,7 @@ class MeetingController extends Controller
 
         return redirect()
             ->route('admin.meetings.index')
-            ->with('status', 'Encuentro eliminado.');
+            ->with('status', 'Encuentro eliminado');
     }
 
     // Añade un guía adicional
@@ -211,7 +211,7 @@ class MeetingController extends Controller
 
         return redirect()
             ->route('admin.meetings.edit', $adminMeeting)
-            ->with('status', 'Guía añadido.');
+            ->with('status', 'Guía añadido');
     }
 
     // Quita un guía adicional
@@ -221,6 +221,6 @@ class MeetingController extends Controller
 
         return redirect()
             ->route('admin.meetings.edit', $adminMeeting)
-            ->with('status', 'Guía eliminado.');
+            ->with('status', 'Guía eliminado');
     }
 }

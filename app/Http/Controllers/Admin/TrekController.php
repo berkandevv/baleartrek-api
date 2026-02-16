@@ -7,6 +7,7 @@ use App\Models\InterestingPlace;
 use App\Models\Municipality;
 use App\Models\Trek;
 use App\Services\TrekImageService;
+use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 
@@ -98,7 +99,7 @@ class TrekController extends Controller
 
         return redirect()
             ->route('admin.treks.edit', $trek)
-            ->with('status', 'Excursión creada.');
+            ->with('status', 'Excursión creada');
     }
 
     // Vista de detalle de excursión
@@ -187,31 +188,43 @@ class TrekController extends Controller
 
         return redirect()
             ->route('admin.treks.edit', $adminTrek)
-            ->with('status', 'Excursión actualizada.');
+            ->with('status', 'Excursión actualizada');
     }
 
     // Dar de baja desde el listado
     public function deactivate(Trek $adminTrek)
     {
-        $adminTrek->update([
-            'status' => 'n',
-        ]);
+        try {
+            $adminTrek->update([
+                'status' => 'n',
+            ]);
+        } catch (QueryException $e) {
+            return redirect()
+                ->route('admin.treks.index')
+                ->with('error', 'No se pudo desactivar la excursión');
+        }
 
         return redirect()
             ->route('admin.treks.index')
-            ->with('status', 'Excursión desactivada.');
+            ->with('status', 'Excursión desactivada');
     }
 
     // Dar de alta desde el listado
     public function activate(Trek $adminTrek)
     {
-        $adminTrek->update([
-            'status' => 'y',
-        ]);
+        try {
+            $adminTrek->update([
+                'status' => 'y',
+            ]);
+        } catch (QueryException $e) {
+            return redirect()
+                ->route('admin.treks.index')
+                ->with('error', 'No se pudo activar la excursión');
+        }
 
         return redirect()
             ->route('admin.treks.index')
-            ->with('status', 'Excursión activada.');
+            ->with('status', 'Excursión activada');
     }
 
     // Elimina una excursión

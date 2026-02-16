@@ -61,7 +61,7 @@ class MunicipalityController extends Controller
 
         return redirect()
             ->route('admin.municipalities.index')
-            ->with('status', 'Municipio creado.');
+            ->with('status', 'Municipio creado');
     }
 
     // Vista de detalle de municipio
@@ -115,7 +115,7 @@ class MunicipalityController extends Controller
 
         return redirect()
             ->route('admin.municipalities.edit', $adminMunicipality)
-            ->with('status', 'Municipio actualizado.');
+            ->with('status', 'Municipio actualizado');
     }
 
 }

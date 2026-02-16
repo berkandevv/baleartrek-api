@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Comment;
 use App\Models\Trek;
+use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 
@@ -76,10 +77,16 @@ class CommentController extends Controller
             'status' => ['required', Rule::in(['y', 'n'])],
         ]);
 
-        $adminComment->update($data);
+        try {
+            $adminComment->update($data);
+        } catch (QueryException $e) {
+            return redirect()
+                ->route('admin.comments.edit', $adminComment)
+                ->with('error', 'No se pudo actualizar el estado del comentario');
+        }
 
         return redirect()
             ->route('admin.comments.edit', $adminComment)
-            ->with('status', 'Comentario actualizado.');
+            ->with('status', 'Comentario actualizado');
     }
 }

@@ -3,6 +3,8 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white/90 border border-sky-100 shadow-sm sm:rounded-2xl">
                 <div class="p-6 text-slate-900">
+                    <x-flash-status class="mb-4" />
+
                     <form method="GET" action="{{ route('admin.users.index') }}" class="flex flex-col gap-3 sm:flex-row sm:items-end">
                         <div class="w-full sm:flex-1">
                             <x-input-label for="q" value="Buscar" />

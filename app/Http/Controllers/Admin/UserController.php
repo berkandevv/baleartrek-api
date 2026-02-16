@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Meeting;
 use App\Models\Role;
 use App\Models\User;
+use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 
@@ -137,30 +138,42 @@ class UserController extends Controller
 
         return redirect()
             ->route('admin.users.edit', $adminUser->id)
-            ->with('status', 'Usuario actualizado.');
+            ->with('status', 'Usuario actualizado');
     }
 
     // Da de baja rápida desde el listado
     public function deactivate(User $adminUser)
     {
-        $adminUser->update([
-            'status' => 'n',
-        ]);
+        try {
+            $adminUser->update([
+                'status' => 'n',
+            ]);
+        } catch (QueryException $e) {
+            return redirect()
+                ->route('admin.users.index')
+                ->with('error', 'No se pudo dar de baja al usuario');
+        }
 
         return redirect()
             ->route('admin.users.index')
-            ->with('status', 'Usuario dado de baja.');
+            ->with('status', 'Usuario dado de baja');
     }
 
     // Da de alta rápida desde el listado
     public function activate(User $adminUser)
     {
-        $adminUser->update([
-            'status' => 'y',
-        ]);
+        try {
+            $adminUser->update([
+                'status' => 'y',
+            ]);
+        } catch (QueryException $e) {
+            return redirect()
+                ->route('admin.users.index')
+                ->with('error', 'No se pudo dar de alta al usuario');
+        }
 
         return redirect()
             ->route('admin.users.index')
-            ->with('status', 'Usuario dado de alta.');
+            ->with('status', 'Usuario dado de alta');
     }
 }
