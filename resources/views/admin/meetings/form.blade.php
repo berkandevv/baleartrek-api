@@ -42,12 +42,12 @@
 <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
     <div>
         <div class="text-xs uppercase text-gray-500">Inicio inscripción</div>
-        <div class="mt-1 font-medium text-gray-900">{{ $meeting->app_date_ini_formatted ?: '-' }}</div>
-        <div class="text-sm text-gray-500">Se calcula automáticamente al guardar (1 mes antes del encuentro).</div>
+        <div id="app-date-ini-preview" class="mt-1 font-medium text-gray-900">{{ $meeting->app_date_ini_formatted ?: '-' }}</div>
+        <div class="text-sm text-gray-500">Vista previa (1 mes antes del encuentro).</div>
     </div>
     <div>
         <div class="text-xs uppercase text-gray-500">Fin inscripción</div>
-        <div class="mt-1 font-medium text-gray-900">{{ $meeting->app_date_end_formatted ?: '-' }}</div>
-        <div class="text-sm text-gray-500">Se calcula automáticamente al guardar (1 semana antes del encuentro).</div>
+        <div id="app-date-end-preview" class="mt-1 font-medium text-gray-900">{{ $meeting->app_date_end_formatted ?: '-' }}</div>
+        <div class="text-sm text-gray-500">Vista previa (1 semana antes del encuentro).</div>
     </div>
 </div>

@@ -1,4 +1,5 @@
 import './bootstrap';
+import './meeting-enrollment-preview';
 
 import Alpine from 'alpinejs';
 
