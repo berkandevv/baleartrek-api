@@ -11,12 +11,12 @@ use Illuminate\Support\Facades\Route;
 
 // Página de bienvenida
 Route::get('/', function () {
-    return view('welcome');
+    return view('pages.welcome');
 });
 
 // Dashboard (solo usuarios autenticados y verificados)
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    return view('pages.dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 // Perfil de usuario autenticado

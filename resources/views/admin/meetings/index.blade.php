@@ -109,7 +109,7 @@
             </div>
 
             <div class="mt-2 flex justify-end">
-                {{ $meetings->links('admin.pagination') }}
+                {{ $meetings->links('admin.partials.pagination') }}
             </div>
         </div>
     </div>

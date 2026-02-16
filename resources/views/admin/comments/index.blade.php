@@ -115,7 +115,7 @@
             </div>
 
             <div class="mt-2 flex justify-end">
-                {{ $comments->links('admin.pagination') }}
+                {{ $comments->links('admin.partials.pagination') }}
             </div>
         </div>
     </div>

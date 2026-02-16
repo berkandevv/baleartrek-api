@@ -81,7 +81,7 @@
             </div>
 
             <div class="mt-2 flex justify-end">
-                {{ $places->links('admin.pagination') }}
+                {{ $places->links('admin.partials.pagination') }}
             </div>
         </div>
     </div>

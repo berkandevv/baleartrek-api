@@ -74,7 +74,7 @@
             </div>
 
             <div class="mt-2 flex justify-end">
-                {{ $municipalities->links('admin.pagination') }}
+                {{ $municipalities->links('admin.partials.pagination') }}
             </div>
         </div>
     </div>
