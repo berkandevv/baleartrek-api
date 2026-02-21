@@ -56,9 +56,6 @@
                             </thead>
                             <tbody>
                                 @forelse($users as $user)
-                                    @php
-                                        $isAdminUser = $user->role?->name === 'admin';
-                                    @endphp
                                     <tr class="border-b">
                                         <td class="py-2 pr-4">{{ $user->id }}</td>
                                         <td class="py-2 pr-4">
@@ -98,30 +95,14 @@
                                         </td>
                                         <td class="py-2 pr-4 text-right">
                                             <div class="inline-flex items-center gap-2">
-                                                @if ($isAdminUser)
-                                                    <button type="button" disabled class="inline-flex items-center px-3 py-1.5 text-xs font-semibold uppercase tracking-widest text-white bg-gray-400 rounded-md cursor-not-allowed opacity-70">
-                                                        Ver
-                                                    </button>
-                                                @else
+                                                @if ($user->role?->name !== 'admin')
                                                     <a href="{{ route('admin.users.show', $user->id) }}" class="inline-flex items-center px-3 py-1.5 text-xs font-semibold uppercase tracking-widest text-white bg-green-700 rounded-md hover:bg-green-600">
                                                         Ver
                                                     </a>
-                                                @endif
-                                                @if ($isAdminUser)
-                                                    <button type="button" disabled class="inline-flex items-center px-3 py-1.5 text-xs font-semibold uppercase tracking-widest text-white bg-gray-400 rounded-md cursor-not-allowed opacity-70">
-                                                        Editar
-                                                    </button>
-                                                @else
                                                     <a href="{{ route('admin.users.edit', $user->id) }}" class="inline-flex items-center px-3 py-1.5 text-xs font-semibold uppercase tracking-widest text-white bg-blue-900 rounded-md hover:bg-blue-800">
                                                         Editar
                                                     </a>
-                                                @endif
-                                            @if ($user->status !== 'n')
-                                                @if ($isAdminUser)
-                                                    <button type="button" disabled class="inline-flex items-center justify-center w-32 px-3 py-1.5 text-xs font-semibold uppercase tracking-widest text-white bg-gray-400 rounded-md cursor-not-allowed opacity-70">
-                                                        Dar de baja
-                                                    </button>
-                                                @else
+                                                    @if ($user->status !== 'n')
                                                     <form method="POST" action="{{ route('admin.users.deactivate', $user->id) }}" onsubmit="return confirm('¿Seguro que quieres dar de baja este usuario?');">
                                                         @csrf
                                                         @method('PATCH')
@@ -129,8 +110,7 @@
                                                             Dar de baja
                                                         </button>
                                                     </form>
-                                                @endif
-                                            @else
+                                                    @else
                                                 <form method="POST" action="{{ route('admin.users.activate', $user->id) }}" onsubmit="return confirm('¿Seguro que quieres dar de alta este usuario?');">
                                                     @csrf
                                                     @method('PATCH')
@@ -138,7 +118,8 @@
                                                         Dar de alta
                                                     </button>
                                                 </form>
-                                            @endif
+                                                    @endif
+                                                @endif
                                             </div>
                                         </td>
                                     </tr>

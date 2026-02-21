@@ -236,7 +236,6 @@ class TrekController extends Controller
             ->with('status', 'Excursión activada');
     }
 
-    // Elimina una excursión
     // Construye el array de sync para lugares remarcables con orden
     private function buildPlaceSync(Request $request): array
     {

@@ -6,10 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Models\Meeting;
 use App\Models\Trek;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
-use Illuminate\Validation\Rule;
-use Carbon\Carbon;
 
 class MeetingController extends Controller
 {
@@ -50,7 +49,7 @@ class MeetingController extends Controller
     }
 
     // Formulario de creación de encuentro
-    public function create(Request $request)
+    public function create()
     {
         $treks = Trek::query()
             ->orderBy('regnumber')
@@ -219,6 +218,26 @@ class MeetingController extends Controller
                 ], 'addGuide');
         }
 
+        if ((int) $guide->id === (int) $adminMeeting->user_id) {
+            return redirect()
+                ->route('admin.meetings.edit', $adminMeeting)
+                ->withErrors([
+                    'guide_user_id' => 'El guía principal ya está asignado en este encuentro.',
+                ], 'addGuide');
+        }
+
+        $alreadyAttached = $adminMeeting->users()
+            ->where('users.id', $guide->id)
+            ->exists();
+
+        if ($alreadyAttached) {
+            return redirect()
+                ->route('admin.meetings.edit', $adminMeeting)
+                ->withErrors([
+                    'guide_user_id' => 'Ese guía ya está asignado como guía adicional.',
+                ], 'addGuide');
+        }
+
         $adminMeeting->users()->syncWithoutDetaching([$guide->id]);
 
         return redirect()
@@ -233,6 +252,12 @@ class MeetingController extends Controller
             return redirect()
                 ->route('admin.meetings.edit', $adminMeeting)
                 ->with('error', 'No se puede quitar el guía principal del encuentro.');
+        }
+
+        if ($user->role?->name !== 'guia') {
+            return redirect()
+                ->route('admin.meetings.edit', $adminMeeting)
+                ->with('error', 'Solo se pueden quitar guías adicionales desde esta acción.');
         }
 
         $isAttached = $adminMeeting->users()
