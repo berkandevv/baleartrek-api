@@ -17,6 +17,8 @@ class MeetingController extends Controller
     {
         $trekId = $request->query('trek_id', 'all');
         $inscripcion = $request->query('inscripcion', 'all');
+        // "Activas" en el listado: encuentros cuyo cierre de inscripción no ha pasado
+        // (el cierre se calcula como 1 semana antes del día del encuentro).
         $enrollmentCloseBoundary = Carbon::today()->addWeek()->toDateString();
 
         $meetings = Meeting::query()
@@ -218,6 +220,7 @@ class MeetingController extends Controller
                 ], 'addGuide');
         }
 
+        // Evita duplicar al guía principal en la tabla pivote de guías adicionales.
         if ((int) $guide->id === (int) $adminMeeting->user_id) {
             return redirect()
                 ->route('admin.meetings.edit', $adminMeeting)
@@ -254,6 +257,7 @@ class MeetingController extends Controller
                 ->with('error', 'No se puede quitar el guía principal del encuentro.');
         }
 
+        // Esta acción solo gestiona guías adicionales, no asistentes.
         if ($user->role?->name !== 'guia') {
             return redirect()
                 ->route('admin.meetings.edit', $adminMeeting)
