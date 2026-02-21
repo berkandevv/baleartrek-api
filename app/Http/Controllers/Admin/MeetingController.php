@@ -229,17 +229,20 @@ class MeetingController extends Controller
     // Quita un guía adicional
     public function removeGuide(Meeting $adminMeeting, User $user)
     {
-        $isAdditionalGuide = $adminMeeting->users()
-            ->where('users.id', $user->id)
-            ->whereHas('role', function ($query) {
-                $query->where('name', 'guia');
-            })
-            ->exists();
-
-        if (! $isAdditionalGuide) {
+        if ((int) $user->id === (int) $adminMeeting->user_id) {
             return redirect()
                 ->route('admin.meetings.edit', $adminMeeting)
-                ->with('error', 'Solo se pueden quitar guías adicionales asignados.');
+                ->with('error', 'No se puede quitar el guía principal del encuentro.');
+        }
+
+        $isAttached = $adminMeeting->users()
+            ->where('users.id', $user->id)
+            ->exists();
+
+        if (! $isAttached) {
+            return redirect()
+                ->route('admin.meetings.edit', $adminMeeting)
+                ->with('error', 'El usuario no está asignado como guía adicional en este encuentro.');
         }
 
         $adminMeeting->users()->detach($user->id);
