@@ -31,8 +31,5 @@ return new class extends Migration
     public function down(): void
     {
         Schema::dropIfExists('treks');
-        Schema::table('treks', function (Blueprint $table) {
-            $table->dropColumn(['description', 'imageUrl']);
-        });
     }
 };

@@ -17,9 +17,13 @@ class CheckRoleAdmin
     {
         $user = $request->user();
 
-        // Si no hay usuario autenticado o no tiene rol de administrador, devolvemos una respuesta 403 (Forbidden)
+        // API: mantiene respuesta JSON; Web: devuelve 403 HTML estándar.
         if (! $user || ! $user->isAdmin()) {
-            return response()->json(['message' => 'Acceso solo para administradores!'], 403);
+            if ($request->expectsJson()) {
+                return response()->json(['message' => 'Acceso solo para administradores.'], 403);
+            }
+
+            abort(403);
         }
 
         // Si el usuario es admin, la petición continúa hacia el controlador

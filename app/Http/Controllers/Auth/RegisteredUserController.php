@@ -36,22 +36,18 @@ class RegisteredUserController extends Controller
 
         $rules = [
             'name' => ['required', 'string', 'max:255'],
+            'lastname' => ['required', 'string', 'max:255'],
+            'dni' => ['required', 'string', 'max:255', 'unique:'.User::class],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
+            'phone' => ['required', 'string', 'max:255'],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ];
 
-        if ($isApiRequest) {
-            $rules['lastname'] = ['required', 'string', 'max:255'];
-            $rules['dni'] = ['required', 'string', 'max:255', 'unique:'.User::class];
-            $rules['phone'] = ['required', 'string', 'max:255'];
-        }
-
         $data = $request->validate($rules);
 
-        if ($isApiRequest) {
-            $data['lastname'] = mb_strtoupper($data['lastname']);
-            $data['dni'] = mb_strtoupper($data['dni']);
-        }
+        $data['lastname'] = mb_strtoupper($data['lastname']);
+        $data['dni'] = mb_strtoupper($data['dni']);
+        $data['email'] = mb_strtolower($data['email']);
 
         $defaultRoleId = Role::where('name', 'visitant')->value('id');
 
@@ -63,10 +59,10 @@ class RegisteredUserController extends Controller
 
         $user = User::create([
             'name' => $data['name'],
-            'lastname' => $data['lastname'] ?? '',
+            'lastname' => $data['lastname'],
             'email' => $data['email'],
-            'dni' => $data['dni'] ?? '',
-            'phone' => $data['phone'] ?? '',
+            'dni' => $data['dni'],
+            'phone' => $data['phone'],
             'password' => Hash::make($data['password']),
             'role_id' => $defaultRoleId,
         ]);

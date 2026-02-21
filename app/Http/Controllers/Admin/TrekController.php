@@ -10,6 +10,7 @@ use App\Services\TrekImageService;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
+use Illuminate\Validation\ValidationException;
 
 class TrekController extends Controller
 {
@@ -87,6 +88,9 @@ class TrekController extends Controller
             'places.*.order' => ['nullable', 'integer', 'min:0'],
         ]);
 
+        $places = $request->input('places', []);
+        $this->validatePlacesPayload($places);
+
         $imageUrl = null;
         if ($request->hasFile('image')) {
             $imageUrl = $this->trekImageService->storeUploadedImage($request->file('image'));
@@ -101,7 +105,7 @@ class TrekController extends Controller
             'municipality_id' => (int) $data['municipality_id'],
         ]);
 
-        $syncData = $this->buildPlaceSync($request);
+        $syncData = $this->buildPlaceSync($places);
         if ($syncData !== []) {
             $trek->interestingPlaces()->sync($syncData);
         }
@@ -178,6 +182,9 @@ class TrekController extends Controller
             'places.*.order' => ['nullable', 'integer', 'min:0'],
         ]);
 
+        $places = $request->input('places', []);
+        $this->validatePlacesPayload($places);
+
         $imageUrl = $adminTrek->imageUrl;
         if ($request->hasFile('image')) {
             $imageUrl = $this->trekImageService->storeUploadedImage($request->file('image'), $adminTrek->imageUrl);
@@ -192,7 +199,7 @@ class TrekController extends Controller
             'municipality_id' => (int) $data['municipality_id'],
         ]);
 
-        $syncData = $this->buildPlaceSync($request);
+        $syncData = $this->buildPlaceSync($places);
         $adminTrek->interestingPlaces()->sync($syncData);
 
         return redirect()
@@ -237,21 +244,55 @@ class TrekController extends Controller
     }
 
     // Construye el array de sync para lugares remarcables con orden
-    private function buildPlaceSync(Request $request): array
+    private function buildPlaceSync(array $places): array
     {
-        $places = $request->input('places', []);
         $syncData = [];
 
         foreach ($places as $placeId => $payload) {
+            if (! is_array($payload)) {
+                continue;
+            }
+
             if (! isset($payload['selected']) || $payload['selected'] !== '1') {
                 continue;
             }
 
             $order = isset($payload['order']) ? (int) $payload['order'] : 0;
-            $syncData[$placeId] = ['order' => $order];
+            $syncData[(int) $placeId] = ['order' => $order];
         }
 
         return $syncData;
+    }
+
+    // Valida que las claves de "places" sean IDs reales de InterestingPlace para evitar errores al sincronizar.
+    private function validatePlacesPayload(array $places): void
+    {
+        if ($places === []) {
+            return;
+        }
+
+        $placeIds = [];
+        foreach (array_keys($places) as $rawId) {
+            $normalizedId = (string) $rawId;
+            if (! ctype_digit($normalizedId) || (int) $normalizedId <= 0) {
+                throw ValidationException::withMessages([
+                    'places' => 'Los lugares seleccionados no son válidos.',
+                ]);
+            }
+
+            $placeIds[] = (int) $normalizedId;
+        }
+
+        $uniqueIds = array_values(array_unique($placeIds));
+        $existingCount = InterestingPlace::query()
+            ->whereIn('id', $uniqueIds)
+            ->count();
+
+        if ($existingCount !== count($uniqueIds)) {
+            throw ValidationException::withMessages([
+                'places' => 'Alguno de los lugares seleccionados no existe.',
+            ]);
+        }
     }
 
 }
