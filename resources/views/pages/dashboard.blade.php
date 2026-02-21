@@ -9,17 +9,25 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white/95 overflow-hidden shadow-sm sm:rounded-2xl border-4 border-red-500">
                 <div class="p-8 text-center">
-                    <p class="text-xl sm:text-3xl font-extrabold leading-tight animate-pulse">
-                        <span class="text-red-700">Ahora tienes TODO el poder</span>
-                        <span class="text-red-600">...</span>
-                        <span class="text-red-700"> y recuerda:</span>
-                        <br>
-                        <span class="text-red-700">un gran poder</span>
-                        <span class="text-red-600"> conlleva una gran responsabilidad</span>
-                        <span class="text-red-700">.</span>
-                        <br>
-                        <span class="text-amber-700">(Úsalo sabiamente o no rompas producción)</span>
-                    </p>
+                    @if (Auth::user()?->isAdmin())
+                        <p class="text-xl sm:text-3xl font-extrabold leading-tight animate-pulse">
+                            <span class="text-red-700">Ahora tienes TODO el poder</span>
+                            <span class="text-red-600">...</span>
+                            <span class="text-red-700"> y recuerda:</span>
+                            <br>
+                            <span class="text-red-700">un gran poder</span>
+                            <span class="text-red-600"> conlleva una gran responsabilidad</span>
+                            <span class="text-red-700">.</span>
+                            <br>
+                            <span class="text-amber-700">(Úsalo sabiamente o no rompas producción)</span>
+                        </p>
+                    @else
+                        <p class="text-xl sm:text-3xl font-extrabold leading-tight">
+                            <span class="text-slate-800">Bienvenido a tu panel de BalearTrek</span>
+                            <br>
+                            <span class="text-slate-600 text-lg sm:text-2xl">Consulta tus datos y gestiona tu actividad.</span>
+                        </p>
+                    @endif
                 </div>
             </div>
         </div>

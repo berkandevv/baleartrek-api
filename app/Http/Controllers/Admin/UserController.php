@@ -129,6 +129,16 @@ class UserController extends Controller
             'status' => ['required', Rule::in(['y', 'n'])],
         ]);
 
+        if ($adminRoleId !== null
+            && (int) $adminUser->role_id === (int) $adminRoleId
+            && $data['status'] === 'n') {
+            return back()
+                ->withErrors([
+                    'status' => 'No se puede dar de baja a un administrador.',
+                ])
+                ->withInput();
+        }
+
         $data['name'] = mb_strtoupper($data['name']);
         $data['lastname'] = mb_strtoupper($data['lastname']);
         $data['dni'] = mb_strtoupper($data['dni']);
