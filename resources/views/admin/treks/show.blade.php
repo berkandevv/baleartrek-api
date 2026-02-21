@@ -33,7 +33,11 @@
                     <div class="rounded-lg border border-violet-100 bg-violet-50/40 p-3"><dt class="text-gray-500">Actualizada</dt><dd class="font-medium">{{ $trek->updated_at?->format('d-m-Y H:i') }}</dd></div>
                     <div class="md:col-span-2 rounded-lg border border-slate-200 bg-slate-50 p-3">
                         <dt class="text-gray-500">Descripción</dt>
-                        <dd class="font-medium prose max-w-none">{!! $trek->description ?: '<span class="text-gray-400">Sin descripción</span>' !!}</dd>
+                        @if (filled($trek->description))
+                            <dd class="font-medium whitespace-pre-line">{{ $trek->description }}</dd>
+                        @else
+                            <dd class="font-medium text-gray-400">Sin descripción</dd>
+                        @endif
                     </div>
                 </dl>
             </div>

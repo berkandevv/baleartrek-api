@@ -144,6 +144,12 @@ class UserController extends Controller
     // Da de baja rápida desde el listado
     public function deactivate(User $adminUser)
     {
+        if ($adminUser->role?->name === 'admin') {
+            return redirect()
+                ->route('admin.users.index')
+                ->with('error', 'No se puede dar de baja a un administrador');
+        }
+
         try {
             $adminUser->update([
                 'status' => 'n',
@@ -162,6 +168,12 @@ class UserController extends Controller
     // Da de alta rápida desde el listado
     public function activate(User $adminUser)
     {
+        if ($adminUser->role?->name === 'admin') {
+            return redirect()
+                ->route('admin.users.index')
+                ->with('error', 'No se puede modificar el estado de un administrador');
+        }
+
         try {
             $adminUser->update([
                 'status' => 'y',

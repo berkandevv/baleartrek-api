@@ -207,7 +207,19 @@ class MeetingController extends Controller
             'guide_user_id' => ['required', 'exists:users,id'],
         ]);
 
-        $adminMeeting->users()->syncWithoutDetaching([(int) $data['guide_user_id']]);
+        $guide = User::query()
+            ->with('role')
+            ->findOrFail((int) $data['guide_user_id']);
+
+        if ($guide->role?->name !== 'guia') {
+            return redirect()
+                ->route('admin.meetings.edit', $adminMeeting)
+                ->withErrors([
+                    'guide_user_id' => 'Solo puedes añadir usuarios con rol guía.',
+                ], 'addGuide');
+        }
+
+        $adminMeeting->users()->syncWithoutDetaching([$guide->id]);
 
         return redirect()
             ->route('admin.meetings.edit', $adminMeeting)
@@ -217,6 +229,19 @@ class MeetingController extends Controller
     // Quita un guía adicional
     public function removeGuide(Meeting $adminMeeting, User $user)
     {
+        $isAdditionalGuide = $adminMeeting->users()
+            ->where('users.id', $user->id)
+            ->whereHas('role', function ($query) {
+                $query->where('name', 'guia');
+            })
+            ->exists();
+
+        if (! $isAdditionalGuide) {
+            return redirect()
+                ->route('admin.meetings.edit', $adminMeeting)
+                ->with('error', 'Solo se pueden quitar guías adicionales asignados.');
+        }
+
         $adminMeeting->users()->detach($user->id);
 
         return redirect()

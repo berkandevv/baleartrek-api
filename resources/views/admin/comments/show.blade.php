@@ -32,14 +32,20 @@
 
             <div class="bg-white/90 border border-cyan-100 shadow-sm sm:rounded-2xl p-6">
                 <h3 class="text-lg font-semibold text-cyan-900 mb-3">Imágenes</h3>
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                    @forelse ($comment->images as $image)
-                        <div class="border border-cyan-100 bg-cyan-50/30 rounded-lg p-3">
-                            <img src="{{ $image->url }}" alt="Imagen del comentario {{ $comment->id }}" class="w-full h-48 object-cover rounded-md">
-                            <p class="mt-2 text-xs text-gray-500 break-all">{{ $image->url }}</p>
-                        </div>
-                    @empty
-                        <p class="text-sm text-gray-500">Sin imágenes asociadas.</p>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                        @forelse ($comment->images as $image)
+                            <div class="border border-cyan-100 bg-cyan-50/30 rounded-lg p-3">
+                                @if ($image->display_url)
+                                    <img src="{{ $image->display_url }}" alt="Imagen del comentario {{ $comment->id }}" class="w-full h-48 object-cover rounded-md">
+                                @else
+                                    <div class="w-full h-48 rounded-md bg-slate-100 text-slate-500 text-sm flex items-center justify-center">
+                                        Imagen no disponible
+                                    </div>
+                                @endif
+                                <p class="mt-2 text-xs text-gray-500 break-all">{{ $image->url }}</p>
+                            </div>
+                        @empty
+                            <p class="text-sm text-gray-500">Sin imágenes asociadas.</p>
                     @endforelse
                 </div>
             </div>
