@@ -103,14 +103,6 @@
                             @endif
                         </div>
                     </div>
-
-                    <form method="POST" action="{{ route('admin.meetings.destroy', $meeting->id) }}" class="mt-6" onsubmit="return confirm('¿Seguro que quieres eliminar este encuentro?');">
-                        @csrf
-                        @method('DELETE')
-                        <x-danger-button type="submit">
-                            Eliminar encuentro
-                        </x-danger-button>
-                    </form>
                 </div>
             </div>
         </div>

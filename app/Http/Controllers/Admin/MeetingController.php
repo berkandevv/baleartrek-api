@@ -7,7 +7,6 @@ use App\Models\Meeting;
 use App\Models\Trek;
 use App\Models\User;
 use Carbon\Carbon;
-use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 
 class MeetingController extends Controller
@@ -183,22 +182,6 @@ class MeetingController extends Controller
         return redirect()
             ->route('admin.meetings.edit', $adminMeeting)
             ->with('status', 'Encuentro actualizado');
-    }
-
-    // Elimina un encuentro
-    public function destroy(Meeting $adminMeeting)
-    {
-        try {
-            $adminMeeting->delete();
-        } catch (QueryException $e) {
-            return redirect()
-                ->route('admin.meetings.index')
-                ->with('error', 'No se puede eliminar el encuentro porque tiene datos relacionados');
-        }
-
-        return redirect()
-            ->route('admin.meetings.index')
-            ->with('status', 'Encuentro eliminado');
     }
 
     // Añade un guía adicional

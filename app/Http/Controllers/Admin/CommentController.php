@@ -14,7 +14,7 @@ class CommentController extends Controller
     // Listado de comentarios con filtros por estado
     public function index(Request $request)
     {
-        $status = $request->query('status', 'pending');
+        $status = $request->query('status', 'all');
         $trekId = $request->query('trek_id', 'all');
 
         $comments = Comment::query()

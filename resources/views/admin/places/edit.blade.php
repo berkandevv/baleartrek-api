@@ -30,14 +30,6 @@
                             </a>
                         </div>
                     </form>
-
-                    <form method="POST" action="{{ route('admin.places.destroy', $place->id) }}" class="mt-6" onsubmit="return confirm('¿Seguro que quieres eliminar este lugar?');">
-                        @csrf
-                        @method('DELETE')
-                        <x-danger-button type="submit">
-                            Eliminar lugar
-                        </x-danger-button>
-                    </form>
                 </div>
             </div>
         </div>

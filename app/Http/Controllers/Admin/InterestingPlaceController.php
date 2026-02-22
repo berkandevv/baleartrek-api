@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\InterestingPlace;
 use App\Models\PlaceType;
-use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 
@@ -135,19 +134,4 @@ class InterestingPlaceController extends Controller
             ->with('status', 'Lugar actualizado');
     }
 
-    // Elimina un lugar
-    public function destroy(InterestingPlace $adminPlace)
-    {
-        try {
-            $adminPlace->delete();
-        } catch (QueryException $e) {
-            return redirect()
-                ->route('admin.places.index')
-                ->with('error', 'No se puede eliminar el lugar porque tiene datos relacionados');
-        }
-
-        return redirect()
-            ->route('admin.places.index')
-            ->with('status', 'Lugar eliminado');
-    }
 }

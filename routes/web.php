@@ -94,9 +94,6 @@ Route::middleware(['auth', 'check.role.admin'])
         Route::patch('/meetings/{admin_meeting}', [AdminMeetingController::class, 'update'])
             ->whereNumber('admin_meeting')
             ->name('meetings.update');
-        Route::delete('/meetings/{admin_meeting}', [AdminMeetingController::class, 'destroy'])
-            ->whereNumber('admin_meeting')
-            ->name('meetings.destroy');
         Route::post('/meetings/{admin_meeting}/guides', [AdminMeetingController::class, 'addGuide'])
             ->whereNumber('admin_meeting')
             ->name('meetings.guides.add');
@@ -132,9 +129,6 @@ Route::middleware(['auth', 'check.role.admin'])
         Route::patch('/places/{admin_place}', [AdminInterestingPlaceController::class, 'update'])
             ->whereNumber('admin_place')
             ->name('places.update');
-        Route::delete('/places/{admin_place}', [AdminInterestingPlaceController::class, 'destroy'])
-            ->whereNumber('admin_place')
-            ->name('places.destroy');
     });
 
 // Rutas de autenticación Breeze
