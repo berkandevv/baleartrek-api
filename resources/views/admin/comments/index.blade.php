@@ -30,7 +30,7 @@
                                 <x-primary-button type="submit">
                                     Buscar
                                 </x-primary-button>
-                                @if ($status !== 'pending' || $trekId !== 'all')
+                                @if ($status !== 'all' || $trekId !== 'all')
                                     <a href="{{ route('admin.comments.index') }}" class="inline-flex items-center px-4 py-2 bg-gray-100 border border-gray-300 rounded-md font-semibold text-xs text-gray-700 uppercase tracking-widest hover:bg-gray-200">
                                         Limpiar
                                     </a>

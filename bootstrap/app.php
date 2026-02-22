@@ -20,7 +20,7 @@ return Application::configure(basePath: dirname(__DIR__))
         ]);
 
         $middleware->alias([
-            'verified' => \App\Http\Middleware\EnsureEmailIsVerified::class,
+            'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
             'check.role.admin' => \App\Http\Middleware\CheckRoleAdmin::class,
             'auth.or.api.key' => \App\Http\Middleware\EnsureApiKeyIsValid::class,
         ]);
