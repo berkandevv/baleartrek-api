@@ -54,7 +54,7 @@
                                 <x-text-input type="text" class="mt-1 block w-full bg-gray-100 text-gray-700" value="admin" disabled />
                                 <input type="hidden" name="role_id" value="{{ $user->role_id }}">
                             @else
-                                <select id="role_id" name="role_id" class="mt-1 block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm">
+                                <select id="role_id" name="role_id" class="mt-1 block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm" required>
                                     @foreach ($roles as $role)
                                         <option value="{{ $role->id }}" @selected(old('role_id', $user->role_id) == $role->id)>
                                             {{ $role->name }}
@@ -67,7 +67,7 @@
 
                         <div>
                             <x-input-label for="status" value="Estado" />
-                            <select id="status" name="status" class="mt-1 block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm">
+                            <select id="status" name="status" class="mt-1 block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm" required>
                                 <option value="y" @selected(old('status', $user->status) === 'y')>Alta</option>
                                 <option value="n" @selected(old('status', $user->status) === 'n')>Baja</option>
                             </select>

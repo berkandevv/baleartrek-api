@@ -77,7 +77,7 @@
                         @method('PATCH')
 
                         <x-input-label for="status" value="Estado" />
-                        <select id="status" name="status" class="mt-1 block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm">
+                        <select id="status" name="status" class="mt-1 block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm" required>
                             <option value="y" @selected(old('status', $comment->status) === 'y')>Aprobar</option>
                             <option value="n" @selected(old('status', $comment->status) === 'n')>Pendiente</option>
                         </select>

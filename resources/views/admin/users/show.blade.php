@@ -34,12 +34,13 @@
                 <h3 class="text-lg font-semibold text-sky-900 mb-3">Encuentros como guía principal</h3>
                 <div class="overflow-x-auto">
                     <table class="min-w-full text-sm">
+                        <caption class="sr-only">Tabla de datos</caption>
                         <thead class="text-left text-sky-900 bg-sky-50 border-b border-sky-100">
                             <tr>
-                                <th class="py-2 pr-4">ID</th>
-                                <th class="py-2 pr-4">Excursión</th>
-                                <th class="py-2 pr-4">Día</th>
-                                <th class="py-2 pr-4">Hora</th>
+                                <th scope="col" class="py-2 pr-4">ID</th>
+                                <th scope="col" class="py-2 pr-4">Excursión</th>
+                                <th scope="col" class="py-2 pr-4">Día</th>
+                                <th scope="col" class="py-2 pr-4">Hora</th>
                             </tr>
                         </thead>
                         <tbody class="divide-y divide-sky-50">
@@ -62,12 +63,13 @@
                 <h3 class="text-lg font-semibold text-emerald-900 mb-3">Encuentros asociados</h3>
                 <div class="overflow-x-auto">
                     <table class="min-w-full text-sm">
+                        <caption class="sr-only">Tabla de datos</caption>
                         <thead class="text-left text-emerald-900 bg-emerald-50 border-b border-emerald-100">
                             <tr>
-                                <th class="py-2 pr-4">ID</th>
-                                <th class="py-2 pr-4">Excursión</th>
-                                <th class="py-2 pr-4">Día</th>
-                                <th class="py-2 pr-4">Hora</th>
+                                <th scope="col" class="py-2 pr-4">ID</th>
+                                <th scope="col" class="py-2 pr-4">Excursión</th>
+                                <th scope="col" class="py-2 pr-4">Día</th>
+                                <th scope="col" class="py-2 pr-4">Hora</th>
                             </tr>
                         </thead>
                         <tbody class="divide-y divide-emerald-50">
@@ -90,13 +92,14 @@
                 <h3 class="text-lg font-semibold text-amber-900 mb-3">Comentarios</h3>
                 <div class="overflow-x-auto">
                     <table class="min-w-full text-sm">
+                        <caption class="sr-only">Tabla de datos</caption>
                         <thead class="text-left text-amber-900 bg-amber-50 border-b border-amber-100">
                             <tr>
-                                <th class="py-2 pr-4">ID</th>
-                                <th class="py-2 pr-4">Encuentro</th>
-                                <th class="py-2 pr-4">Puntuación</th>
-                                <th class="py-2 pr-4">Estado</th>
-                                <th class="py-2 pr-4">Texto</th>
+                                <th scope="col" class="py-2 pr-4">ID</th>
+                                <th scope="col" class="py-2 pr-4">Encuentro</th>
+                                <th scope="col" class="py-2 pr-4">Puntuación</th>
+                                <th scope="col" class="py-2 pr-4">Estado</th>
+                                <th scope="col" class="py-2 pr-4">Texto</th>
                             </tr>
                         </thead>
                         <tbody class="divide-y divide-amber-50">

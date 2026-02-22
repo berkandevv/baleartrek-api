@@ -8,7 +8,7 @@
 <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
     <div>
         <x-input-label for="zone_id" value="Zona" />
-        <select id="zone_id" name="zone_id" class="mt-1 block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm">
+        <select id="zone_id" name="zone_id" class="mt-1 block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm" required>
             <option value="">Selecciona una zona</option>
             @foreach ($zones as $zone)
                 <option value="{{ $zone->id }}" @selected(old('zone_id', $municipality->zone_id ?? '') == $zone->id)>
@@ -20,7 +20,7 @@
     </div>
     <div>
         <x-input-label for="island_id" value="Isla" />
-        <select id="island_id" name="island_id" class="mt-1 block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm">
+        <select id="island_id" name="island_id" class="mt-1 block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm" required>
             <option value="">Selecciona una isla</option>
             @foreach ($islands as $island)
                 <option value="{{ $island->id }}" @selected(old('island_id', $municipality->island_id ?? '') == $island->id)>

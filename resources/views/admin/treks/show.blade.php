@@ -46,13 +46,14 @@
                 <h3 class="text-lg font-semibold text-emerald-900 mb-3">Lugares remarcables</h3>
                 <div class="overflow-x-auto">
                     <table class="min-w-full text-sm">
+                        <caption class="sr-only">Tabla de datos</caption>
                         <thead class="text-left text-emerald-900 bg-emerald-50 border-b border-emerald-100">
                             <tr>
-                                <th class="py-2 pr-4">Orden</th>
-                                <th class="py-2 pr-4">ID</th>
-                                <th class="py-2 pr-4">Nombre</th>
-                                <th class="py-2 pr-4">Tipo</th>
-                                <th class="py-2 pr-4">GPS</th>
+                                <th scope="col" class="py-2 pr-4">Orden</th>
+                                <th scope="col" class="py-2 pr-4">ID</th>
+                                <th scope="col" class="py-2 pr-4">Nombre</th>
+                                <th scope="col" class="py-2 pr-4">Tipo</th>
+                                <th scope="col" class="py-2 pr-4">GPS</th>
                             </tr>
                         </thead>
                         <tbody class="divide-y divide-emerald-50">
@@ -76,14 +77,15 @@
                 <h3 class="text-lg font-semibold text-cyan-900 mb-3">Encuentros</h3>
                 <div class="overflow-x-auto">
                     <table class="min-w-full text-sm">
+                        <caption class="sr-only">Tabla de datos</caption>
                         <thead class="text-left text-cyan-900 bg-cyan-50 border-b border-cyan-100">
                             <tr>
-                                <th class="py-2 pr-4">ID</th>
-                                <th class="py-2 pr-4">Guía</th>
-                                <th class="py-2 pr-4">Día</th>
-                                <th class="py-2 pr-4">Hora</th>
-                                <th class="py-2 pr-4">Inscripción</th>
-                                <th class="py-2 pr-4">Comentarios</th>
+                                <th scope="col" class="py-2 pr-4">ID</th>
+                                <th scope="col" class="py-2 pr-4">Guía</th>
+                                <th scope="col" class="py-2 pr-4">Día</th>
+                                <th scope="col" class="py-2 pr-4">Hora</th>
+                                <th scope="col" class="py-2 pr-4">Inscripción</th>
+                                <th scope="col" class="py-2 pr-4">Comentarios</th>
                             </tr>
                         </thead>
                         <tbody class="divide-y divide-cyan-50">

@@ -65,14 +65,15 @@
                 <h3 class="text-lg font-semibold text-teal-900 mb-3">Comentarios</h3>
                 <div class="overflow-x-auto">
                     <table class="min-w-full text-sm">
+                        <caption class="sr-only">Tabla de datos</caption>
                         <thead class="text-left text-teal-900 bg-teal-50 border-b border-teal-100">
                             <tr>
-                                <th class="py-2 pr-4">ID</th>
-                                <th class="py-2 pr-4">Usuario</th>
-                                <th class="py-2 pr-4">Puntuación</th>
-                                <th class="py-2 pr-4">Estado</th>
-                                <th class="py-2 pr-4">Imágenes</th>
-                                <th class="py-2 pr-4">Texto</th>
+                                <th scope="col" class="py-2 pr-4">ID</th>
+                                <th scope="col" class="py-2 pr-4">Usuario</th>
+                                <th scope="col" class="py-2 pr-4">Puntuación</th>
+                                <th scope="col" class="py-2 pr-4">Estado</th>
+                                <th scope="col" class="py-2 pr-4">Imágenes</th>
+                                <th scope="col" class="py-2 pr-4">Texto</th>
                             </tr>
                         </thead>
                         <tbody class="divide-y divide-teal-50">

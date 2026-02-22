@@ -41,16 +41,17 @@
 
                     <div class="mt-6 overflow-x-auto">
                         <table class="min-w-full text-sm">
+                        <caption class="sr-only">Tabla de datos</caption>
                             <thead class="text-left text-sky-900 bg-sky-50 border-b border-sky-100">
                                 <tr>
-                                    <th class="py-2 pr-4">ID</th>
-                                    <th class="py-2 pr-4">Usuario</th>
-                                    <th class="py-2 pr-4">Ruta</th>
-                                    <th class="py-2 pr-4">Encuentro</th>
-                                    <th class="py-2 pr-4">Puntuación</th>
-                                    <th class="py-2 pr-4">Estado</th>
-                                    <th class="py-2 pr-4">Imágenes</th>
-                                    <th class="py-2 pr-4"></th>
+                                    <th scope="col" class="py-2 pr-4">ID</th>
+                                    <th scope="col" class="py-2 pr-4">Usuario</th>
+                                    <th scope="col" class="py-2 pr-4">Ruta</th>
+                                    <th scope="col" class="py-2 pr-4">Encuentro</th>
+                                    <th scope="col" class="py-2 pr-4">Puntuación</th>
+                                    <th scope="col" class="py-2 pr-4">Estado</th>
+                                    <th scope="col" class="py-2 pr-4">Imágenes</th>
+                                    <th scope="col" class="py-2 pr-4"><span class="sr-only">Acciones</span></th>
                                 </tr>
                             </thead>
                             <tbody>

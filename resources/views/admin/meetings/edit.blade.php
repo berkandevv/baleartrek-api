@@ -82,11 +82,12 @@
                             @else
                                 <div class="overflow-x-auto">
                                     <table class="min-w-full text-sm">
+                        <caption class="sr-only">Tabla de datos</caption>
                                         <thead class="text-left text-sky-900 bg-sky-50 border-b border-sky-100">
                                             <tr>
-                                                <th class="py-2 pr-4">Nombre</th>
-                                                <th class="py-2 pr-4">Email</th>
-                                                <th class="py-2 pr-4">DNI</th>
+                                                <th scope="col" class="py-2 pr-4">Nombre</th>
+                                                <th scope="col" class="py-2 pr-4">Email</th>
+                                                <th scope="col" class="py-2 pr-4">DNI</th>
                                             </tr>
                                         </thead>
                                         <tbody>

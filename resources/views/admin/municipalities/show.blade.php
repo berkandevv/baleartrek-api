@@ -29,13 +29,14 @@
                 <h3 class="text-lg font-semibold text-emerald-900 mb-3">Excursiones del municipio</h3>
                 <div class="overflow-x-auto">
                     <table class="min-w-full text-sm">
+                        <caption class="sr-only">Tabla de datos</caption>
                         <thead class="text-left text-emerald-900 bg-emerald-50 border-b border-emerald-100">
                             <tr>
-                                <th class="py-2 pr-4">ID</th>
-                                <th class="py-2 pr-4">Código</th>
-                                <th class="py-2 pr-4">Nombre</th>
-                                <th class="py-2 pr-4">Estado</th>
-                                <th class="py-2 pr-4">Encuentros</th>
+                                <th scope="col" class="py-2 pr-4">ID</th>
+                                <th scope="col" class="py-2 pr-4">Código</th>
+                                <th scope="col" class="py-2 pr-4">Nombre</th>
+                                <th scope="col" class="py-2 pr-4">Estado</th>
+                                <th scope="col" class="py-2 pr-4">Encuentros</th>
                             </tr>
                         </thead>
                         <tbody class="divide-y divide-emerald-50">

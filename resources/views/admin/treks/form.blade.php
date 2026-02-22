@@ -15,7 +15,7 @@
 
 <div>
     <x-input-label for="municipality_id" value="Municipio" />
-    <select id="municipality_id" name="municipality_id" class="mt-1 block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm">
+    <select id="municipality_id" name="municipality_id" class="mt-1 block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm" required>
         <option value="">Selecciona un municipio</option>
         @foreach ($municipalities as $municipality)
             <option value="{{ $municipality->id }}" @selected(old('municipality_id', $trek->municipality_id ?? '') == $municipality->id)>
@@ -29,7 +29,7 @@
 <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
     <div>
         <x-input-label for="status" value="Estado" />
-        <select id="status" name="status" class="mt-1 block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm">
+        <select id="status" name="status" class="mt-1 block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm" required>
             <option value="y" @selected(old('status', $trek->status ?? 'y') === 'y')>Activa</option>
             <option value="n" @selected(old('status', $trek->status ?? 'y') === 'n')>Inactiva</option>
         </select>
@@ -52,7 +52,7 @@
 
 <div>
     <x-input-label for="description" value="Descripción" />
-    <textarea id="description" name="description" rows="4" class="mt-1 block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm">{{ old('description', $trek->description ?? '') }}</textarea>
+    <textarea id="description" name="description" rows="4" data-ckeditor="trek-description" data-ckeditor-license-key="{{ config('services.ckeditor.license_key') ?: 'GPL' }}" class="mt-1 block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm">{{ old('description', $trek->description ?? '') }}</textarea>
     <x-input-error :messages="$errors->get('description')" class="mt-2" />
 </div>
 
@@ -63,36 +63,6 @@
 
     @push('scripts')
         <script src="https://cdn.ckeditor.com/ckeditor5/47.3.0/ckeditor5.umd.js"></script>
-        <script>
-            (function initTrekDescriptionEditor() {
-                const editorElement = document.querySelector('#description');
-                if (!editorElement || typeof CKEDITOR === 'undefined') {
-                    return;
-                }
-
-                if (editorElement.dataset.ckeditorInitialized === '1') {
-                    return;
-                }
-
-                const { ClassicEditor, Essentials, Bold, Italic, Font, Paragraph, Undo } = CKEDITOR;
-
-                ClassicEditor
-                    .create(editorElement, {
-                        licenseKey: @json(config('services.ckeditor.license_key') ?: 'GPL'),
-                        plugins: [Essentials, Bold, Italic, Font, Paragraph, Undo],
-                        toolbar: [
-                            'undo', 'redo', '|', 'bold', 'italic', '|',
-                            'fontSize', 'fontFamily', 'fontColor', 'fontBackgroundColor', '|'
-                        ]
-                    })
-                    .then(() => {
-                        editorElement.dataset.ckeditorInitialized = '1';
-                    })
-                    .catch((error) => {
-                        console.error(error);
-                    });
-            })();
-        </script>
     @endpush
 @endonce
 

@@ -39,15 +39,16 @@
 
                     <div class="mt-6 overflow-x-auto">
                         <table class="min-w-full text-sm">
+                        <caption class="sr-only">Tabla de datos</caption>
                             <thead class="text-left text-sky-900 bg-sky-50 border-b border-sky-100">
                                 <tr>
-                                    <th class="py-2 pr-4">Código</th>
-                                    <th class="py-2 pr-4">Nombre</th>
-                                    <th class="py-2 pr-4">Municipio</th>
-                                    <th class="py-2 pr-4">Isla</th>
-                                    <th class="py-2 pr-4">Estado</th>
-                                    <th class="py-2 pr-4">Lugares</th>
-                                    <th class="py-2 pr-4"></th>
+                                    <th scope="col" class="py-2 pr-4">Código</th>
+                                    <th scope="col" class="py-2 pr-4">Nombre</th>
+                                    <th scope="col" class="py-2 pr-4">Municipio</th>
+                                    <th scope="col" class="py-2 pr-4">Isla</th>
+                                    <th scope="col" class="py-2 pr-4">Estado</th>
+                                    <th scope="col" class="py-2 pr-4">Lugares</th>
+                                    <th scope="col" class="py-2 pr-4"><span class="sr-only">Acciones</span></th>
                                 </tr>
                             </thead>
                             <tbody>

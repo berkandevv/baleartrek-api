@@ -2,7 +2,7 @@
 <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
     <div>
         <x-input-label for="trek_id" value="Excursión" />
-        <select id="trek_id" name="trek_id" class="mt-1 block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm">
+        <select id="trek_id" name="trek_id" class="mt-1 block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm" required>
             <option value="">Selecciona una excursión</option>
             @foreach ($treks as $trek)
                 <option value="{{ $trek->id }}" @selected(old('trek_id', $meeting->trek_id ?? '') == $trek->id)>
@@ -14,7 +14,7 @@
     </div>
     <div>
         <x-input-label for="user_id" value="Guía principal" />
-        <select id="user_id" name="user_id" class="mt-1 block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm">
+        <select id="user_id" name="user_id" class="mt-1 block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm" required>
             <option value="">Selecciona un guía</option>
             @foreach ($guides as $guide)
                 <option value="{{ $guide->id }}" @selected(old('user_id', $meeting->user_id ?? '') == $guide->id)>

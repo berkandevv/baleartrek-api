@@ -31,13 +31,14 @@
                 <h3 class="text-lg font-semibold text-lime-900 mb-3">Excursiones donde aparece</h3>
                 <div class="overflow-x-auto">
                     <table class="min-w-full text-sm">
+                        <caption class="sr-only">Tabla de datos</caption>
                         <thead class="text-left text-lime-900 bg-lime-50 border-b border-lime-100">
                             <tr>
-                                <th class="py-2 pr-4">ID</th>
-                                <th class="py-2 pr-4">Código</th>
-                                <th class="py-2 pr-4">Excursión</th>
-                                <th class="py-2 pr-4">Municipio</th>
-                                <th class="py-2 pr-4">Orden en ruta</th>
+                                <th scope="col" class="py-2 pr-4">ID</th>
+                                <th scope="col" class="py-2 pr-4">Código</th>
+                                <th scope="col" class="py-2 pr-4">Excursión</th>
+                                <th scope="col" class="py-2 pr-4">Municipio</th>
+                                <th scope="col" class="py-2 pr-4">Orden en ruta</th>
                             </tr>
                         </thead>
                         <tbody class="divide-y divide-lime-50">

@@ -31,12 +31,13 @@
 
                     <div class="mt-6 overflow-x-auto">
                         <table class="min-w-full text-sm">
+                        <caption class="sr-only">Tabla de datos</caption>
                             <thead class="text-left text-sky-900 bg-sky-50 border-b border-sky-100">
                                 <tr>
-                                    <th class="py-2 pr-4">Nombre</th>
-                                    <th class="py-2 pr-4">GPS</th>
-                                    <th class="py-2 pr-4">Tipo</th>
-                                    <th class="py-2 pr-4"></th>
+                                    <th scope="col" class="py-2 pr-4">Nombre</th>
+                                    <th scope="col" class="py-2 pr-4">GPS</th>
+                                    <th scope="col" class="py-2 pr-4">Tipo</th>
+                                    <th scope="col" class="py-2 pr-4"><span class="sr-only">Acciones</span></th>
                                 </tr>
                             </thead>
                             <tbody>
