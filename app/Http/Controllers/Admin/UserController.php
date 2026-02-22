@@ -16,9 +16,18 @@ class UserController extends Controller
     public function index(Request $request)
     {
         $search = trim((string) $request->query('q'));
-        $role = $request->query('role', 'all');
-        $status = $request->query('status', 'all');
         $roles = Role::query()->orderBy('name')->get();
+        $role = (string) $request->query('role', 'all');
+        $status = (string) $request->query('status', 'all');
+
+        $allowedRoles = $roles->pluck('name')->all();
+        if (! in_array($role, [...$allowedRoles, 'all'], true)) {
+            $role = 'all';
+        }
+
+        if (! in_array($status, ['all', 'alta', 'baja'], true)) {
+            $status = 'all';
+        }
 
         $users = User::query()
             ->with('role')
