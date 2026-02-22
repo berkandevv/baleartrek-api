@@ -24,17 +24,33 @@ $maxWidth = [
                 // All non-disabled elements...
                 .filter(el => ! el.hasAttribute('disabled'))
         },
-        firstFocusable() { return this.focusables()[0] },
-        lastFocusable() { return this.focusables().slice(-1)[0] },
-        nextFocusable() { return this.focusables()[this.nextFocusableIndex()] || this.firstFocusable() },
-        prevFocusable() { return this.focusables()[this.prevFocusableIndex()] || this.lastFocusable() },
-        nextFocusableIndex() { return (this.focusables().indexOf(document.activeElement) + 1) % (this.focusables().length + 1) },
-        prevFocusableIndex() { return Math.max(0, this.focusables().indexOf(document.activeElement)) -1 },
+        firstFocusable() { return this.focusables()[0] ?? null },
+        lastFocusable() { return this.focusables().slice(-1)[0] ?? null },
+        nextFocusable() {
+            const list = this.focusables()
+            if (!list.length) return null
+            return list[this.nextFocusableIndex()] ?? list[0]
+        },
+        prevFocusable() {
+            const list = this.focusables()
+            if (!list.length) return null
+            return list[this.prevFocusableIndex()] ?? list[list.length - 1]
+        },
+        nextFocusableIndex() {
+            const list = this.focusables()
+            if (!list.length) return -1
+            return (list.indexOf(document.activeElement) + 1 + list.length) % list.length
+        },
+        prevFocusableIndex() {
+            const list = this.focusables()
+            if (!list.length) return -1
+            return (list.indexOf(document.activeElement) - 1 + list.length) % list.length
+        },
     }"
     x-init="$watch('show', value => {
         if (value) {
             document.body.classList.add('overflow-y-hidden');
-            {{ $attributes->has('focusable') ? 'setTimeout(() => firstFocusable().focus(), 100)' : '' }}
+            {{ $attributes->has('focusable') ? 'setTimeout(() => { const first = firstFocusable(); if (first) first.focus(); }, 100)' : '' }}
         } else {
             document.body.classList.remove('overflow-y-hidden');
         }
@@ -43,9 +59,12 @@ $maxWidth = [
     x-on:close-modal.window="$event.detail == '{{ $name }}' ? show = false : null"
     x-on:close.stop="show = false"
     x-on:keydown.escape.window="show = false"
-    x-on:keydown.tab.prevent="$event.shiftKey || nextFocusable().focus()"
-    x-on:keydown.shift.tab.prevent="prevFocusable().focus()"
+    x-on:keydown.tab.prevent="if (! $event.shiftKey) { const next = nextFocusable(); if (next) next.focus(); }"
+    x-on:keydown.shift.tab.prevent="const prev = prevFocusable(); if (prev) prev.focus()"
     x-show="show"
+    role="dialog"
+    aria-modal="true"
+    x-bind:aria-hidden="(!show).toString()"
     class="fixed inset-0 overflow-y-auto px-4 py-6 sm:px-0 z-50"
     style="display: {{ $show ? 'block' : 'none' }};"
 >
