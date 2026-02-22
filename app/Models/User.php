@@ -52,15 +52,17 @@ class User extends Authenticatable
         ];
     }
 
+    // Indica a Laravel qué campo usar para validar la contraseña del usuario
     public function getAuthPassword(): string
     {
         return $this->password;
     }
 
+    // Comprueba si el usuario tiene rol administrador
     public function isAdmin(): bool
-{
-    return $this->role?->name === 'admin';
-}
+    {
+        return $this->role?->name === 'admin';
+    }
 
     public function role()
     {

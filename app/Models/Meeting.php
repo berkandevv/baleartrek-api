@@ -49,11 +49,13 @@ class Meeting extends Model
         return $this->hasMany(Comment::class);
     }
 
+    // Devuelve el día en formato dd-mm-YYYY para mostrar en UI
     public function getDayFormattedAttribute(): string
     {
         return $this->formatDateAttribute('day');
     }
 
+    // Expone la fecha de apertura de inscripción en formato legible
     public function getAppDateIniFormattedAttribute(): string
     {
         $appDateIni = $this->resolveEnrollmentDate('appDateIni');
@@ -61,6 +63,7 @@ class Meeting extends Model
         return $appDateIni?->format('d-m-Y') ?? '';
     }
 
+    // Expone la fecha de cierre de inscripción en formato legible
     public function getAppDateEndFormattedAttribute(): string
     {
         $appDateEnd = $this->resolveEnrollmentDate('appDateEnd');
@@ -68,6 +71,7 @@ class Meeting extends Model
         return $appDateEnd?->format('d-m-Y') ?? '';
     }
 
+    // Convierte el valor de hora al formato HH:mm usado por inputs time
     public function getHourInputAttribute(): string
     {
         $hour = $this->getAttribute('hour');
@@ -82,6 +86,7 @@ class Meeting extends Model
         }
     }
 
+    // Indica si la inscripción sigue abierta según appDateEnd y la fecha actual
     public function getEnrollmentIsOpenAttribute(): bool
     {
         $appDateEnd = $this->resolveEnrollmentDate('appDateEnd');
@@ -89,6 +94,7 @@ class Meeting extends Model
         return $appDateEnd instanceof Carbon && Carbon::today()->lte($appDateEnd);
     }
 
+    // Calcula fechas de inscripción a partir del día de la salida
     public static function enrollmentDatesForDay(Carbon|string $day): array
     {
         $baseDay = $day instanceof Carbon ? $day->copy() : Carbon::parse($day);
@@ -99,6 +105,7 @@ class Meeting extends Model
         ];
     }
 
+    // Formatea un atributo de fecha si está correctamente casteado a Carbon
     private function formatDateAttribute(string $attribute): string
     {
         $value = $this->getAttribute($attribute);
@@ -110,6 +117,7 @@ class Meeting extends Model
         return $value->format('d-m-Y');
     }
 
+    // Prioriza el cálculo por day y si no existe usa el valor guardado en base de datos
     private function resolveEnrollmentDate(string $attribute): ?Carbon
     {
         $day = $this->getAttribute('day');

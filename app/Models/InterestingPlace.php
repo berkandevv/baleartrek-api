@@ -22,16 +22,19 @@ class InterestingPlace extends Model
         return $this->belongsToMany(Trek::class, 'interesting_place_trek')->withPivot('order')->withTimestamps();
     }
 
+    // Obtiene la latitud desde el campo gps con formato "lat,lng"
     public function getLatitudeAttribute(): ?string
     {
         return $this->gpsPart(0);
     }
 
+    // Obtiene la longitud desde el campo gps con formato "lat,lng"
     public function getLongitudeAttribute(): ?string
     {
         return $this->gpsPart(1);
     }
 
+    // Extrae y limpia una parte del campo gps según su índice
     private function gpsPart(int $index): ?string
     {
         if (! is_string($this->gps) || $this->gps === '') {

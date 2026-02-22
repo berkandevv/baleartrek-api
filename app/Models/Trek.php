@@ -33,6 +33,7 @@ class Trek extends Model
         return $this->belongsToMany(InterestingPlace::class, 'interesting_place_trek')->withPivot('order')->withTimestamps();
     }
 
+    // Normaliza la imagen para devolver una URL utilizable en frontend
     public function getImageDisplayUrlAttribute(): ?string
     {
         $imageUrl = $this->imageUrl;

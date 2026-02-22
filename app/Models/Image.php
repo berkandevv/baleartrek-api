@@ -16,6 +16,7 @@ class Image extends Model
         return $this->belongsTo(Comment::class);
     }
 
+    // Normaliza la URL para mostrar una ruta absoluta en vistas y API
     public function getDisplayUrlAttribute(): ?string
     {
         $url = $this->url;
