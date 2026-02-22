@@ -196,12 +196,43 @@ routes/
 |------|--------|
 | Base de datos | ✔️ Completada |
 | API REST | ✔️ Completada |
-| Dashboard de la API | ⏳ Pendiente |
-| Frontend (React + Vite) | ⏳ Pendiente |
+| Dashboard de la API | ✔️ Completada |
+| Frontend (React + Vite) | ✔️ Completada |
 
 ---
 
-## 📖 11. Resumen técnico final
+## 📌 11. Cobertura funcional Back End (admin)
+
+### 1. Gestión de usuarios
+- Listado de usuarios en panel de administración.
+- Búsqueda y filtrado por rol y estado.
+- Alta y baja lógica de usuarios.
+- Edición de datos básicos del usuario.
+- Cambio de rol entre perfiles operativos del sistema.
+
+### 2. Moderación de comentarios e imágenes
+- Listado de comentarios con filtros por estado y excursión.
+- Vista de detalle de comentario para moderación.
+- Aprobación/actualización del estado del comentario como bloque único.
+- Visualización de imágenes asociadas al comentario en detalle y edición.
+
+### 3. Gestión de catálogos y operativa (CRUD)
+- Lugares destacables: alta, listado, detalle y edición.
+- Municipios: alta, listado, detalle y edición.
+- Excursiones: alta, listado, detalle y edición.
+- Encuentros de una excursión: alta, listado, detalle y edición.
+- Asignación de guía principal en encuentros con validación de rol.
+- Cálculo automático de rango de inscripción desde la fecha del encuentro.
+
+### 4. Estado de encuentros, guías adicionales e inscripciones
+- Visualización del estado de inscripción del encuentro.
+- Filtro de encuentros por estado de inscripción.
+- Asignación y retirada de guías adicionales.
+- Visualización de listado de inscripciones/asistentes del encuentro.
+
+---
+
+## 📖 12. Resumen técnico final
 
 ✔ Migraciones completas  
 ✔ Seeders basados en JSON  
