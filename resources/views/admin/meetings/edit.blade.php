@@ -82,7 +82,7 @@
                             @else
                                 <div class="overflow-x-auto">
                                     <table class="min-w-full text-sm">
-                        <caption class="sr-only">Tabla de datos</caption>
+                        <caption class="sr-only">Listado de asistentes inscritos</caption>
                                         <thead class="text-left text-sky-900 bg-sky-50 border-b border-sky-100">
                                             <tr>
                                                 <th scope="col" class="py-2 pr-4">Nombre</th>

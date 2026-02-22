@@ -46,7 +46,7 @@
                 <h3 class="text-lg font-semibold text-emerald-900 mb-3">Lugares remarcables</h3>
                 <div class="overflow-x-auto">
                     <table class="min-w-full text-sm">
-                        <caption class="sr-only">Tabla de datos</caption>
+                        <caption class="sr-only">Listado de lugares remarcables de la excursión</caption>
                         <thead class="text-left text-emerald-900 bg-emerald-50 border-b border-emerald-100">
                             <tr>
                                 <th scope="col" class="py-2 pr-4">Orden</th>
@@ -77,7 +77,7 @@
                 <h3 class="text-lg font-semibold text-cyan-900 mb-3">Encuentros</h3>
                 <div class="overflow-x-auto">
                     <table class="min-w-full text-sm">
-                        <caption class="sr-only">Tabla de datos</caption>
+                        <caption class="sr-only">Listado de encuentros de la excursión</caption>
                         <thead class="text-left text-cyan-900 bg-cyan-50 border-b border-cyan-100">
                             <tr>
                                 <th scope="col" class="py-2 pr-4">ID</th>

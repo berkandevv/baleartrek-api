@@ -72,17 +72,24 @@
 
     <div class="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-2">
         @foreach ($interestingPlaces as $place)
-            <label class="flex items-center gap-3 border rounded-md p-3">
-                <input type="checkbox" name="places[{{ $place->id }}][selected]" value="1" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" @checked(old('places.' . $place->id . '.selected', array_key_exists($place->id, $selectedPlaces ?? []) ? '1' : '0') === '1') />
-                <div class="flex-1">
-                    <div class="font-medium">{{ $place->name }}</div>
-                    <div class="text-xs text-gray-500">{{ $place->placeType?->name }}</div>
-                </div>
+            <div class="flex items-center gap-3 border rounded-md p-3">
+                <input
+                    id="place-selected-{{ $place->id }}"
+                    type="checkbox"
+                    name="places[{{ $place->id }}][selected]"
+                    value="1"
+                    class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500"
+                    @checked(old('places.' . $place->id . '.selected', array_key_exists($place->id, $selectedPlaces ?? []) ? '1' : '0') === '1')
+                />
+                <label for="place-selected-{{ $place->id }}" class="flex-1 cursor-pointer">
+                    <span class="block font-medium">{{ $place->name }}</span>
+                    <span class="block text-xs text-gray-500">{{ $place->placeType?->name }}</span>
+                </label>
                 <div class="w-24">
                     <x-input-label for="place-order-{{ $place->id }}" value="Orden" />
                     <x-text-input id="place-order-{{ $place->id }}" name="places[{{ $place->id }}][order]" type="number" min="0" class="mt-1 block w-full" value="{{ old('places.' . $place->id . '.order', $selectedPlaces[$place->id] ?? 0) }}" />
                 </div>
-            </label>
+            </div>
         @endforeach
     </div>
 </div>

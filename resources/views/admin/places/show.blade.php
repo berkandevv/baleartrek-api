@@ -31,7 +31,7 @@
                 <h3 class="text-lg font-semibold text-lime-900 mb-3">Excursiones donde aparece</h3>
                 <div class="overflow-x-auto">
                     <table class="min-w-full text-sm">
-                        <caption class="sr-only">Tabla de datos</caption>
+                        <caption class="sr-only">Listado de excursiones asociadas al lugar</caption>
                         <thead class="text-left text-lime-900 bg-lime-50 border-b border-lime-100">
                             <tr>
                                 <th scope="col" class="py-2 pr-4">ID</th>

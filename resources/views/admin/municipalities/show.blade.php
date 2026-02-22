@@ -29,7 +29,7 @@
                 <h3 class="text-lg font-semibold text-emerald-900 mb-3">Excursiones del municipio</h3>
                 <div class="overflow-x-auto">
                     <table class="min-w-full text-sm">
-                        <caption class="sr-only">Tabla de datos</caption>
+                        <caption class="sr-only">Listado de excursiones del municipio</caption>
                         <thead class="text-left text-emerald-900 bg-emerald-50 border-b border-emerald-100">
                             <tr>
                                 <th scope="col" class="py-2 pr-4">ID</th>

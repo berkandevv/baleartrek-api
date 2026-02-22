@@ -65,7 +65,7 @@
                 <h3 class="text-lg font-semibold text-teal-900 mb-3">Comentarios</h3>
                 <div class="overflow-x-auto">
                     <table class="min-w-full text-sm">
-                        <caption class="sr-only">Tabla de datos</caption>
+                        <caption class="sr-only">Listado de comentarios del encuentro</caption>
                         <thead class="text-left text-teal-900 bg-teal-50 border-b border-teal-100">
                             <tr>
                                 <th scope="col" class="py-2 pr-4">ID</th>

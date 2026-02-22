@@ -34,7 +34,7 @@
                 <h3 class="text-lg font-semibold text-sky-900 mb-3">Encuentros como guía principal</h3>
                 <div class="overflow-x-auto">
                     <table class="min-w-full text-sm">
-                        <caption class="sr-only">Tabla de datos</caption>
+                        <caption class="sr-only">Listado de encuentros como guía principal</caption>
                         <thead class="text-left text-sky-900 bg-sky-50 border-b border-sky-100">
                             <tr>
                                 <th scope="col" class="py-2 pr-4">ID</th>
@@ -63,7 +63,7 @@
                 <h3 class="text-lg font-semibold text-emerald-900 mb-3">Encuentros asociados</h3>
                 <div class="overflow-x-auto">
                     <table class="min-w-full text-sm">
-                        <caption class="sr-only">Tabla de datos</caption>
+                        <caption class="sr-only">Listado de encuentros asociados al usuario</caption>
                         <thead class="text-left text-emerald-900 bg-emerald-50 border-b border-emerald-100">
                             <tr>
                                 <th scope="col" class="py-2 pr-4">ID</th>
@@ -92,7 +92,7 @@
                 <h3 class="text-lg font-semibold text-amber-900 mb-3">Comentarios</h3>
                 <div class="overflow-x-auto">
                     <table class="min-w-full text-sm">
-                        <caption class="sr-only">Tabla de datos</caption>
+                        <caption class="sr-only">Listado de comentarios del usuario</caption>
                         <thead class="text-left text-amber-900 bg-amber-50 border-b border-amber-100">
                             <tr>
                                 <th scope="col" class="py-2 pr-4">ID</th>
