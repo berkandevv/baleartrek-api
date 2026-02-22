@@ -62,7 +62,7 @@
                                             <div class="text-sm text-slate-800">
                                                 {{ $guide->lastname }} {{ $guide->name }} ({{ $guide->email }})
                                             </div>
-                                            <form method="POST" action="{{ route('admin.meetings.guides.remove', [$meeting->id, $guide->id]) }}" onsubmit="return confirm('¿Quitar este guía?');">
+                                            <form method="POST" action="{{ route('admin.meetings.guides.remove', [$meeting->id, $guide->id]) }}" data-confirm="¿Quitar este guía?">
                                                 @csrf
                                                 @method('DELETE')
                                                 <x-danger-button type="submit">Quitar</x-danger-button>

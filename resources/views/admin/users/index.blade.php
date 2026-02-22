@@ -103,7 +103,7 @@
                                                         Editar
                                                     </a>
                                                     @if ($user->status !== 'n')
-                                                    <form method="POST" action="{{ route('admin.users.deactivate', $user->id) }}" onsubmit="return confirm('¿Seguro que quieres dar de baja este usuario?');">
+                                                    <form method="POST" action="{{ route('admin.users.deactivate', $user->id) }}" data-confirm="¿Seguro que quieres dar de baja este usuario?">
                                                         @csrf
                                                         @method('PATCH')
                                                         <button type="submit" class="inline-flex items-center justify-center w-32 px-3 py-1.5 text-xs font-semibold uppercase tracking-widest text-white bg-red-700 rounded-md hover:bg-red-600">
@@ -111,7 +111,7 @@
                                                         </button>
                                                     </form>
                                                     @else
-                                                <form method="POST" action="{{ route('admin.users.activate', $user->id) }}" onsubmit="return confirm('¿Seguro que quieres dar de alta este usuario?');">
+                                                <form method="POST" action="{{ route('admin.users.activate', $user->id) }}" data-confirm="¿Seguro que quieres dar de alta este usuario?">
                                                     @csrf
                                                     @method('PATCH')
                                                     <button type="submit" class="inline-flex items-center justify-center w-32 px-3 py-1.5 text-xs font-semibold uppercase tracking-widest text-white bg-green-500 rounded-md hover:bg-green-400">

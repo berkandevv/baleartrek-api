@@ -78,7 +78,7 @@
                                                     Editar
                                                 </a>
                                                 @if ($trek->status === 'y')
-                                                    <form method="POST" action="{{ route('admin.treks.deactivate', $trek->id) }}" onsubmit="return confirm('¿Seguro que quieres desactivar esta excursión?');">
+                                                    <form method="POST" action="{{ route('admin.treks.deactivate', $trek->id) }}" data-confirm="¿Seguro que quieres desactivar esta excursión?">
                                                         @csrf
                                                         @method('PATCH')
                                                         <button type="submit" class="inline-flex items-center justify-center w-32 px-3 py-1.5 text-xs font-semibold uppercase tracking-widest text-white bg-red-700 rounded-md hover:bg-red-600">
@@ -86,7 +86,7 @@
                                                         </button>
                                                     </form>
                                                 @else
-                                                    <form method="POST" action="{{ route('admin.treks.activate', $trek->id) }}" onsubmit="return confirm('¿Seguro que quieres activar esta excursión?');">
+                                                    <form method="POST" action="{{ route('admin.treks.activate', $trek->id) }}" data-confirm="¿Seguro que quieres activar esta excursión?">
                                                         @csrf
                                                         @method('PATCH')
                                                         <button type="submit" class="inline-flex items-center justify-center w-32 px-3 py-1.5 text-xs font-semibold uppercase tracking-widest text-white bg-green-500 rounded-md hover:bg-green-400">
