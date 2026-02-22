@@ -16,6 +16,8 @@ use App\Models\User;
 use App\Models\Meeting;
 use App\Models\Trek;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\RateLimiter;
+use Illuminate\Validation\ValidationException;
 
 // ROUTE MODEL BINDING PERSONALIZADO "USERS"
 
@@ -54,9 +56,28 @@ Route::bind('trek', function ($value) {
 Route::post('/register', [RegisteredUserController::class, 'store']);
 // Login de usuario (devuelve token Sanctum, sin sesión)
 Route::post('/login', function (LoginRequest $request) {
-    $request->authenticate();
+    $request->ensureIsNotRateLimited();
+
+    $credentials = $request->only('email', 'password');
+
+    if (! Auth::attempt($credentials, $request->boolean('remember'))) {
+        RateLimiter::hit($request->throttleKey());
+
+        throw ValidationException::withMessages([
+            'email' => trans('auth.failed'),
+        ]);
+    }
 
     $user = Auth::user();
+
+    if ($user->status !== 'y') {
+        Auth::logout();
+        RateLimiter::clear($request->throttleKey());
+
+        return response()->noContent(403);
+    }
+
+    RateLimiter::clear($request->throttleKey());
     $token = $user->createToken('api')->plainTextToken;
 
     return response()->json([

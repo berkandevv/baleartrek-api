@@ -20,6 +20,8 @@
                     <div class="rounded-lg border border-sky-100 bg-sky-50/50 p-3"><dt class="text-gray-500">Usuario</dt><dd class="font-medium">{{ $comment->user?->name }} {{ $comment->user?->lastname }}</dd></div>
                     <div class="rounded-lg border border-sky-100 bg-sky-50/50 p-3"><dt class="text-gray-500">Rol usuario</dt><dd class="font-medium">{{ $comment->user?->role?->name ?? '-' }}</dd></div>
                     <div class="rounded-lg border border-cyan-100 bg-cyan-50/50 p-3"><dt class="text-gray-500">Encuentro</dt><dd class="font-medium">#{{ $comment->meeting?->id ?? '-' }}</dd></div>
+                    <div class="rounded-lg border border-cyan-100 bg-cyan-50/50 p-3"><dt class="text-gray-500">Día del encuentro</dt><dd class="font-medium">{{ $comment->meeting?->day_formatted ?: '-' }}</dd></div>
+                    <div class="rounded-lg border border-cyan-100 bg-cyan-50/50 p-3"><dt class="text-gray-500">Hora del encuentro</dt><dd class="font-medium">{{ $comment->meeting?->hour_input ?: '-' }}</dd></div>
                     <div class="rounded-lg border border-cyan-100 bg-cyan-50/50 p-3"><dt class="text-gray-500">Excursión</dt><dd class="font-medium">{{ $comment->meeting?->trek?->name ?? '-' }}</dd></div>
                     <div class="rounded-lg border border-cyan-100 bg-cyan-50/50 p-3"><dt class="text-gray-500">Guía principal</dt><dd class="font-medium">{{ $comment->meeting?->user?->name }} {{ $comment->meeting?->user?->lastname }}</dd></div>
                     <div class="rounded-lg border border-cyan-100 bg-cyan-50/50 p-3"><dt class="text-gray-500">Puntuación</dt><dd class="font-medium">{{ $comment->score }}</dd></div>

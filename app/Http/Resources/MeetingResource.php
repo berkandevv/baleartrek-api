@@ -20,6 +20,21 @@ class MeetingResource extends JsonResource
                 'appDateEnd' => $this->appDateEnd,
             ];
 
+        $extraGuides = collect();
+        $attendees = collect();
+
+        if ($this->relationLoaded('users')) {
+            $participants = $this->users;
+            $guideRoleId = $this->relationLoaded('user') ? $this->user?->role_id : null;
+
+            if ($guideRoleId !== null) {
+                $extraGuides = $participants->where('role_id', $guideRoleId)->values();
+                $attendees = $participants->where('role_id', '!=', $guideRoleId)->values();
+            } else {
+                $attendees = $participants->values();
+            }
+        }
+
         return [
             'id' => $this->id,
             'day' => $this->day,
@@ -37,7 +52,14 @@ class MeetingResource extends JsonResource
                     : null,
             ],
             'guide' => new UserSummaryResource($this->whenLoaded('user')),
-            'attendees' => UserSummaryResource::collection($this->whenLoaded('users')),
+            'extraGuides' => $this->when(
+                $this->relationLoaded('users'),
+                fn () => UserSummaryResource::collection($extraGuides)
+            ),
+            'attendees' => $this->when(
+                $this->relationLoaded('users'),
+                fn () => UserSummaryResource::collection($attendees)
+            ),
             'comments' => CommentResource::collection($this->whenLoaded('comments')),
         ];
     }
