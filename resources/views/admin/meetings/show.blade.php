@@ -6,9 +6,6 @@
                     <span class="inline-flex items-center px-2.5 py-0.5 text-xs font-semibold uppercase tracking-widest text-sky-700 bg-sky-100 rounded-full">Encuentro</span>
                 </div>
                 <div class="flex gap-2">
-                    <a href="{{ route('admin.meetings.index') }}" class="inline-flex items-center px-4 py-2 bg-gray-100 border border-gray-300 rounded-md font-semibold text-xs text-gray-700 uppercase tracking-widest hover:bg-gray-200">
-                        Volver
-                    </a>
                     <a href="{{ route('admin.meetings.edit', $meeting->id) }}" class="inline-flex items-center px-4 py-2 text-xs font-semibold uppercase tracking-widest text-white bg-blue-900 rounded-md hover:bg-blue-800">
                         Editar
                     </a>
@@ -40,7 +37,7 @@
                 <ul class="space-y-2 text-sm">
                     @forelse ($extraGuides as $guide)
                         <li class="border border-indigo-100 bg-indigo-50/40 rounded-md px-3 py-2">
-                            #{{ $guide->id }} - {{ $guide->name }} {{ $guide->lastname }} ({{ $guide->email }})
+                            {{ $guide->name }} {{ $guide->lastname }} ({{ $guide->email }})
                         </li>
                     @empty
                         <li class="text-gray-500">Sin guías adicionales.</li>
@@ -53,7 +50,7 @@
                 <ul class="space-y-2 text-sm">
                     @forelse ($attendees as $attendee)
                         <li class="border border-sky-100 bg-sky-50/40 rounded-md px-3 py-2">
-                            #{{ $attendee->id }} - {{ $attendee->name }} {{ $attendee->lastname }} ({{ $attendee->email }})
+                            {{ $attendee->name }} {{ $attendee->lastname }} ({{ $attendee->email }})
                         </li>
                     @empty
                         <li class="text-gray-500">Sin asistentes.</li>
@@ -68,7 +65,6 @@
                         <caption class="sr-only">Listado de comentarios del encuentro</caption>
                         <thead class="text-left text-teal-900 bg-teal-50 border-b border-teal-100">
                             <tr>
-                                <th scope="col" class="py-2 pr-4">ID</th>
                                 <th scope="col" class="py-2 pr-4">Usuario</th>
                                 <th scope="col" class="py-2 pr-4">Puntuación</th>
                                 <th scope="col" class="py-2 pr-4">Estado</th>
@@ -79,7 +75,6 @@
                         <tbody class="divide-y divide-teal-50">
                             @forelse ($meeting->comments as $comment)
                                 <tr class="hover:bg-teal-50/40">
-                                    <td class="py-2 pr-4">#{{ $comment->id }}</td>
                                     <td class="py-2 pr-4">{{ $comment->user?->name }} {{ $comment->user?->lastname }}</td>
                                     <td class="py-2 pr-4">{{ $comment->score }}</td>
                                     <td class="py-2 pr-4">{{ $comment->status === 'y' ? 'Aprobado' : 'Pendiente' }}</td>
@@ -87,7 +82,7 @@
                                     <td class="py-2 pr-4">{{ $comment->comment }}</td>
                                 </tr>
                             @empty
-                                <tr><td colspan="6" class="py-4 text-gray-500">Sin comentarios.</td></tr>
+                                <tr><td colspan="5" class="py-4 text-gray-500">Sin comentarios.</td></tr>
                             @endforelse
                         </tbody>
                     </table>

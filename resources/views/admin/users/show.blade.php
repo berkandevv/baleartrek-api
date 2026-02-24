@@ -6,9 +6,6 @@
                     <span class="inline-flex items-center px-2.5 py-0.5 text-xs font-semibold uppercase tracking-widest text-emerald-700 bg-emerald-100 rounded-full">Usuario</span>
                 </div>
                 <div class="flex gap-2">
-                    <a href="{{ route('admin.users.index') }}" class="inline-flex items-center px-4 py-2 bg-gray-100 border border-gray-300 rounded-md font-semibold text-xs text-gray-700 uppercase tracking-widest hover:bg-gray-200">
-                        Volver
-                    </a>
                     <a href="{{ route('admin.users.edit', $user->id) }}" class="inline-flex items-center px-4 py-2 text-xs font-semibold uppercase tracking-widest text-white bg-blue-900 rounded-md hover:bg-blue-800">
                         Editar
                     </a>
@@ -37,7 +34,6 @@
                         <caption class="sr-only">Listado de encuentros como guía principal</caption>
                         <thead class="text-left text-sky-900 bg-sky-50 border-b border-sky-100">
                             <tr>
-                                <th scope="col" class="py-2 pr-4">ID</th>
                                 <th scope="col" class="py-2 pr-4">Excursión</th>
                                 <th scope="col" class="py-2 pr-4">Día</th>
                                 <th scope="col" class="py-2 pr-4">Hora</th>
@@ -46,13 +42,12 @@
                         <tbody class="divide-y divide-sky-50">
                             @forelse ($createdMeetings as $meeting)
                                 <tr class="hover:bg-sky-50/40">
-                                    <td class="py-2 pr-4">#{{ $meeting->id }}</td>
                                     <td class="py-2 pr-4">{{ $meeting->trek?->name ?? '-' }}</td>
                                     <td class="py-2 pr-4">{{ $meeting->day_formatted }}</td>
                                     <td class="py-2 pr-4">{{ $meeting->hour }}</td>
                                 </tr>
                             @empty
-                                <tr><td colspan="4" class="py-4 text-gray-500">No tiene encuentros como guía principal.</td></tr>
+                                <tr><td colspan="3" class="py-4 text-gray-500">No tiene encuentros como guía principal.</td></tr>
                             @endforelse
                         </tbody>
                     </table>
@@ -66,7 +61,6 @@
                         <caption class="sr-only">Listado de encuentros asociados al usuario</caption>
                         <thead class="text-left text-emerald-900 bg-emerald-50 border-b border-emerald-100">
                             <tr>
-                                <th scope="col" class="py-2 pr-4">ID</th>
                                 <th scope="col" class="py-2 pr-4">Excursión</th>
                                 <th scope="col" class="py-2 pr-4">Día</th>
                                 <th scope="col" class="py-2 pr-4">Hora</th>
@@ -75,13 +69,12 @@
                         <tbody class="divide-y divide-emerald-50">
                             @forelse ($user->meetings as $meeting)
                                 <tr class="hover:bg-emerald-50/40">
-                                    <td class="py-2 pr-4">#{{ $meeting->id }}</td>
                                     <td class="py-2 pr-4">{{ $meeting->trek?->name ?? '-' }}</td>
                                     <td class="py-2 pr-4">{{ $meeting->day_formatted }}</td>
                                     <td class="py-2 pr-4">{{ $meeting->hour }}</td>
                                 </tr>
                             @empty
-                                <tr><td colspan="4" class="py-4 text-gray-500">No tiene encuentros asociados.</td></tr>
+                                <tr><td colspan="3" class="py-4 text-gray-500">No tiene encuentros asociados.</td></tr>
                             @endforelse
                         </tbody>
                     </table>
@@ -95,7 +88,6 @@
                         <caption class="sr-only">Listado de comentarios del usuario</caption>
                         <thead class="text-left text-amber-900 bg-amber-50 border-b border-amber-100">
                             <tr>
-                                <th scope="col" class="py-2 pr-4">ID</th>
                                 <th scope="col" class="py-2 pr-4">Encuentro</th>
                                 <th scope="col" class="py-2 pr-4">Puntuación</th>
                                 <th scope="col" class="py-2 pr-4">Estado</th>
@@ -105,16 +97,15 @@
                         <tbody class="divide-y divide-amber-50">
                             @forelse ($user->comments as $comment)
                                 <tr class="hover:bg-amber-50/40">
-                                    <td class="py-2 pr-4">#{{ $comment->id }}</td>
                                     <td class="py-2 pr-4">
-                                        {{ $comment->meeting?->trek?->name ?? '-' }} (#{{ $comment->meeting_id }})
+                                        {{ $comment->meeting?->trek?->name ?? '-' }}
                                     </td>
                                     <td class="py-2 pr-4">{{ $comment->score }}</td>
                                     <td class="py-2 pr-4">{{ $comment->status === 'y' ? 'Aprobado' : 'Pendiente' }}</td>
                                     <td class="py-2 pr-4">{{ $comment->comment }}</td>
                                 </tr>
                             @empty
-                                <tr><td colspan="5" class="py-4 text-gray-500">No tiene comentarios.</td></tr>
+                                <tr><td colspan="4" class="py-4 text-gray-500">No tiene comentarios.</td></tr>
                             @endforelse
                         </tbody>
                     </table>

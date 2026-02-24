@@ -6,9 +6,6 @@
                     <span class="inline-flex items-center px-2.5 py-0.5 text-xs font-semibold uppercase tracking-widest text-sky-700 bg-sky-100 rounded-full">Comentario</span>
                 </div>
                 <div class="flex gap-2">
-                    <a href="{{ route('admin.comments.index') }}" class="inline-flex items-center px-4 py-2 bg-gray-100 border border-gray-300 rounded-md font-semibold text-xs text-gray-700 uppercase tracking-widest hover:bg-gray-200">
-                        Volver
-                    </a>
                     <a href="{{ route('admin.comments.edit', $comment->id) }}" class="inline-flex items-center px-4 py-2 text-xs font-semibold uppercase tracking-widest text-white bg-blue-900 rounded-md hover:bg-blue-800">
                         Editar
                     </a>
@@ -19,7 +16,6 @@
                 <dl class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-slate-800">
                     <div class="rounded-lg border border-sky-100 bg-sky-50/50 p-3"><dt class="text-gray-500">Usuario</dt><dd class="font-medium">{{ $comment->user?->name }} {{ $comment->user?->lastname }}</dd></div>
                     <div class="rounded-lg border border-sky-100 bg-sky-50/50 p-3"><dt class="text-gray-500">Rol usuario</dt><dd class="font-medium">{{ $comment->user?->role?->name ?? '-' }}</dd></div>
-                    <div class="rounded-lg border border-cyan-100 bg-cyan-50/50 p-3"><dt class="text-gray-500">Encuentro</dt><dd class="font-medium">#{{ $comment->meeting?->id ?? '-' }}</dd></div>
                     <div class="rounded-lg border border-cyan-100 bg-cyan-50/50 p-3"><dt class="text-gray-500">Día del encuentro</dt><dd class="font-medium">{{ $comment->meeting?->day_formatted ?: '-' }}</dd></div>
                     <div class="rounded-lg border border-cyan-100 bg-cyan-50/50 p-3"><dt class="text-gray-500">Hora del encuentro</dt><dd class="font-medium">{{ $comment->meeting?->hour_input ?: '-' }}</dd></div>
                     <div class="rounded-lg border border-cyan-100 bg-cyan-50/50 p-3"><dt class="text-gray-500">Excursión</dt><dd class="font-medium">{{ $comment->meeting?->trek?->name ?? '-' }}</dd></div>
@@ -38,7 +34,7 @@
                         @forelse ($comment->images as $image)
                             <div class="border border-cyan-100 bg-cyan-50/30 rounded-lg p-3">
                                 @if ($image->display_url)
-                                    <img src="{{ $image->display_url }}" alt="Imagen del comentario {{ $comment->id }}" class="w-full h-48 object-cover rounded-md">
+                                    <img src="{{ $image->display_url }}" alt="Imagen del comentario" class="w-full h-48 object-cover rounded-md">
                                 @else
                                     <div class="w-full h-48 rounded-md bg-slate-100 text-slate-500 text-sm flex items-center justify-center">
                                         Imagen no disponible

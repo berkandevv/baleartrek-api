@@ -6,9 +6,6 @@
                     <span class="inline-flex items-center px-2.5 py-0.5 text-xs font-semibold uppercase tracking-widest text-lime-700 bg-lime-100 rounded-full">Municipio</span>
                 </div>
                 <div class="flex gap-2">
-                    <a href="{{ route('admin.municipalities.index') }}" class="inline-flex items-center px-4 py-2 bg-gray-100 border border-gray-300 rounded-md font-semibold text-xs text-gray-700 uppercase tracking-widest hover:bg-gray-200">
-                        Volver
-                    </a>
                     <a href="{{ route('admin.municipalities.edit', $municipality->id) }}" class="inline-flex items-center px-4 py-2 text-xs font-semibold uppercase tracking-widest text-white bg-blue-900 rounded-md hover:bg-blue-800">
                         Editar
                     </a>
@@ -32,7 +29,6 @@
                         <caption class="sr-only">Listado de excursiones del municipio</caption>
                         <thead class="text-left text-emerald-900 bg-emerald-50 border-b border-emerald-100">
                             <tr>
-                                <th scope="col" class="py-2 pr-4">ID</th>
                                 <th scope="col" class="py-2 pr-4">Código</th>
                                 <th scope="col" class="py-2 pr-4">Nombre</th>
                                 <th scope="col" class="py-2 pr-4">Estado</th>
@@ -42,14 +38,13 @@
                         <tbody class="divide-y divide-emerald-50">
                             @forelse ($municipality->treks as $trek)
                                 <tr class="hover:bg-emerald-50/40">
-                                    <td class="py-2 pr-4">#{{ $trek->id }}</td>
                                     <td class="py-2 pr-4">{{ $trek->regnumber }}</td>
                                     <td class="py-2 pr-4">{{ $trek->name }}</td>
                                     <td class="py-2 pr-4">{{ $trek->status === 'y' ? 'Activa' : 'Inactiva' }}</td>
                                     <td class="py-2 pr-4">{{ $trek->meetings_count }}</td>
                                 </tr>
                             @empty
-                                <tr><td colspan="5" class="py-4 text-gray-500">No hay excursiones asociadas.</td></tr>
+                                <tr><td colspan="4" class="py-4 text-gray-500">No hay excursiones asociadas.</td></tr>
                             @endforelse
                         </tbody>
                     </table>

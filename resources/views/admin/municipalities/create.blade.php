@@ -6,9 +6,6 @@
                     <span class="inline-flex items-center px-2.5 py-0.5 text-xs font-semibold uppercase tracking-widest text-lime-700 bg-lime-100 rounded-full">Municipio</span>
                     <h2 class="mt-2 font-semibold text-xl text-gray-800 leading-tight">Crear nuevo municipio</h2>
                 </div>
-                <a href="{{ route('admin.municipalities.index') }}" class="inline-flex items-center px-4 py-2 bg-gray-100 border border-gray-300 rounded-md font-semibold text-xs text-gray-700 uppercase tracking-widest hover:bg-gray-200">
-                    Volver
-                </a>
             </div>
 
             <div class="bg-white/90 border border-lime-100 shadow-sm sm:rounded-2xl">
@@ -22,9 +19,6 @@
                             <x-primary-button type="submit">
                                 Crear municipio
                             </x-primary-button>
-                            <a href="{{ route('admin.municipalities.index') }}" class="inline-flex items-center px-3 py-1.5 text-xs font-semibold uppercase tracking-widest text-gray-700 bg-gray-100 border border-gray-300 rounded-md hover:bg-gray-200">
-                                Volver a la lista
-                            </a>
                         </div>
                     </form>
                 </div>

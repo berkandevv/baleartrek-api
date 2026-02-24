@@ -6,9 +6,6 @@
                     <span class="inline-flex items-center px-2.5 py-0.5 text-xs font-semibold uppercase tracking-widest text-emerald-700 bg-emerald-100 rounded-full">Lugar</span>
                 </div>
                 <div class="flex gap-2">
-                    <a href="{{ route('admin.places.index') }}" class="inline-flex items-center px-4 py-2 bg-gray-100 border border-gray-300 rounded-md font-semibold text-xs text-gray-700 uppercase tracking-widest hover:bg-gray-200">
-                        Volver
-                    </a>
                     <a href="{{ route('admin.places.edit', $place->id) }}" class="inline-flex items-center px-4 py-2 text-xs font-semibold uppercase tracking-widest text-white bg-blue-900 rounded-md hover:bg-blue-800">
                         Editar
                     </a>
@@ -34,7 +31,6 @@
                         <caption class="sr-only">Listado de excursiones asociadas al lugar</caption>
                         <thead class="text-left text-lime-900 bg-lime-50 border-b border-lime-100">
                             <tr>
-                                <th scope="col" class="py-2 pr-4">ID</th>
                                 <th scope="col" class="py-2 pr-4">Código</th>
                                 <th scope="col" class="py-2 pr-4">Excursión</th>
                                 <th scope="col" class="py-2 pr-4">Municipio</th>
@@ -44,14 +40,13 @@
                         <tbody class="divide-y divide-lime-50">
                             @forelse ($place->treks as $trek)
                                 <tr class="hover:bg-lime-50/40">
-                                    <td class="py-2 pr-4">#{{ $trek->id }}</td>
                                     <td class="py-2 pr-4">{{ $trek->regnumber }}</td>
                                     <td class="py-2 pr-4">{{ $trek->name }}</td>
                                     <td class="py-2 pr-4">{{ $trek->municipality?->name ?? '-' }}</td>
                                     <td class="py-2 pr-4">{{ $trek->pivot?->order }}</td>
                                 </tr>
                             @empty
-                                <tr><td colspan="5" class="py-4 text-gray-500">No está asociado a excursiones.</td></tr>
+                                <tr><td colspan="4" class="py-4 text-gray-500">No está asociado a excursiones.</td></tr>
                             @endforelse
                         </tbody>
                     </table>

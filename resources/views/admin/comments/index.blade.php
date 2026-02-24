@@ -44,7 +44,6 @@
                         <caption class="sr-only">Listado de comentarios</caption>
                             <thead class="text-left text-sky-900 bg-sky-50 border-b border-sky-100">
                                 <tr>
-                                    <th scope="col" class="py-2 pr-4">ID</th>
                                     <th scope="col" class="py-2 pr-4">Usuario</th>
                                     <th scope="col" class="py-2 pr-4">Ruta</th>
                                     <th scope="col" class="py-2 pr-4">Encuentro</th>
@@ -57,7 +56,6 @@
                             <tbody>
                                 @forelse($comments as $comment)
                                     <tr class="border-b">
-                                        <td class="py-2 pr-4">{{ $comment->id }}</td>
                                         <td class="py-2 pr-4">
                                             {{ $comment->user?->name }} {{ $comment->user?->lastname }}
                                         </td>
@@ -66,10 +64,7 @@
                                         </td>
                                         <td class="py-2 pr-4">
                                             @if ($comment->meeting)
-                                                <div>#{{ $comment->meeting->id }}</div>
-                                                <div class="text-xs text-gray-500">
-                                                    {{ $comment->meeting->day_formatted ?: '-' }}
-                                                </div>
+                                                {{ $comment->meeting->day_formatted ?: '-' }}
                                             @else
                                                 -
                                             @endif
@@ -104,7 +99,7 @@
                                     </tr>
                                 @empty
                                     <tr>
-                                        <td colspan="8" class="py-6 text-center text-gray-500">
+                                        <td colspan="7" class="py-6 text-center text-gray-500">
                                             No hay comentarios para mostrar.
                                         </td>
                                     </tr>

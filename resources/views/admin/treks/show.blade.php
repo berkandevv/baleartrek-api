@@ -6,9 +6,6 @@
                     <span class="inline-flex items-center px-2.5 py-0.5 text-xs font-semibold uppercase tracking-widest text-cyan-700 bg-cyan-100 rounded-full">Excursión</span>
                 </div>
                 <div class="flex gap-2">
-                    <a href="{{ route('admin.treks.index') }}" class="inline-flex items-center px-4 py-2 bg-gray-100 border border-gray-300 rounded-md font-semibold text-xs text-gray-700 uppercase tracking-widest hover:bg-gray-200">
-                        Volver
-                    </a>
                     <a href="{{ route('admin.treks.edit', $trek->id) }}" class="inline-flex items-center px-4 py-2 text-xs font-semibold uppercase tracking-widest text-white bg-blue-900 rounded-md hover:bg-blue-800">
                         Editar
                     </a>
@@ -50,7 +47,6 @@
                         <thead class="text-left text-emerald-900 bg-emerald-50 border-b border-emerald-100">
                             <tr>
                                 <th scope="col" class="py-2 pr-4">Orden</th>
-                                <th scope="col" class="py-2 pr-4">ID</th>
                                 <th scope="col" class="py-2 pr-4">Nombre</th>
                                 <th scope="col" class="py-2 pr-4">Tipo</th>
                                 <th scope="col" class="py-2 pr-4">GPS</th>
@@ -60,13 +56,12 @@
                             @forelse ($trek->interestingPlaces as $place)
                                 <tr class="hover:bg-emerald-50/40">
                                     <td class="py-2 pr-4">{{ $place->pivot?->order }}</td>
-                                    <td class="py-2 pr-4">#{{ $place->id }}</td>
                                     <td class="py-2 pr-4">{{ $place->name }}</td>
                                     <td class="py-2 pr-4">{{ $place->placeType?->name ?? '-' }}</td>
                                     <td class="py-2 pr-4">{{ $place->gps }}</td>
                                 </tr>
                             @empty
-                                <tr><td colspan="5" class="py-4 text-gray-500">No hay lugares asociados.</td></tr>
+                                <tr><td colspan="4" class="py-4 text-gray-500">No hay lugares asociados.</td></tr>
                             @endforelse
                         </tbody>
                     </table>
@@ -80,7 +75,6 @@
                         <caption class="sr-only">Listado de encuentros de la excursión</caption>
                         <thead class="text-left text-cyan-900 bg-cyan-50 border-b border-cyan-100">
                             <tr>
-                                <th scope="col" class="py-2 pr-4">ID</th>
                                 <th scope="col" class="py-2 pr-4">Guía</th>
                                 <th scope="col" class="py-2 pr-4">Día</th>
                                 <th scope="col" class="py-2 pr-4">Hora</th>
@@ -91,7 +85,6 @@
                         <tbody class="divide-y divide-cyan-50">
                             @forelse ($trek->meetings as $meeting)
                                 <tr class="hover:bg-cyan-50/40">
-                                    <td class="py-2 pr-4">#{{ $meeting->id }}</td>
                                     <td class="py-2 pr-4">{{ $meeting->user?->name }} {{ $meeting->user?->lastname }}</td>
                                     <td class="py-2 pr-4">{{ $meeting->day_formatted }}</td>
                                     <td class="py-2 pr-4">{{ $meeting->hour }}</td>
@@ -99,7 +92,7 @@
                                     <td class="py-2 pr-4">{{ $meeting->comments_count }}</td>
                                 </tr>
                             @empty
-                                <tr><td colspan="6" class="py-4 text-gray-500">No hay encuentros asociados.</td></tr>
+                                <tr><td colspan="5" class="py-4 text-gray-500">No hay encuentros asociados.</td></tr>
                             @endforelse
                         </tbody>
                     </table>

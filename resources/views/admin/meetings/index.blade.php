@@ -50,7 +50,6 @@
                         <caption class="sr-only">Listado de encuentros</caption>
                             <thead class="text-left text-sky-900 bg-sky-50 border-b border-sky-100">
                                 <tr>
-                                    <th scope="col" class="py-2 pr-4">ID</th>
                                     <th scope="col" class="py-2 pr-4">Excursión</th>
                                     <th scope="col" class="py-2 pr-4">Guía</th>
                                     <th scope="col" class="py-2 pr-4">Día</th>
@@ -62,7 +61,6 @@
                             <tbody>
                                 @forelse($meetings as $meeting)
                                 <tr class="border-b">
-                                    <td class="py-2 pr-4">{{ $meeting->id }}</td>
                                     <td class="py-2 pr-4">{{ $meeting->trek?->name }}</td>
                                         <td class="py-2 pr-4">
                                             {{ $meeting->user?->name }} {{ $meeting->user?->lastname }}
@@ -87,7 +85,7 @@
                                 </tr>
                                 @empty
                                     <tr>
-                                        <td colspan="7" class="py-6 text-center text-gray-500">
+                                        <td colspan="6" class="py-6 text-center text-gray-500">
                                             No hay encuentros para mostrar.
                                         </td>
                                     </tr>
